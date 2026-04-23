@@ -2,46 +2,57 @@
 <html lang="es">
 
 <head>
+
+    <!-- Meta datos -->
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Tienda de ropa online con las últimas tendencias">
+    <meta name="description" content="Tienda de ropa online con ropa tipo casual a buenos precios">
+
+    <!-- OPEN GRAPH -->
+    <meta property="og:title" content="ER Store - Homepage">
+    <meta property="og:description" content="Tienda de ropa online con ropa tipo casual a buenos precios">
+    <meta property="og:image" content="images/Logo_ER.png">
+
+    <!-- Intrucciones motores de busqueda -->
+    <meta name="robots" content="index, follow">
+    <meta name="googlebot" content="index, follow">
+
+    <!-- Icono de la pestaña -->
+    <link rel="icon" href="images/Logo_ER.png">
+
+    <!-- Título de la página -->
     <title>ER Store - Homepage</title>
+
+    <!-- Estilos -->
     <link rel="stylesheet" href="css/styles.css">
 </head>
 
 <body>
     <!-- BARRA DE ANUNCIOS -->
     <div class="announcement-bar" id="announcementBar">
-        <p>🎉 ¡Envío gratis en compras superiores a $50.000! 🎉</p>
+        <p>¡Envío gratis en compras superiores a $50.000!</p>
     </div>
-
     <!-- HEADER -->
     <header class="header">
-        <nav class="container nav-container">
-            <div class="nav-wrapper">
+        <nav class="nav-container" aria-label="Navegación principal">
                 <!-- Logo -->
-                <a href="index.html" class="logo">
-                    <img src="images/Logo para Ps empresa Er.png"> ER store
+                <a href="index.html" class="logo-header">
+                    <img src="images/Logo_ER.png" alt="ER Store">
                 </a>
 
-                <!-- Búsqueda -->
-                <div class="nav-search">
-                    <span class="search-icon">🔍</span>
-                    <input type="text" class="search-input" id="searchInput" placeholder="Buscar productos..."
-                        aria-label="Buscar productos">
-                </div>
-
-                <!-- Acciones de navegación -->
-                <div class="nav-actions">
-                    <a href="#" class="nav-link" id="loginBtn">
-                        👤 <span>Iniciar Sesión</span>
+                <!-- Funciones rapidas de la pagina -->
+                <div class="shortcuts-container">
+                    <a href="#" class="search-shortcut">
+                        🔍
                     </a>
-                    <a href="cart.html" class="nav-link">
-                        🛒 <span>Carrito</span>
+                    <a href="#" class="nav-link" id="loginBtn">
+                        👤
+                    </a>
+                    <a href="cart.html" class="nav-link" id="cartBtn" aria-label="Abrir carrito">
+                        🛒
                         <span class="cart-badge" id="cartBadge">0</span>
                     </a>
                 </div>
-            </div>
         </nav>
     </header>
 
@@ -56,8 +67,40 @@
         </div>
     </section>
 
-    <!-- SECCIÓN DE PRODUCTOS -->
-    <main class="container" style="margin-top: 3rem;">
+    <main>
+        <!-- SECCIONES MARKETING -->
+        <section class="container section" aria-labelledby="categoriesTitle" style="margin-top: 3rem;">
+            <header class="section-header">
+                <h2 id="categoriesTitle" class="section-title">Categorías destacadas</h2>
+                <p class="section-subtitle">Explora lo más popular y encuentra tu estilo en segundos.</p>
+            </header>
+            <div class="categories-grid">
+                <a class="category-card" href="#products-section" data-category-jump="camisas">👕 Camisas</a>
+                <a class="category-card" href="#products-section" data-category-jump="pantalones">👖 Pantalones</a>
+                <a class="category-card" href="#products-section" data-category-jump="vestidos">👗 Vestidos</a>
+                <a class="category-card" href="#products-section" data-category-jump="zapatos">👟 Zapatos</a>
+                <a class="category-card" href="#products-section" data-category-jump="accesorios">🧢 Accesorios</a>
+            </div>
+        </section>
+
+        <section class="container section" aria-labelledby="featuredTitle">
+            <header class="section-header">
+                <h2 id="featuredTitle" class="section-title">Productos destacados</h2>
+                <p class="section-subtitle">Selección rápida de lo mejor de la tienda.</p>
+            </header>
+            <div class="products-grid" id="featuredProductsGrid"></div>
+        </section>
+
+        <section class="container section" aria-labelledby="trendingTitle">
+            <header class="section-header">
+                <h2 id="trendingTitle" class="section-title">Más buscados</h2>
+                <p class="section-subtitle">Lo que todos están mirando ahora mismo.</p>
+            </header>
+            <div class="products-grid" id="trendingProductsGrid"></div>
+        </section>
+
+        <!-- SECCIÓN DE PRODUCTOS -->
+        <section class="container" style="margin-top: 3rem;">
         <!-- Filtros -->
         <section class="filters-container">
             <h2 style="margin-bottom: 1.5rem;">Filtrar Productos</h2>
@@ -133,6 +176,21 @@
                 <p style="margin-top: 1rem;">Intenta ajustar los filtros</p>
             </div>
         </section>
+        </section>
+
+        <section class="container section" aria-labelledby="subscribeTitle">
+            <header class="section-header">
+                <h2 id="subscribeTitle" class="section-title">Suscríbete</h2>
+                <p class="section-subtitle">Recibe ofertas y novedades. Sin spam.</p>
+            </header>
+            <form id="subscribeForm" class="subscribe-form">
+                <label class="form-label" for="subscribeEmail">Correo electrónico</label>
+                <div class="subscribe-form__row">
+                    <input id="subscribeEmail" class="form-input" type="email" placeholder="tu@email.com" required>
+                    <button class="btn btn-primary" type="submit">Suscribirme</button>
+                </div>
+            </form>
+        </section>
     </main>
 
     <!-- FOOTER -->
@@ -140,7 +198,7 @@
         <div class="container">
             <div class="footer-content">
                 <div class="footer-section">
-                    <h3> <img src="images/Logo para Ps empresa Er.png"> ER store</h3>
+                    <h3> <img src="images/Logo_ER.png" alt="ER Store"> ER store</h3>
                     <p style="margin-top: 1rem; opacity: 0.8;">
                         Tu tienda de moda online con las mejores tendencias y precios.
                     </p>
@@ -176,9 +234,8 @@
                 </div>
             </div>
 
-            <div
-                style="text-align: center; margin-top: 2rem; padding-top: 2rem; border-top: 1px solid rgba(255,255,255,0.1);">
-                <p>&copy; 2025 ER store. Todos los derechos reservados.</p>
+            <div style="text-align: center; margin-top: 2rem; padding-top: 2rem; border-top: 1px solid rgba(255,255,255,0.1);">
+                <p>&copy; <span class="current-year">2025</span> ER store. Todos los derechos reservados.</p>
             </div>
         </div>
     </footer>
@@ -187,8 +244,8 @@
     <script src="js/data.js"></script>
     <script src="js/cart.js"></script>
     <script src="js/filters.js"></script>
-    <script src="js/search.js"></script>
     <script src="js/main.js"></script>
+    <script src="js/search.js"></script>
 </body>
 
 </html>

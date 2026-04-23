@@ -11,26 +11,22 @@
 <body>
     <!-- HEADER -->
     <header class="header">
-        <nav class="container nav-container">
-            <div class="nav-wrapper">
-                <a href="index.html" class="logo">
-                    <img src="images/Logo para Ps empresa Er.png"> ER Store
+        <nav class="nav-container" aria-label="Navegación principal">
+            <a href="index.html" class="logo-header">
+                <img src="images/Logo_ER.png" alt="ER Store">
+            </a>
+
+            <div class="shortcuts-container">
+                <a href="#" class="search-shortcut" aria-label="Buscar">
+                    🔍
                 </a>
-
-                <div class="nav-search">
-                    <span class="search-icon">🔍</span>
-                    <input type="text" class="search-input" placeholder="Buscar productos...">
-                </div>
-
-                <div class="nav-actions">
-                    <a href="#" class="nav-link" id="loginBtn">
-                        👤 <span>Iniciar Sesión</span>
-                    </a>
-                    <a href="cart.html" class="nav-link">
-                        🛒 <span>Carrito</span>
-                        <span class="cart-badge" id="cartBadge">0</span>
-                    </a>
-                </div>
+                <a href="#" class="nav-link" id="loginBtn" aria-label="Iniciar sesión">
+                    👤
+                </a>
+                <a href="cart.html" class="nav-link" id="cartBtn" aria-label="Abrir carrito">
+                    🛒
+                    <span class="cart-badge" id="cartBadge">0</span>
+                </a>
             </div>
         </nav>
     </header>
@@ -108,7 +104,7 @@
         <div class="container">
             <div class="footer-content">
                 <div class="footer-section">
-                    <h3> <img src="images/Logo para Ps empresa Er.png"> ER Store</h3>
+                    <h3> <img src="images/Logo_ER.png" alt="ER Store"> ER Store</h3>
                     <p style="margin-top: 1rem; opacity: 0.8;">
                         Tu tienda de moda online con las mejores tendencias y precios.
                     </p>
@@ -146,7 +142,7 @@
 
             <div
                 style="text-align: center; margin-top: 2rem; padding-top: 2rem; border-top: 1px solid rgba(255,255,255,0.1);">
-                <p>&copy; 2025 SENA Store. Todos los derechos reservados.</p>
+                <p>&copy; <span class="current-year">2025</span> SENA Store. Todos los derechos reservados.</p>
             </div>
         </div>
     </footer>

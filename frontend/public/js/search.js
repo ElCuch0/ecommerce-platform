@@ -119,8 +119,23 @@ class SearchManager {
     }
 }
 
-// Crear instancia global del gestor de búsqueda
-const searchManager = new SearchManager();
+let searchManager = null;
+
+function initSearchManager() {
+    const input = document.getElementById('searchInput');
+    if (!input) return;
+    if (searchManager && searchManager.searchInput === input) return;
+    searchManager = new SearchManager();
+}
+
+document.addEventListener('DOMContentLoaded', () => {
+    initSearchManager();
+});
+
+// Cuando `main.js` inyecta el input del modal
+document.addEventListener('search:inputReady', () => {
+    initSearchManager();
+});
 
 // Función para scroll a productos
 function scrollToProducts() {
