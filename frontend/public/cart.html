@@ -147,10 +147,79 @@
         </div>
     </footer>
 
+    <!-- NAV MODALS (viven en el HTML) -->
+    <dialog class="nav-dialog" id="navSearchDialog" aria-label="Búsqueda">
+        <form method="dialog" class="nav-dialog__card">
+            <header class="nav-dialog__header">
+                <h2 class="nav-dialog__title">Buscar</h2>
+                <button class="nav-dialog__close" value="cancel" aria-label="Cerrar">×</button>
+            </header>
+            <div class="nav-dialog__body">
+                <label class="nav-dialog__label" for="searchInput">Buscar productos</label>
+                <input id="searchInput" type="search" class="form-input" placeholder="Buscar..." autocomplete="off">
+                <p class="nav-dialog__hint">Tip: escribe y se filtrarán los productos (si estás en la homepage).</p>
+            </div>
+        </form>
+    </dialog>
+
+    <dialog class="nav-dialog" id="navLoginDialog" aria-label="Inicio de sesión">
+        <form class="nav-dialog__card" id="navLoginForm">
+            <header class="nav-dialog__header">
+                <h2 class="nav-dialog__title">Iniciar sesión</h2>
+                <button class="nav-dialog__close" type="button" data-close-dialog="navLoginDialog" aria-label="Cerrar">×</button>
+            </header>
+            <div class="nav-dialog__body">
+                <div class="form-group">
+                    <label for="loginEmail" class="form-label">Correo electrónico</label>
+                    <input type="email" id="loginEmail" class="form-input" placeholder="tu@email.com" required>
+                </div>
+                <div class="form-group">
+                    <label for="loginPassword" class="form-label">Contraseña</label>
+                    <input type="password" id="loginPassword" class="form-input" placeholder="••••••••" required>
+                </div>
+                <button type="submit" class="btn btn-primary" style="width: 100%;">Entrar</button>
+            </div>
+        </form>
+    </dialog>
+
+    <dialog class="nav-dialog" id="navCartDialog" aria-label="Carrito">
+        <form method="dialog" class="nav-dialog__card">
+            <header class="nav-dialog__header">
+                <h2 class="nav-dialog__title">Tu carrito</h2>
+                <button class="nav-dialog__close" value="cancel" aria-label="Cerrar">×</button>
+            </header>
+            <div class="nav-dialog__body">
+                <div id="navCartItems"></div>
+                <div class="nav-dialog__footer">
+                    <div class="nav-dialog__total">
+                        <span>Total</span>
+                        <strong id="navCartTotal">$0</strong>
+                    </div>
+                    <div class="nav-dialog__actions">
+                        <a class="btn btn-outline" href="cart.html">Ir al carrito</a>
+                        <button type="button" class="btn btn-primary" id="navCartCheckoutBtn">Finalizar</button>
+                    </div>
+                </div>
+            </div>
+        </form>
+    </dialog>
+
+    <!-- GENERIC MODAL (reemplaza .modal-overlay) -->
+    <dialog class="nav-dialog" id="appModalDialog" aria-label="Modal">
+        <div class="nav-dialog__card">
+            <header class="nav-dialog__header">
+                <h2 class="nav-dialog__title" id="appModalTitle">Modal</h2>
+                <button class="nav-dialog__close" type="button" data-close-dialog="appModalDialog" aria-label="Cerrar">×</button>
+            </header>
+            <div class="nav-dialog__body" id="appModalBody"></div>
+        </div>
+    </dialog>
+
     <!-- Scripts -->
     <script src="js/data.js"></script>
     <script src="js/cart.js"></script>
     <script src="js/main.js"></script>
+    <script src="js/search.js"></script>
     <script src="js/cart-page.js"></script>
 </body>
 

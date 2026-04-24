@@ -68,76 +68,31 @@ function setupAnnouncements() {
     }
 }
 
-// Configurar modales de autenticación
+// Los dialogs del nav viven en el HTML. Aquí solo inicializamos comportamiento común.
 function ensureNavDialogs() {
-    const existing = document.getElementById('navSearchDialog');
-    if (existing) {
-        return;
-    }
+    ['navSearchDialog', 'navLoginDialog', 'navCartDialog', 'appModalDialog'].forEach((id) => {
+        const dialog = document.getElementById(id);
+        if (!dialog) return;
+        setupDialogCommonBehavior(dialog);
+    });
+}
 
-    const wrapper = document.createElement('div');
-    wrapper.innerHTML = `
-        <dialog class="nav-dialog" id="navSearchDialog" aria-label="Búsqueda">
-            <form method="dialog" class="nav-dialog__card">
-                <header class="nav-dialog__header">
-                    <h2 class="nav-dialog__title">Buscar</h2>
-                    <button class="nav-dialog__close" value="cancel" aria-label="Cerrar">×</button>
-                </header>
-                <div class="nav-dialog__body">
-                    <label class="nav-dialog__label" for="searchInput">Buscar productos</label>
-                    <input id="searchInput" type="search" class="form-input" placeholder="Buscar..." autocomplete="off">
-                    <p class="nav-dialog__hint">Tip: escribe y se filtrarán los productos (si estás en la homepage).</p>
-                </div>
-            </form>
-        </dialog>
+function setupDialogCommonBehavior(dialog) {
+    if (!(dialog instanceof HTMLDialogElement)) return;
+    if (dialog.dataset.commonBehavior === 'true') return;
+    dialog.dataset.commonBehavior = 'true';
 
-        <dialog class="nav-dialog" id="navLoginDialog" aria-label="Inicio de sesión">
-            <form class="nav-dialog__card" id="navLoginForm">
-                <header class="nav-dialog__header">
-                    <h2 class="nav-dialog__title">Iniciar sesión</h2>
-                    <button class="nav-dialog__close" type="button" data-close-dialog="navLoginDialog" aria-label="Cerrar">×</button>
-                </header>
-                <div class="nav-dialog__body">
-                    <div class="form-group">
-                        <label for="loginEmail" class="form-label">Correo electrónico</label>
-                        <input type="email" id="loginEmail" class="form-input" placeholder="tu@email.com" required>
-                    </div>
-                    <div class="form-group">
-                        <label for="loginPassword" class="form-label">Contraseña</label>
-                        <input type="password" id="loginPassword" class="form-input" placeholder="••••••••" required>
-                    </div>
-                    <button type="submit" class="btn btn-primary" style="width: 100%;">Entrar</button>
-                </div>
-            </form>
-        </dialog>
+    // Click en el backdrop (área fuera de la tarjeta) -> cerrar
+    dialog.addEventListener('click', (e) => {
+        if (e.target === dialog) {
+            dialog.close();
+        }
+    });
 
-        <dialog class="nav-dialog" id="navCartDialog" aria-label="Carrito">
-            <form method="dialog" class="nav-dialog__card">
-                <header class="nav-dialog__header">
-                    <h2 class="nav-dialog__title">Tu carrito</h2>
-                    <button class="nav-dialog__close" value="cancel" aria-label="Cerrar">×</button>
-                </header>
-                <div class="nav-dialog__body">
-                    <div id="navCartItems"></div>
-                    <div class="nav-dialog__footer">
-                        <div class="nav-dialog__total">
-                            <span>Total</span>
-                            <strong id="navCartTotal">$0</strong>
-                        </div>
-                        <div class="nav-dialog__actions">
-                            <a class="btn btn-outline" href="cart.html">Ir al carrito</a>
-                            <button type="button" class="btn btn-primary" id="navCartCheckoutBtn">Finalizar</button>
-                        </div>
-                    </div>
-                </div>
-            </form>
-        </dialog>
-    `;
-
-    document.body.appendChild(wrapper);
-
-    // Notificar a search.js que el input ya existe
-    document.dispatchEvent(new CustomEvent('search:inputReady'));
+    // ESC -> cerrar (permitiendo cancel por defecto)
+    dialog.addEventListener('cancel', () => {
+        // Nada: el diálogo se cierra solo, esto solo estandariza el hook si luego se requiere.
+    });
 }
 
 function openDialogById(id) {
@@ -217,6 +172,9 @@ function setupNavModals() {
                 const input = document.getElementById('searchInput');
                 input?.focus?.();
                 input?.select?.();
+                if (typeof updateSearchRecommendations === 'function') {
+                    updateSearchRecommendations(input?.value || '');
+                }
             });
         });
     }
@@ -246,6 +204,29 @@ function setupNavModals() {
     document.addEventListener('click', (e) => {
         const target = e.target;
         if (!(target instanceof HTMLElement)) return;
+
+        const searchTermEl = target.closest?.('[data-search-term]');
+        if (searchTermEl instanceof HTMLElement) {
+            const term = searchTermEl.getAttribute('data-search-term') || '';
+            if (term) {
+                e.preventDefault();
+                const input = document.getElementById('searchInput');
+                if (input) input.value = term;
+                if (typeof searchManager?.performSearch === 'function') {
+                    searchManager.performSearch(term);
+                } else if (typeof productFilters !== 'undefined') {
+                    productFilters.updateSearchFilter(term);
+                }
+                closeDialogById('navSearchDialog');
+                if (typeof scrollToProducts === 'function') {
+                    scrollToProducts();
+                } else {
+                    document.getElementById('products-section')?.scrollIntoView?.({ behavior: 'smooth', block: 'start' });
+                }
+            }
+            return;
+        }
+
         const closeId = target.getAttribute('data-close-dialog');
         if (closeId) {
             closeDialogById(closeId);
@@ -272,6 +253,11 @@ function setupNavModals() {
 function showLoginModal() {
     ensureNavDialogs();
     openDialogById('navLoginDialog');
+    requestAnimationFrame(() => {
+        const email = document.getElementById('loginEmail');
+        email?.focus?.();
+        email?.select?.();
+    });
 }
 
 // Mostrar modal de registro
@@ -355,61 +341,40 @@ function showRegisterModal() {
     
     // Event listener para el formulario
     const registerForm = document.getElementById('registerForm');
-    registerForm.addEventListener('submit', handleRegister);
+    registerForm?.addEventListener?.('submit', handleRegister);
     
     // Link para mostrar login
     const showLoginLink = document.getElementById('showLoginModal');
-    showLoginLink.addEventListener('click', (e) => {
+    showLoginLink?.addEventListener?.('click', (e) => {
         e.preventDefault();
         closeModal();
         setTimeout(showLoginModal, 100);
+    });
+
+    requestAnimationFrame(() => {
+        const nameInput = document.getElementById('registerName');
+        nameInput?.focus?.();
     });
 }
 
 // Crear modal genérico
 function createModal(title, content) {
-    // Remover modal existente si hay
-    const existingModal = document.querySelector('.modal-overlay');
-    if (existingModal) {
-        existingModal.remove();
-    }
-    
-    const modal = document.createElement('div');
-    modal.className = 'modal-overlay';
-    modal.innerHTML = `
-        <div class="modal-content">
-            <button class="modal-close" onclick="closeModal()">×</button>
-            <h2 style="margin-bottom: 1rem;">${title}</h2>
-            ${content}
-        </div>
-    `;
-    
-    document.body.appendChild(modal);
-    
-    // Cerrar al hacer clic fuera del modal
-    modal.addEventListener('click', (e) => {
-        if (e.target === modal) {
-            closeModal();
-        }
-    });
-    
-    // Cerrar con tecla Escape
-    document.addEventListener('keydown', function escapeHandler(e) {
-        if (e.key === 'Escape') {
-            closeModal();
-            document.removeEventListener('keydown', escapeHandler);
-        }
-    });
-    
-    return modal;
+    ensureNavDialogs();
+    const dialog = document.getElementById('appModalDialog');
+    const titleEl = document.getElementById('appModalTitle');
+    const bodyEl = document.getElementById('appModalBody');
+    if (!dialog || !titleEl || !bodyEl) return null;
+
+    titleEl.textContent = title || 'Modal';
+    bodyEl.innerHTML = content || '';
+
+    openDialogById('appModalDialog');
+    return dialog;
 }
 
 // Cerrar modal
 function closeModal() {
-    const modal = document.querySelector('.modal-overlay');
-    if (modal) {
-        modal.remove();
-    }
+    closeDialogById('appModalDialog');
 }
 
 // Manejar inicio de sesión

@@ -203,6 +203,113 @@ select {
   background: var(--bg-primary);
 }
 
+.nav-dialog--topbar {
+  width: 100dvw;
+  max-width: 100dvw;
+  margin: 0;
+  border-radius: 0 0 14px 14px;
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+}
+
+.nav-dialog--topbar .nav-dialog__card {
+  width: 100%;
+  margin: 0;
+}
+
+.nav-dialog--topbar .nav-dialog__body {
+  padding-inline: var(--spacing-lg);
+}
+
+.search-panels {
+  margin-top: var(--spacing-lg);
+  display: grid;
+  grid-template-columns: minmax(240px, 320px) 1fr;
+  gap: var(--spacing-lg);
+  align-items: start;
+}
+
+@media (max-width: 768px) {
+  .search-panels {
+    grid-template-columns: 1fr;
+  }
+}
+
+.search-panel {
+  background: var(--bg-secondary);
+  border: 1px solid var(--border-color);
+  border-radius: 14px;
+  padding: var(--spacing-lg);
+}
+
+.search-panel__title {
+  font-size: var(--font-base);
+  font-weight: 700;
+  margin-bottom: var(--spacing-md);
+}
+
+.search-panel__content {
+  display: grid;
+  gap: var(--spacing-sm);
+}
+
+.popular-searches {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: grid;
+  gap: var(--spacing-sm);
+}
+
+.popular-searches a {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0.65rem 0.85rem;
+  border-radius: 12px;
+  background: var(--bg-primary);
+  border: 1px solid var(--border-color);
+  font-size: var(--font-sm);
+  font-weight: 700;
+  transition: transform var(--transition-fast), box-shadow var(--transition-fast), border-color var(--transition-fast);
+}
+
+.popular-searches a:hover {
+  transform: translateY(-1px);
+  box-shadow: var(--shadow-sm);
+  border-color: rgba(31, 47, 58, 0.35);
+}
+
+.popular-searches a::after {
+  content: "→";
+  color: var(--text-secondary);
+  font-weight: 900;
+}
+
+.recommendations-row {
+  display: flex;
+  gap: var(--spacing-md);
+  overflow-x: auto;
+  padding-bottom: 6px;
+  scroll-snap-type: x mandatory;
+  -webkit-overflow-scrolling: touch;
+}
+
+.recommendations-row > .card {
+  flex: 0 0 260px;
+  scroll-snap-align: start;
+}
+
+.recommendations-row .card-image {
+  height: 160px;
+}
+
+.nav-dialog--topbar .nav-dialog__body {
+  padding-bottom: calc(var(--spacing-lg) + env(safe-area-inset-bottom, 0px));
+}
+
 .nav-dialog::backdrop {
   background: rgba(0, 0, 0, 0.5);
 }
@@ -218,10 +325,31 @@ select {
   justify-content: space-between;
   padding: var(--spacing-md) var(--spacing-lg);
   border-bottom: 1px solid var(--border-color);
+  gap: var(--spacing-md);
+}
+
+.nav-dialog__brand {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 12px;
+  padding: 6px;
+}
+
+.nav-dialog__brand:hover {
+  background: var(--bg-secondary);
+}
+
+.nav-dialog__brand img {
+  width: auto;
+  height: 34px;
 }
 
 .nav-dialog__title {
   font-size: var(--font-lg);
+  margin: 0;
+  flex: 1;
+  text-align: center;
 }
 
 .nav-dialog__close {
@@ -231,12 +359,18 @@ select {
   display: grid;
   place-items: center;
   color: var(--text-secondary);
-  font-size: 1.5rem;
+  font-size: 1.25rem;
+  font-weight: 800;
+  line-height: 1;
 }
 
 .nav-dialog__close:hover {
   background: var(--bg-secondary);
   color: var(--text-primary);
+}
+
+.nav-dialog__close--x {
+  letter-spacing: 0.02em;
 }
 
 .nav-dialog__body {
@@ -722,49 +856,6 @@ select {
   min-width: 40px;
   text-align: center;
   font-weight: 600;
-}
-
-/* ================================
-  MODAL
-   ================================ */
-.modal-overlay {
-  position: fixed;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  background-color: rgba(0, 0, 0, 0.5);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  z-index: 1000;
-  padding: var(--spacing-lg);
-}
-
-.modal-content {
-  background-color: var(--bg-primary);
-  border-radius: var(--border-radius);
-  padding: var(--spacing-xl);
-  max-width: 500px;
-  width: 100%;
-  max-height: 90vh;
-  overflow-y: auto;
-  position: relative;
-}
-
-.modal-close {
-  position: absolute;
-  top: var(--spacing-md);
-  right: var(--spacing-md);
-  font-size: var(--font-2xl);
-  color: var(--text-secondary);
-  background: none;
-  border: none;
-  cursor: pointer;
-}
-
-.modal-close:hover {
-  color: var(--text-primary);
 }
 
 /* ================================

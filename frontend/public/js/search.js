@@ -40,6 +40,8 @@ class SearchManager {
             productFilters.updateSearchFilter(trimmedSearch);
         }
 
+        updateSearchRecommendations(trimmedSearch);
+
         // Guardar búsqueda en el historial
         if (trimmedSearch) {
             this.saveToSearchHistory(trimmedSearch);
@@ -130,11 +132,8 @@ function initSearchManager() {
 
 document.addEventListener('DOMContentLoaded', () => {
     initSearchManager();
-});
-
-// Cuando `main.js` inyecta el input del modal
-document.addEventListener('search:inputReady', () => {
-    initSearchManager();
+    renderPopularSearches();
+    updateSearchRecommendations('');
 });
 
 // Función para scroll a productos
@@ -143,4 +142,90 @@ function scrollToProducts() {
     if (productsSection) {
         productsSection.scrollIntoView({ behavior: 'smooth', block: 'start' });
     }
+}
+
+function renderPopularSearches() {
+    const container = document.getElementById('popularSearches');
+    if (!container) return;
+
+    const popular = [
+        'Camisas',
+        'Pantalones',
+        'Vestidos',
+        'Zapatos',
+        'Accesorios',
+        'Negro',
+        'Oferta'
+    ];
+
+    container.innerHTML = `
+        <ul class="popular-searches">
+            ${popular.map(term => `
+                <li><a href="#products-section" data-search-term="${term}">${term}</a></li>
+            `).join('')}
+        </ul>
+    `;
+}
+
+function updateSearchRecommendations(searchTerm) {
+    const container = document.getElementById('searchRecommendations');
+    if (!container) return;
+
+    const list = (typeof products !== 'undefined' && Array.isArray(products)) ? products : [];
+    const term = (searchTerm || '').trim().toLowerCase();
+
+    let recommended = [];
+    if (term) {
+        recommended = list.filter(p => {
+            const name = String(p?.name || '').toLowerCase();
+            const category = String(p?.category || '').toLowerCase();
+            const desc = String(p?.description || '').toLowerCase();
+            return name.includes(term) || category.includes(term) || desc.includes(term);
+        });
+    }
+
+    if (!term || recommended.length === 0) {
+        recommended = list.slice(0, 6);
+    } else {
+        recommended = recommended.slice(0, 6);
+    }
+
+    if (recommended.length === 0) {
+        container.innerHTML = `<p class="nav-dialog__hint">Aún no hay productos para mostrar.</p>`;
+        return;
+    }
+
+    const formatPrice = (value) => {
+        try {
+            if (typeof cart?.formatPrice === 'function') return cart.formatPrice(value);
+        } catch (_) {}
+        return `$${Number(value || 0).toLocaleString('es-CO')}`;
+    };
+
+    container.innerHTML = `
+        <div class="recommendations-row">
+            ${recommended.map(p => `
+                <div class="card fade-in" data-search-term="${String(p?.name || '')}">
+                    <img src="${p.image}" alt="${p.name}" class="card-image">
+                    <div class="card-content">
+                        <h3 class="card-title">${p.name}</h3>
+                        <div class="flex-between" style="margin-bottom: 0.75rem;">
+                            <p class="card-price" style="margin-bottom: 0;">${formatPrice(p.price)}</p>
+                            ${p.stock > 0
+                                ? `<span class="badge badge-success">En stock</span>`
+                                : `<span class="badge badge-warning">Agotado</span>`}
+                        </div>
+                        <button
+                            type="button"
+                            class="btn btn-outline btn-sm"
+                            style="width: 100%;"
+                            data-search-term="${String(p?.name || '')}"
+                        >
+                            Ver
+                        </button>
+                    </div>
+                </div>
+            `).join('')}
+        </div>
+    `;
 }
