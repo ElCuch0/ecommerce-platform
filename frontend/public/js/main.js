@@ -450,7 +450,9 @@ function renderProductsToGrid(gridId, list) {
         card.innerHTML = `
             <img src="${product.image}" alt="${product.name}" class="card-image">
             <div class="card-content">
-                <h3 class="card-title">${product.name}</h3>
+                <h3 class="card-title">
+                    <a class="card-title-link" href="product.html?id=${product.id}">${product.name}</a>
+                </h3>
                 <p class="card-text">${product.description}</p>
                 <div class="flex-between" style="margin-bottom: 1rem;">
                     <p class="card-price">${cart.formatPrice(product.price)}</p>

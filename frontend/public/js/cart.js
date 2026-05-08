@@ -154,6 +154,15 @@ class ShoppingCart {
 // Crear instancia global del carrito
 const cart = new ShoppingCart();
 
+// Añadir al carrito (global; requiere `products` de data.js)
+function addToCart(productId) {
+    if (typeof products === 'undefined' || !Array.isArray(products)) return;
+    const product = products.find(p => p.id === productId);
+    if (product && product.stock > 0) {
+        cart.addItem(product);
+    }
+}
+
 // Agregar estilos de animación para notificaciones
 const style = document.createElement('style');
 style.textContent = `

@@ -160,7 +160,9 @@ class ProductFilters {
         card.innerHTML = `
             <img src="${product.image}" alt="${product.name}" class="card-image">
             <div class="card-content">
-                <h3 class="card-title">${product.name}</h3>
+                <h3 class="card-title">
+                    <a class="card-title-link" href="product.html?id=${product.id}">${product.name}</a>
+                </h3>
                 <p class="card-text">${product.description}</p>
                 <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1rem;">
                     <p class="card-price">${cart.formatPrice(product.price)}</p>
@@ -260,12 +262,4 @@ const productFilters = new ProductFilters();
 // Función global para limpiar filtros
 function clearFilters() {
     productFilters.clearAllFilters();
-}
-
-// Función global para añadir al carrito
-function addToCart(productId) {
-    const product = products.find(p => p.id === productId);
-    if (product && product.stock > 0) {
-        cart.addItem(product);
-    }
 }
