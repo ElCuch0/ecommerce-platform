@@ -30,7 +30,7 @@
 <body>
     <!-- BARRA DE ANUNCIOS -->
     <div class="announcement-bar" id="announcementBar">
-        <p>¡Envío gratis en compras superiores a $50.000!</p>
+        <p>! Envío gratis en compras superiores a $50.000 !</p>
     </div>
     <!-- HEADER -->
     <header class="header">
@@ -75,11 +75,11 @@
                 <p class="section-subtitle">Explora lo más popular y encuentra tu estilo en segundos.</p>
             </header>
             <div class="categories-grid">
-                <a class="category-card" href="#products-section" data-category-jump="camisas">👕 Camisas</a>
-                <a class="category-card" href="#products-section" data-category-jump="pantalones">👖 Pantalones</a>
-                <a class="category-card" href="#products-section" data-category-jump="vestidos">👗 Vestidos</a>
-                <a class="category-card" href="#products-section" data-category-jump="zapatos">👟 Zapatos</a>
-                <a class="category-card" href="#products-section" data-category-jump="accesorios">🧢 Accesorios</a>
+                <a class="category-card" href="#products-section" data-category-jump="camisas">Camisas</a>
+                <a class="category-card" href="#products-section" data-category-jump="pantalones">Pantalones</a>
+                <a class="category-card" href="#products-section" data-category-jump="vestidos">Vestidos</a>
+                <a class="category-card" href="#products-section" data-category-jump="zapatos">Zapatos</a>
+                <a class="category-card" href="#products-section" data-category-jump="accesorios">Accesorios</a>
             </div>
         </section>
 
@@ -235,10 +235,95 @@
             </div>
 
             <div style="text-align: center; margin-top: 2rem; padding-top: 2rem; border-top: 1px solid rgba(255,255,255,0.1);">
-                <p>&copy; <span class="current-year">2025</span> ER store. Todos los derechos reservados.</p>
+                <p>&copy; <span class="current-year">2026</span> ER store. Todos los derechos reservados.</p>
             </div>
         </div>
     </footer>
+
+    <!-- NAV MODALS (viven en el HTML) -->
+    <dialog class="nav-dialog nav-dialog--topbar" id="navSearchDialog" aria-label="Búsqueda">
+        <form method="dialog" class="nav-dialog__card">
+            <header class="nav-dialog__header">
+                <a class="nav-dialog__brand" href="index.html" aria-label="Ir al inicio">
+                    <img src="images/Logo_ER.png" alt="Logo ER Store">
+                </a>
+                <h2 class="nav-dialog__title">Buscar</h2>
+                <button class="nav-dialog__close nav-dialog__close--x" value="cancel" aria-label="Cerrar">X</button>
+            </header>
+            <div class="nav-dialog__body">
+                <label class="nav-dialog__label" for="searchInput">Buscar productos</label>
+                <input id="searchInput" type="search" class="form-input" placeholder="Buscar..." autocomplete="off">
+
+                <div class="search-panels">
+                    <section class="search-panel" aria-label="Búsquedas populares">
+                        <h3 class="search-panel__title">Búsquedas más concurridas</h3>
+                        <div class="search-panel__content" id="popularSearches"></div>
+                    </section>
+
+                    <section class="search-panel" aria-label="Productos recomendados">
+                        <h3 class="search-panel__title">Recomendados para ti</h3>
+                        <div class="search-panel__content" id="searchRecommendations"></div>
+                    </section>
+                </div>
+            </div>
+            <footer class="nav-dialog__footer">
+                <p class="nav-dialog__hint">Tip: escribe y se filtrarán los productos (si estás en la homepage).</p>
+            </footer>
+        </form>
+    </dialog>
+
+    <dialog class="nav-dialog" id="navLoginDialog" aria-label="Inicio de sesión">
+        <form class="nav-dialog__card" id="navLoginForm">
+            <header class="nav-dialog__header">
+                <h2 class="nav-dialog__title">Iniciar sesión</h2>
+                <button class="nav-dialog__close" type="button" data-close-dialog="navLoginDialog" aria-label="Cerrar">×</button>
+            </header>
+            <div class="nav-dialog__body">
+                <div class="form-group">
+                    <label for="loginEmail" class="form-label">Correo electrónico</label>
+                    <input type="email" id="loginEmail" class="form-input" placeholder="tu@email.com" required>
+                </div>
+                <div class="form-group">
+                    <label for="loginPassword" class="form-label">Contraseña</label>
+                    <input type="password" id="loginPassword" class="form-input" placeholder="••••••••" required>
+                </div>
+                <button type="submit" class="btn btn-primary" style="width: 100%;">Entrar</button>
+            </div>
+        </form>
+    </dialog>
+
+    <dialog class="nav-dialog" id="navCartDialog" aria-label="Carrito">
+        <form method="dialog" class="nav-dialog__card">
+            <header class="nav-dialog__header">
+                <h2 class="nav-dialog__title">Tu carrito</h2>
+                <button class="nav-dialog__close" value="cancel" aria-label="Cerrar">×</button>
+            </header>
+            <div class="nav-dialog__body">
+                <div id="navCartItems"></div>
+                <div class="nav-dialog__footer">
+                    <div class="nav-dialog__total">
+                        <span>Total</span>
+                        <strong id="navCartTotal">$0</strong>
+                    </div>
+                    <div class="nav-dialog__actions">
+                        <a class="btn btn-outline" href="cart.html">Ir al carrito</a>
+                        <button type="button" class="btn btn-primary" id="navCartCheckoutBtn">Finalizar</button>
+                    </div>
+                </div>
+            </div>
+        </form>
+    </dialog>
+
+    <!-- GENERIC MODAL (reemplaza .modal-overlay) -->
+    <dialog class="nav-dialog" id="appModalDialog" aria-label="Modal">
+        <div class="nav-dialog__card">
+            <header class="nav-dialog__header">
+                <h2 class="nav-dialog__title" id="appModalTitle">Modal</h2>
+                <button class="nav-dialog__close" type="button" data-close-dialog="appModalDialog" aria-label="Cerrar">×</button>
+            </header>
+            <div class="nav-dialog__body" id="appModalBody"></div>
+        </div>
+    </dialog>
 
     <!-- Scripts -->
     <script src="js/data.js"></script>
