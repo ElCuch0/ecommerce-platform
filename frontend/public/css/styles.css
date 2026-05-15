@@ -191,6 +191,13 @@ select {
   gap: var(--spacing-md);
 }
 
+/* Bloquea scroll de la página mientras un dialog modal del nav está abierto (main.js) */
+html.nav-modal-open,
+body.nav-modal-open {
+  overflow: hidden;
+  overscroll-behavior: none;
+}
+
 /* ================================
   DIALOGS (NAV MODALS)
    ================================ */
@@ -204,8 +211,9 @@ select {
 }
 
 .nav-dialog--topbar {
-  width: 100dvw;
-  max-width: 100dvw;
+  width: 100%;
+  max-width: 100%;
+  box-sizing: border-box;
   margin: 0;
   border-radius: 0 0 14px 14px;
   position: fixed;
@@ -216,22 +224,90 @@ select {
 
 .nav-dialog--topbar .nav-dialog__card {
   width: 100%;
+  max-width: 100%;
+  min-width: 0;
+  margin: 0;
+  box-sizing: border-box;
+  overflow-x: hidden;
+  height: 100%;
+  max-height: 100%;
+  position: relative;
+}
+
+.nav-dialog--topbar .nav-dialog__header {
+  min-width: 0;
+  max-width: 100%;
+  box-sizing: border-box;
+}
+
+.nav-dialog--topbar .nav-dialog__title {
+  min-width: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.nav-dialog--topbar .nav-dialog__body .form-input {
+  max-width: 100%;
+  max-height: 50%;
+  box-sizing: border-box;
+}
+
+#navLoginDialog {
+  position: fixed;
+  right: 0;
+  left: auto;
+}
+
+#navLoginDialog .nav-dialog__title {
+  text-align: left;
+}
+
+#navCartDialog {
+  position: fixed;
+  top: 0;
+  right: 0;
+  left: auto;
+  height: 100dvh;
+  max-height: 100dvh;
   margin: 0;
 }
 
-.nav-dialog--topbar .nav-dialog__body {
-  padding-inline: var(--spacing-lg);
+#navCartDialog .nav-dialog__card{
+  max-height: 100%;
+  height: 100%;
+}
+
+#navCartDialog .nav-dialog__body{
+  display: flex;
+  align-items: center;
+  box-sizing: border-box;
+  justify-content: center;
+  margin: 0;
+  bottom: auto;
+}
+
+#navCartDialog .nav-dialog__footer {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  max-width: 100%;
+  box-sizing: border-box;
+  padding: var(--spacing-md) var(--spacing-lg);
 }
 
 .search-panels {
   margin-top: var(--spacing-lg);
   display: grid;
-  grid-template-columns: minmax(240px, 320px) 1fr;
+  grid-template-columns: minmax(0, min(280px, 100%)) minmax(0, 1fr);
   gap: var(--spacing-lg);
   align-items: start;
+  min-width: 0;
+  max-width: 100%;
 }
 
-@media (max-width: 768px) {
+@media (max-width: 900px) {
   .search-panels {
     grid-template-columns: 1fr;
   }
@@ -242,6 +318,9 @@ select {
   border: 1px solid var(--border-color);
   border-radius: 14px;
   padding: var(--spacing-lg);
+  min-width: 0;
+  max-width: 100%;
+  box-sizing: border-box;
 }
 
 .search-panel__title {
@@ -253,6 +332,8 @@ select {
 .search-panel__content {
   display: grid;
   gap: var(--spacing-sm);
+  min-width: 0;
+  max-width: 100%;
 }
 
 .popular-searches {
@@ -291,6 +372,10 @@ select {
 /* Recomendados en la modal de búsqueda: fila horizontal con flechas (tarjetas estándar) */
 .search-rec-carousel--horizontal {
   width: 100%;
+  max-width: 100%;
+  min-width: 0;
+  box-sizing: border-box;
+  overflow: hidden;
 }
 
 .search-rec-carousel__strip {
@@ -298,11 +383,14 @@ select {
   flex-direction: row;
   align-items: stretch;
   gap: var(--spacing-sm);
+  min-width: 0;
+  max-width: 100%;
 }
 
 .search-rec-carousel__viewport {
   flex: 1;
   min-width: 0;
+  max-width: 100%;
   overflow: hidden;
 }
 
@@ -349,6 +437,10 @@ select {
 }
 
 .nav-dialog--topbar .nav-dialog__body {
+  max-width: 100%;
+  min-width: 0;
+  box-sizing: border-box;
+  overflow-x: hidden;
   padding-bottom: calc(var(--spacing-lg) + env(safe-area-inset-bottom, 0px));
 }
 
@@ -416,7 +508,9 @@ select {
 }
 
 .nav-dialog__body {
-  padding: var(--spacing-lg);
+  padding: var(--spacing-md);
+  max-width: 560px;
+  width: 560px;
 }
 
 .nav-dialog__label {
@@ -431,12 +525,6 @@ select {
   color: var(--text-secondary);
 }
 
-.nav-dialog__footer {
-  margin-top: var(--spacing-lg);
-  border-top: 1px solid var(--border-color);
-  padding-top: var(--spacing-lg);
-}
-
 .nav-dialog__actions {
   display: flex;
   gap: var(--spacing-sm);
@@ -449,17 +537,24 @@ select {
   justify-content: space-between;
 }
 
+.nav-dialog__footer {
+  padding: var(--spacing-md) var(--spacing-lg);
+  margin: 0;
+  text-align: center;
+}
+
 .nav-cart-list {
   list-style: none;
   display: grid;
   gap: var(--spacing-md);
+  max-width: 540px;
+  width: 100%;
 }
 
 .nav-cart-item {
   display: grid;
   grid-template-columns: 44px 1fr 32px;
   gap: var(--spacing-md);
-  align-items: center;
 }
 
 .nav-cart-item__img {

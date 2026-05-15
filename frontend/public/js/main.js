@@ -68,6 +68,23 @@ function setupAnnouncements() {
     }
 }
 
+// Scroll del documento: bloquear mientras un <dialog> modal del nav está abierto
+let navModalScrollLockDepth = 0;
+
+function lockNavModalScroll() {
+    navModalScrollLockDepth++;
+    if (navModalScrollLockDepth !== 1) return;
+    document.documentElement.classList.add('nav-modal-open');
+    document.body.classList.add('nav-modal-open');
+}
+
+function unlockNavModalScroll() {
+    if (navModalScrollLockDepth > 0) navModalScrollLockDepth--;
+    if (navModalScrollLockDepth !== 0) return;
+    document.documentElement.classList.remove('nav-modal-open');
+    document.body.classList.remove('nav-modal-open');
+}
+
 // Los dialogs del nav viven en el HTML. Aquí solo inicializamos comportamiento común.
 function ensureNavDialogs() {
     ['navSearchDialog', 'navLoginDialog', 'navCartDialog', 'appModalDialog'].forEach((id) => {
@@ -82,27 +99,32 @@ function setupDialogCommonBehavior(dialog) {
     if (dialog.dataset.commonBehavior === 'true') return;
     dialog.dataset.commonBehavior = 'true';
 
+    dialog.addEventListener('close', () => {
+        unlockNavModalScroll();
+    });
+
     // Click en el backdrop (área fuera de la tarjeta) -> cerrar
     dialog.addEventListener('click', (e) => {
         if (e.target === dialog) {
             dialog.close();
         }
     });
-
-    // ESC -> cerrar (permitiendo cancel por defecto)
-    dialog.addEventListener('cancel', () => {
-        // Nada: el diálogo se cierra solo, esto solo estandariza el hook si luego se requiere.
-    });
 }
 
 function openDialogById(id) {
     const dialog = document.getElementById(id);
     if (!dialog) return;
+    if (dialog.open) return;
     if (typeof dialog.showModal === 'function') {
-        dialog.showModal();
+        try {
+            dialog.showModal();
+        } catch (_) {
+            return;
+        }
     } else {
         dialog.setAttribute('open', '');
     }
+    lockNavModalScroll();
 }
 
 function closeDialogById(id) {
