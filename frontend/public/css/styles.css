@@ -507,12 +507,6 @@ body.nav-modal-open {
   letter-spacing: 0.02em;
 }
 
-.nav-dialog__body {
-  padding: var(--spacing-md);
-  max-width: 560px;
-  width: 560px;
-}
-
 .nav-dialog__label {
   display: block;
   margin-bottom: var(--spacing-sm);
@@ -541,6 +535,10 @@ body.nav-modal-open {
   padding: var(--spacing-md) var(--spacing-lg);
   margin: 0;
   text-align: center;
+}
+
+.nav-dialog__body{
+  padding: var(--spacing-md)
 }
 
 .nav-cart-list {
