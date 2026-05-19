@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="robots" content="noindex, nofollow">
+  <meta name="description" content="Panel administrativo ER Store">
+  <title>Administración — Dashboard</title>
+  <link rel="icon" href="../images/Logo_ER.png">
+  <link rel="stylesheet" href="../css/dashboard.css">
+</head>
+
+<body>
+  <div class="dash-app" id="dashApp">
+    <button type="button" class="dash-overlay" id="dashOverlay" aria-label="Cerrar menú"></button>
+
+    <header class="dash-topbar">
+      <button type="button" class="dash-topbar__menu" id="dashMenuBtn" aria-expanded="false" aria-controls="dashSidebar" aria-label="Abrir menú lateral">
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+          <path d="M4 6h16M4 12h16M4 18h16" />
+        </svg>
+      </button>
+      <a class="dash-topbar__brand" href="dashboard.html" aria-label="Inicio administración">
+        <img src="../images/Logo_ER.png" alt="">
+        <span>ER Admin</span>
+      </a>
+      <nav class="dash-topbar__nav" aria-label="Secciones">
+        <a class="dash-topbar__link is-active" href="dashboard.html">Dashboard</a>
+        <a class="dash-topbar__link" href="inventario.html">Inventario</a>
+        <a class="dash-topbar__link" href="#">Pedidos</a>
+        <a class="dash-topbar__link" href="#">Informes</a>
+        <a class="dash-topbar__link" href="#">Configuración</a>
+      </nav>
+    </header>
+
+    <div class="dash-body">
+      <aside class="dash-sidebar" id="dashSidebar" aria-label="Submenú administrativo">
+        <p class="dash-sidebar__label">Vista general</p>
+        <a class="dash-sidebar__link is-active" href="dashboard.html">Resumen</a>
+        <a class="dash-sidebar__link" href="#">Actividad</a>
+        <a class="dash-sidebar__link" href="#">Alertas</a>
+        <p class="dash-sidebar__label" style="margin-top: 1rem;">Inventario</p>
+        <a class="dash-sidebar__link" href="inventario.html">Tabla de inventario</a>
+        <a class="dash-sidebar__link" href="inventario-agregar.html">Agregar</a>
+        <a class="dash-sidebar__link" href="inventario-actualizar.html">Actualizar</a>
+        <a class="dash-sidebar__link" href="inventario-eliminar.html">Eliminar</a>
+      </aside>
+
+      <main class="dash-main">
+        <h1 class="dash-main__title">Dashboard</h1>
+        <p class="dash-main__subtitle">Resumen operativo de la tienda. Los datos son de ejemplo hasta conectar el backend.</p>
+
+        <section class="dash-kpi-grid" aria-label="Indicadores">
+          <article class="dash-card dash-card--stat">
+            <span class="dash-stat__label">Ventas (hoy)</span>
+            <span class="dash-stat__value">$0</span>
+            <span class="dash-stat__hint">Sin conexión a datos reales</span>
+          </article>
+          <article class="dash-card dash-card--stat">
+            <span class="dash-stat__label">Pedidos pendientes</span>
+            <span class="dash-stat__value">0</span>
+            <span class="dash-stat__hint">Revisar en Pedidos</span>
+          </article>
+          <article class="dash-card dash-card--stat">
+            <span class="dash-stat__label">Productos activos</span>
+            <span class="dash-stat__value">—</span>
+            <span class="dash-stat__hint">Sincronizar con inventario</span>
+          </article>
+          <article class="dash-card dash-card--stat">
+            <span class="dash-stat__label">Visitas (7 días)</span>
+            <span class="dash-stat__value">—</span>
+            <span class="dash-stat__hint">Informes en desarrollo</span>
+          </article>
+        </section>
+
+        <div class="dash-panels">
+          <section class="dash-card" aria-labelledby="dashRecentOrdersTitle">
+            <div class="dash-card__head">
+              <h2 class="dash-card__title" id="dashRecentOrdersTitle">Últimos pedidos</h2>
+              <a class="dash-card__action" href="#">Ver todos</a>
+            </div>
+            <div style="overflow-x: auto;">
+              <table class="dash-table">
+                <thead>
+                  <tr>
+                    <th>Pedido</th>
+                    <th>Cliente</th>
+                    <th>Estado</th>
+                    <th>Total</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td colspan="4" style="color: var(--dash-muted); font-size: 0.9rem;">No hay pedidos para mostrar.</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </section>
+
+          <section class="dash-card" aria-labelledby="dashStockTitle">
+            <div class="dash-card__head">
+              <h2 class="dash-card__title" id="dashStockTitle">Stock bajo</h2>
+              <a class="dash-card__action" href="inventario.html">Inventario</a>
+            </div>
+            <ul class="dash-list">
+              <li>
+                <span>—</span>
+                <span class="dash-list__meta">Conecta el API para listar alertas</span>
+              </li>
+            </ul>
+          </section>
+        </div>
+      </main>
+    </div>
+  </div>
+
+  <script src="js/dashboard.js"></script>
+</body>
+
+</html>

@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="robots" content="noindex, nofollow">
+  <meta name="description" content="Eliminar productos — ER Admin">
+  <title>Inventario — Eliminar</title>
+  <link rel="icon" href="../images/Logo_ER.png">
+  <link rel="stylesheet" href="../css/dashboard.css">
+</head>
+
+<body>
+  <div class="dash-app" id="dashApp">
+    <button type="button" class="dash-overlay" id="dashOverlay" aria-label="Cerrar menú"></button>
+
+    <header class="dash-topbar">
+      <button type="button" class="dash-topbar__menu" id="dashMenuBtn" aria-expanded="false" aria-controls="dashSidebar" aria-label="Abrir menú lateral">
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+          <path d="M4 6h16M4 12h16M4 18h16" />
+        </svg>
+      </button>
+      <a class="dash-topbar__brand" href="dashboard.html" aria-label="Inicio administración">
+        <img src="../images/Logo_ER.png" alt="">
+        <span>ER Admin</span>
+      </a>
+      <nav class="dash-topbar__nav" aria-label="Secciones">
+        <a class="dash-topbar__link" href="dashboard.html">Dashboard</a>
+        <a class="dash-topbar__link is-active" href="inventario.html">Inventario</a>
+        <a class="dash-topbar__link" href="#">Pedidos</a>
+        <a class="dash-topbar__link" href="#">Informes</a>
+        <a class="dash-topbar__link" href="#">Configuración</a>
+      </nav>
+    </header>
+
+    <div class="dash-body">
+      <aside class="dash-sidebar" id="dashSidebar" aria-label="Submenú administrativo">
+        <p class="dash-sidebar__label">Vista general</p>
+        <a class="dash-sidebar__link" href="dashboard.html">Resumen</a>
+        <a class="dash-sidebar__link" href="#">Actividad</a>
+        <a class="dash-sidebar__link" href="#">Alertas</a>
+        <p class="dash-sidebar__label" style="margin-top: 1rem;">Inventario</p>
+        <a class="dash-sidebar__link" href="inventario.html">Tabla de inventario</a>
+        <a class="dash-sidebar__link" href="inventario-agregar.html">Agregar</a>
+        <a class="dash-sidebar__link" href="inventario-actualizar.html">Actualizar</a>
+        <a class="dash-sidebar__link is-active" href="inventario-eliminar.html">Eliminar</a>
+      </aside>
+
+      <main class="dash-main">
+        <h1 class="dash-main__title">Eliminar productos</h1>
+        <p class="dash-main__subtitle">Marca uno o varios productos y confirma la eliminación. Esta acción solo afecta la demo en memoria de sesión.</p>
+
+        <p class="dash-muted-banner">Tras eliminar, la tabla de inventario y la pantalla de actualizar reflejarán los mismos datos hasta que cierres la pestaña o vacíes el almacenamiento de sesión.</p>
+
+        <div class="dash-toolbar">
+          <div class="dash-toolbar__grow">
+            <label class="dash-label" for="delSearch">Buscar</label>
+            <input type="search" id="delSearch" class="dash-input" placeholder="Filtrar por nombre o SKU…" autocomplete="off">
+          </div>
+          <div class="dash-toolbar__actions">
+            <button type="button" class="dash-btn dash-btn--outline dash-btn--sm" id="delSelectAll">Seleccionar visibles</button>
+            <button type="button" class="dash-btn dash-btn--outline dash-btn--sm" id="delClearSel">Limpiar selección</button>
+            <button type="button" class="dash-btn dash-btn--danger" id="delBulkBtn" disabled>Eliminar seleccionados</button>
+            <a class="dash-btn dash-btn--outline" href="inventario.html">Volver a la tabla</a>
+          </div>
+        </div>
+
+        <section class="dash-card" aria-labelledby="delTableTitle">
+          <div class="dash-card__head">
+            <h2 class="dash-card__title" id="delTableTitle">Productos</h2>
+            <span class="dash-list__meta" id="delSelectedCount">0 seleccionados</span>
+          </div>
+          <div class="dash-table-wrap">
+            <table class="dash-table">
+              <thead>
+                <tr>
+                  <th scope="col" style="width: 2.5rem;">
+                    <span class="dash-sr-only" id="delMasterLabel">Seleccionar todos los visibles</span>
+                    <input type="checkbox" id="delMaster" aria-labelledby="delMasterLabel" title="Seleccionar todos los visibles">
+                  </th>
+                  <th>SKU</th>
+                  <th>Nombre</th>
+                  <th>Categoría</th>
+                  <th>Stock</th>
+                </tr>
+              </thead>
+              <tbody id="delTableBody"></tbody>
+            </table>
+          </div>
+        </section>
+      </main>
+    </div>
+  </div>
+
+  <script src="js/dashboard.js"></script>
+  <script src="js/inventory-store.js"></script>
+  <script src="js/inventario-eliminar.js"></script>
+</body>
+
+</html>
