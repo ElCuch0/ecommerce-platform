@@ -307,7 +307,7 @@ body.nav-modal-open {
   max-width: 100%;
 }
 
-@media (max-width: 900px) {
+@media (max-width: 640px) {
   .search-panels {
     grid-template-columns: 1fr;
   }
