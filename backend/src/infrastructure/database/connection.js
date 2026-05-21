@@ -24,10 +24,6 @@ async function clientConnection() {
         // Tratar de conectar a la base de datos
         await client.connect()
         console.log('Conexión exitosa a PostgreSQL')
-
-        // Realizar una query de prueba
-        const res = await client.query('SELECT NOW()')
-        console.log('Fecha y hora actual del servidor: ', res.rows[0].now)
     } catch (err) {
         console.error('Fallo al tratar de conectar a la base de datos: ', err)
     } finally {
@@ -37,4 +33,4 @@ async function clientConnection() {
     }
 }
 
-clientConnection()
+export default clientConnection;
