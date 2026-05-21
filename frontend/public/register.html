@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+
+    <!-- Meta datos -->
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Tienda de ropa online con ropa tipo casual a buenos precios">
+
+    <!-- Icono de la pestaña -->
+    <link rel="icon" href="images/Logo_ER.png">
+
+    <!-- Título de la página -->
+    <title>ER Store - Register</title>
+
+    <!-- Estilos -->
+    <link rel="stylesheet" href="css/styles.css">
+</head>
+
+<body>
+    <!-- BARRA DE ANUNCIOS -->
+    <div class="announcement-bar" id="announcementBar">
+        <p>! Envío gratis en compras superiores a $50.000 !</p>
+    </div>
+    <!-- HEADER -->
+    <header class="header">
+        <nav class="nav-container" aria-label="Navegación principal">
+                <!-- Logo -->
+                <a href="index.html" class="logo-header">
+                    <img src="images/Logo_ER.png" alt="ER Store">
+                </a>
+        </nav>
+    </header>
+
+    <main>
+        <section class = "register-card">
+            <form class = "register-form" action="./process_register.js" method="post">
+                <h2>Crear cuenta</h2>
+                <div class = "field">
+                    <label for="fname">Nombre: </label>
+                    <input type="text">
+                </div>
+                <div class = "field">
+                    <label for="fsurname">Apellido: </label>
+                    <input type="text">
+                </div>
+                <div class = "field">
+                    <label for="femail">Correo electrónico: </label>
+                    <input type="email">
+                </div>
+                <div class = "field">
+                    <label for="fpassword">Contraseña: </label>
+                    <input type="password">
+                </div>
+                <div class = "field">
+                    <label for="fphone" pattern:[0-9]{10}>Teléfono: </label>
+                    <input type="tel">
+                </div>
+                <button class = "register-button">Registrarme</button>
+                <p class = "register-footer">¿Ya tienes una cuenta?<a href="./index.html">Iniciar sesión</a></p>
+            </form>
+        </section>
+    </main>
+
+    <!-- FOOTER -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h3> <img src="images/Logo_ER.png" alt="ER Store"> ER store</h3>
+                    <p style="margin-top: 1rem; opacity: 0.8;">
+                        Tu tienda de moda online con las mejores tendencias y precios.
+                    </p>
+                </div>
+
+                <div class="footer-section">
+                    <h3>Enlaces Rápidos</h3>
+                    <ul class="footer-links">
+                        <li><a href="index.html">Inicio</a></li>
+                        <li><a href="cart.html">Carrito</a></li>
+                        <li><a href="#" id="footerLoginLink">Mi Cuenta</a></li>
+                    </ul>
+                </div>
+
+                <div class="footer-section">
+                    <h3>Atención al Cliente</h3>
+                    <ul class="footer-links">
+                        <li><a href="#">Preguntas Frecuentes</a></li>
+                        <li><a href="#">Envíos y Devoluciones</a></li>
+                        <li><a href="#">Términos y Condiciones</a></li>
+                        <li><a href="#">Política de Privacidad</a></li>
+                    </ul>
+                </div>
+
+                <div class="footer-section">
+                    <h3>Contáctanos</h3>
+                    <ul class="footer-links">
+                        <li> contacto@ERstore.com</li>
+                        <li> +57 300 123 4567</li>
+                        <li> Cucuta, Norte de Santander, CO</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div style="text-align: center; margin-top: 2rem; padding-top: 2rem; border-top: 1px solid rgba(255,255,255,0.1);">
+                <p>&copy; <span class="current-year">2026</span> ER store. Todos los derechos reservados.</p>
+            </div>
+        </div>
+    </footer>
+
+</body>
+
+</html>

@@ -1286,3 +1286,86 @@ body.nav-modal-open {
     position: static;
   }
 }
+
+.register-card {
+  display: flex;
+  margin: inherit;
+  padding: inherit;
+  box-sizing: border-box;
+  justify-content: center;
+  align-items: center;
+  height: 100dvh;
+}
+
+.register-form {
+  padding: 40px;
+  border-radius: 10px;
+  box-shadow: 0 4px 15px;
+  width: 100%;
+  max-width: 500px;
+}
+
+.register-form h2 {
+  text-align: center;
+  color: var(--primary-color);
+  margin-bottom: 30px;
+}
+
+.field {
+  margin: 20px;
+  label {
+    display: block;
+    margin-bottom: 8px;
+    color: var(--text-primary);
+    font-size: var(--font-lg);
+  }
+
+  input {
+    width: 100%;
+    padding: 5px;
+    border: 1px solid var(--primary-dark);
+    border-radius: 10px;
+    font-size: var(--font-lg);
+    outline: none;
+    transition: var(--border-color) var(--transition-fast);
+
+    &:focus{
+      border-color: var(--secondary-color) !important;
+    }
+
+  }
+
+}
+
+.register-button {
+  width: 100%;
+  padding: 10px;
+  background-color: var(--secondary-color);
+  border: none;
+  border-radius: 10px;
+  font-size: var(--font-lg);
+  cursor: pointer;
+  transition: var(--border-color) var(--transition-fast);
+
+  &:hover{
+    background-color: var(--secondary-dark);
+  }
+}
+
+.register-footer {
+  text-align: center;
+  margin-top: 20px;
+  font-size: var(--font-sm);
+  color: var(--text-primary);
+
+  a {
+    display: block;
+    color: var(--text-primary);
+    text-decoration: none;
+
+    &:hover {
+      color: var(--text-light);
+    }
+  }
+
+}
