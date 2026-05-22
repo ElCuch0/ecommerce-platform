@@ -11,26 +11,19 @@ dotenv.config({
     path: path.resolve(dirName, '../../../.env')
 })
 
-const client = new Client({
-    host: process.env.DB_HOST ?? "localhost",
-    user: process.env.DB_USER ?? "postgres",
-    password: process.env.DB_PASSWORD,
-    database: process.env.DB_NAME ?? ER-Store,
-    port: Number(process.env.DB_PORT) ?? 5432
-})
+export const connectionClient = async () => {
+    const client = new Client({
+        host: process.env.DB_HOST ?? "localhost",
+        user: process.env.DB_USER ?? "postgres",
+        password: process.env.DB_PASSWORD,
+        database: process.env.DB_NAME ?? ER-Store,
+        port: Number(process.env.DB_PORT) ?? 5432
+    })
 
-async function clientConnection() {
     try {
-        // Tratar de conectar a la base de datos
         await client.connect()
-        console.log('Conexión exitosa a PostgreSQL')
+        console.log("Conexión con la base de datos exitosa")
     } catch (err) {
-        console.error('Fallo al tratar de conectar a la base de datos: ', err)
-    } finally {
-        // Cerrar la conexión
-        await client.end()
-        console.log('Conexión cerrada con éxito')
+        console.error("Error al conectar con la base de datos: ", err)
     }
 }
-
-export default clientConnection;

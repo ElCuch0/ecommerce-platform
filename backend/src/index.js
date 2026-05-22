@@ -1,3 +1,3 @@
-import clientConnection  from "./infrastructure/database/connection.js";
+import { connectionClient }  from "./infrastructure/database/connection.js";
 
-clientConnection()
+connectionClient()
