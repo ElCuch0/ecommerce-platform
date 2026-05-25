@@ -1,0 +1,8 @@
+.announcement-bar {
+    position: sticky;
+    background-color: #FF5100;
+    color: white;
+    text-align: center;
+    padding: 0.5rem;
+    font-size: 0.875rem;
+}
