@@ -1,0 +1,12 @@
+.featured-products{
+    display: flex;
+    overflow-x: auto;
+    padding: 20px;
+    scroll-snap-type: x mandatory;
+    -webkit-overflow-scrolling: touch;
+    gap: 20px;
+}
+
+.section-title {
+    display: block;
+}
