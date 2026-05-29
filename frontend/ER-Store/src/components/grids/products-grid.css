@@ -6,17 +6,3 @@
     -webkit-overflow-scrolling: touch;
     gap: 20px;
 }
-
-.section-title {
-    display: block;
-}
-
-.featured-products-title {
-    margin-left: 20px;
-    margin-top: 20px;
-}
-
-.featured-products-description {
-    margin-left: 20px;
-    color: #6b7280;
-}

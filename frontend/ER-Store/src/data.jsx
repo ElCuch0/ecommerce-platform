@@ -1,3 +1,7 @@
+import collection1 from "./assets/images/Collection1.jpg"
+import collection2 from "./assets/images/Collection2.jpg"
+import collection3 from "./assets/images/Collection3.jpg"
+
 // ================================
 // DATOS DE PRODUCTOS
 // ================================
@@ -6,7 +10,7 @@ export const products = [
     {
         id: 1,
         name: "Camisa Casual Azul",
-        description: "Camisa de algodón 100% con diseño moderno y cómodo",
+        alternative: "Camisa de algodón 100% con diseño moderno y cómodo",
         price: 45000,
         category: "camisas",
         sizes: ["s", "m", "l", "xl"],
@@ -18,7 +22,7 @@ export const products = [
     {
         id: 2,
         name: "Pantalón Jean Clásico",
-        description: "Jean de corte recto, resistente y versátil",
+        alternative: "Jean de corte recto, resistente y versátil",
         price: 89000,
         category: "pantalones",
         sizes: ["28", "30", "32", "34", "36"],
@@ -30,7 +34,7 @@ export const products = [
     {
         id: 3,
         name: "Vestido Floral Verano",
-        description: "Vestido ligero perfecto para días soleados",
+        alternative: "Vestido ligero perfecto para días soleados",
         price: 120000,
         category: "vestidos",
         sizes: ["xs", "s", "m", "l"],
@@ -42,7 +46,7 @@ export const products = [
     {
         id: 4,
         name: "Zapatillas Deportivas",
-        description: "Zapatillas cómodas para todo tipo de actividades",
+        alternative: "Zapatillas cómodas para todo tipo de actividades",
         price: 150000,
         category: "zapatos",
         sizes: ["38", "39", "40", "41", "42"],
@@ -54,7 +58,7 @@ export const products = [
     {
         id: 5,
         name: "Camisa Formal Blanca",
-        description: "Camisa elegante para ocasiones especiales",
+        alternative: "Camisa elegante para ocasiones especiales",
         price: 65000,
         category: "camisas",
         sizes: ["s", "m", "l", "xl"],
@@ -66,7 +70,7 @@ export const products = [
     {
         id: 6,
         name: "Pantalón Chino Beige",
-        description: "Pantalón versátil para look casual o semiformal",
+        alternative: "Pantalón versátil para look casual o semiformal",
         price: 75000,
         category: "pantalones",
         sizes: ["28", "30", "32", "34"],
@@ -78,7 +82,7 @@ export const products = [
     {
         id: 7,
         name: "Vestido Cóctel Negro",
-        description: "Vestido elegante para eventos especiales",
+        alternative: "Vestido elegante para eventos especiales",
         price: 180000,
         category: "vestidos",
         sizes: ["s", "m", "l"],
@@ -90,7 +94,7 @@ export const products = [
     {
         id: 8,
         name: "Botas de Cuero",
-        description: "Botas resistentes y con estilo",
+        alternative: "Botas resistentes y con estilo",
         price: 220000,
         category: "zapatos",
         sizes: ["38", "39", "40", "41"],
@@ -102,7 +106,7 @@ export const products = [
     {
         id: 9,
         name: "Gorra Deportiva",
-        description: "Gorra ajustable de calidad premium",
+        alternative: "Gorra ajustable de calidad premium",
         price: 35000,
         category: "accesorios",
         sizes: ["única"],
@@ -114,7 +118,7 @@ export const products = [
     {
         id: 10,
         name: "Bufanda de Lana",
-        description: "Bufanda suave y cálida para invierno",
+        alternative: "Bufanda suave y cálida para invierno",
         price: 40000,
         category: "accesorios",
         sizes: ["única"],
@@ -126,7 +130,7 @@ export const products = [
     {
         id: 11,
         name: "Camiseta Estampada",
-        description: "Camiseta de algodón con diseño exclusivo",
+        alternative: "Camiseta de algodón con diseño exclusivo",
         price: 38000,
         category: "camisas",
         sizes: ["xs", "s", "m", "l", "xl"],
@@ -138,7 +142,7 @@ export const products = [
     {
         id: 12,
         name: "Shorts Deportivos",
-        description: "Shorts ligeros ideales para ejercicio",
+        alternative: "Shorts ligeros ideales para ejercicio",
         price: 45000,
         category: "pantalones",
         sizes: ["s", "m", "l", "xl"],
@@ -150,7 +154,7 @@ export const products = [
     {
         id: 13,
         name: "Vestido Casual",
-        description: "Vestido cómodo para el día a día",
+        alternative: "Vestido cómodo para el día a día",
         price: 95000,
         category: "vestidos",
         sizes: ["xs", "s", "m", "l", "xl"],
@@ -162,7 +166,7 @@ export const products = [
     {
         id: 14,
         name: "Sandalias de Verano",
-        description: "Sandalias cómodas para días calurosos",
+        alternative: "Sandalias cómodas para días calurosos",
         price: 55000,
         category: "zapatos",
         sizes: ["36", "37", "38", "39", "40"],
@@ -174,7 +178,7 @@ export const products = [
     {
         id: 15,
         name: "Cinturón de Cuero",
-        description: "Cinturón elegante de cuero genuino",
+        alternative: "Cinturón elegante de cuero genuino",
         price: 60000,
         category: "accesorios",
         sizes: ["m", "l", "xl"],
@@ -212,3 +216,34 @@ export const announcements = [
         endDate: "2025-12-31"
     }
 ];
+
+// ==============================
+// Datos Colecciones
+// ==============================
+
+export const collections = [
+    {
+        id: 1,
+        image: collection1,
+        name: "collection 1",
+        description: "Esta es la colección número 1.",
+        alternative: "Imagen de la colección número 1",
+        redirect: "/"
+    },
+    {
+        id: 2,
+        image: collection2,
+        name: "collection 2",
+        description: "Esta es la colección número 2.",
+        alternative: "Imagen de la colección número 2",
+        redirect: "/"
+    },
+    {
+        id: 3,
+        image: collection3,
+        name: "collection 3",
+        description: "Esta es la colección número 3.",
+        alternative: "Imagen de la colección número 3",
+        redirect: "/"
+    }
+]
