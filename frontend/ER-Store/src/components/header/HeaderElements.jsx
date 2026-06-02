@@ -5,7 +5,7 @@ import { IconEr, IconSearch, IconAccount, IconCart } from '../assets/Icons.jsx'
 export function HeaderElements () {
     return(
         <nav className = "nav-container">
-            <a href = "main.jsx" className = "logo-header">
+            <a href = "/" className = "logo-header">
                 <IconEr />
             </a>
 

@@ -13,7 +13,6 @@ export function CollectionsGrid() {
             </div>
             
             {collections.map(collection => (
-                console.log(collection.image),
                 <CollectionCard key={collection.id} collection={collection} />
             ))}
         </section>
