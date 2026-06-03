@@ -1,5 +1,4 @@
 import { useEffect, useRef } from "react"
-import "./modal-context.css"
 
 export function ModalContext({ isOpen, onClose, children }) {
 
@@ -37,9 +36,6 @@ export function ModalContext({ isOpen, onClose, children }) {
                 {/* Asignamos la referencia al contenedor del contenido real */}
             <div className="modal-content" ref={modalRef}>
                 {/* 3. Lógica para cerrar con el botón (Simple onClick) */}
-            <button className="modal-close-btn" onClick={onClose}>
-                &times;
-            </button>
                 {children}
             </div>
         </div>

@@ -1,6 +1,8 @@
 import { useEffect, useMemo, useRef, useState } from 'react'
 import { ModalContext } from '../../context/ModalContext.jsx'
-import logoEr from '../../assets/images/Logo_ER.png'
+import { IconClose, IconEr } from '../assets/Icons.jsx'
+import { ProductCard } from '../cards/ProductCard.jsx'
+import './search-modal.css'
 
 const popularSearchTerms = [
     'Camisas',
@@ -29,7 +31,7 @@ export function SearchModal({ isOpen, onClose, products = [], onSearch }) {
     const recommendations = useMemo(() => {
         const normalizedQuery = query.trim().toLowerCase()
         if (!normalizedQuery) {
-            return products.slice(0, 4)
+            return products.slice(0, 7)
         }
 
         return products
@@ -58,25 +60,25 @@ export function SearchModal({ isOpen, onClose, products = [], onSearch }) {
 
     return (
         <ModalContext isOpen={isOpen} onClose={onClose}>
-            <section className="nav-dialog nav-dialog--topbar" aria-label="Búsqueda">
-                <div className="nav-dialog__card">
-                    <header className="nav-dialog__header">
-                        <a className="nav-dialog__brand" href="/" aria-label="Ir al inicio">
-                            <img src={logoEr} alt="Logo ER Store" />
+            <section className="nav-dialog" aria-label="Búsqueda">
+                <div className="nav-dialog-card">
+                    <header className="nav-dialog-header">
+                        <a className="nav-dialog-brand" href="/" aria-label="Ir al inicio">
+                            <IconEr />
                         </a>
-                        <h2 className="nav-dialog__title">Buscar</h2>
+                        <h2 className="nav-dialog-title">Buscar</h2>
                         <button
                             type="button"
-                            className="nav-dialog__close nav-dialog__close--x"
+                            className="nav-dialog-close"
                             aria-label="Cerrar"
                             onClick={onClose}
                         >
-                            ×
+                            <IconClose />
                         </button>
                     </header>
 
-                    <div className="nav-dialog__body">
-                        <label className="nav-dialog__label" htmlFor="searchInput">Buscar productos</label>
+                    <div className="nav-dialog-body">
+                        <label className="nav-dialog-label" htmlFor="searchInput">Buscar productos</label>
                         <div className="search-input-row">
                             <input
                                 id="searchInput"
@@ -90,7 +92,7 @@ export function SearchModal({ isOpen, onClose, products = [], onSearch }) {
                             />
                             <button
                                 type="button"
-                                className="btn btn-primary search-submit"
+                                className="search-submit"
                                 onClick={() => handleSearch(query)}
                             >
                                 Buscar
@@ -99,8 +101,8 @@ export function SearchModal({ isOpen, onClose, products = [], onSearch }) {
 
                         <div className="search-panels">
                             <section className="search-panel" aria-label="Búsquedas populares">
-                                <h3 className="search-panel__title">Búsquedas más concurridas</h3>
-                                <div className="search-panel__content popular-searches">
+                                <h3 className="search-panel-title">Búsquedas más concurridas</h3>
+                                <div className="popular-searches">
                                     {popularSearchTerms.map((term) => (
                                         <button
                                             type="button"
@@ -115,25 +117,12 @@ export function SearchModal({ isOpen, onClose, products = [], onSearch }) {
                             </section>
 
                             <section className="search-panel" aria-label="Productos recomendados">
-                                <h3 className="search-panel__title">Recomendados para ti</h3>
-                                <div className="search-panel__content search-rec-carousel--horizontal">
-                                    <div className="search-rec-carousel__strip">
+                                <h3 className="search-panel-title">Recomendados para ti</h3>
+                                <div className="search-rec-carousel-horizontal">
+                                    <div className="search-rec-carousel-strip">
                                         {recommendations.length > 0 ? (
                                             recommendations.map((product) => (
-                                                <article className="card recommendation-card" key={product.id}>
-                                                    <img
-                                                        src={product.image}
-                                                        alt={product.name}
-                                                        className="recommendation-card__image"
-                                                    />
-                                                    <div className="recommendation-card__body">
-                                                        <p className="recommendation-card__title">{product.name}</p>
-                                                        <p className="recommendation-card__category">{product.category}</p>
-                                                        <strong className="recommendation-card__price">
-                                                            ${product.price?.toLocaleString()}
-                                                        </strong>
-                                                    </div>
-                                                </article>
+                                                <ProductCard key={product.id} product={product} onClick={() => handleSearch(product.name)} />
                                             ))
                                         ) : (
                                             <p>No hay recomendaciones para esa búsqueda.</p>
@@ -144,7 +133,7 @@ export function SearchModal({ isOpen, onClose, products = [], onSearch }) {
                         </div>
                     </div>
 
-                    <footer className="nav-dialog__footer">
+                    <footer className="nav-dialog-footer">
                         <p>Motor de búsqueda</p>
                     </footer>
                 </div>

@@ -41,6 +41,15 @@ export function LoginModal({ isOpen, onClose }) {
                     <button type="submit" className="btn btn-primary" style={{ width: '100%' }}>
                         Entrar
                     </button>
+
+                    <a href="/forgot-password" className="btn btn-link">
+                        ¿Olvidaste tu contraseña?
+                    </a>
+
+                    <a href="/register" className="btn btn-link">
+                        ¿No tienes cuenta? Regístrate
+                    </a>
+
                 </footer>
             </form>
         </ModalContext>
