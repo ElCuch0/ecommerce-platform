@@ -2,7 +2,7 @@ import React from "react";
 import logoEr from "../assets/images/Logo_ER.png"
 import "./er-footer.css"
 
-export function ErFooter() {
+export function ErFooter({ onOpenLogin }) {
     return(
         <footer className="footer">
             <div className="footer-content">
@@ -18,7 +18,7 @@ export function ErFooter() {
                     <ul className="footer-links">
                         <li><a href="index.html">Inicio</a></li>
                         <li><a href="cart.html">Carrito</a></li>
-                        <li><a href="#" id="footerLoginLink">Mi Cuenta</a></li>
+                        <li><button type="button" className="footer-login-button" onClick={onOpenLogin}>Mi Cuenta</button></li>
                     </ul>
                 </div>
 

@@ -2,24 +2,24 @@ import React from "react";
 import "./header-elements.css"
 import { IconEr, IconSearch, IconAccount, IconCart } from '../assets/Icons.jsx'
 
-export function HeaderElements () {
+export function HeaderElements ({ onOpenSearch, onOpenLogin, onOpenCart }) {
     return(
         <nav className = "nav-container">
-            <a href = "/" className = "logo-header">
+            <a href="/" className = "logo-header" aria-label="Ir al inicio">
                 <IconEr />
             </a>
 
             <div className = "nav-modals">
-                <a href="#" className="nav-link">
+                <button type="button" className="nav-link" onClick={onOpenSearch} aria-label="Abrir búsqueda">
                     <IconSearch />
-                </a>
-                <a href="#" className="nav-link">
+                </button>
+                <button type="button" className="nav-link" onClick={onOpenLogin} aria-label="Abrir inicio de sesión">
                     <IconAccount />
-                </a>
-                <a href="cart.html" className="nav-link" id="cartBtn">
+                </button>
+                <button type="button" className="nav-link" onClick={onOpenCart} aria-label="Abrir carrito">
                     <IconCart />
                     <span className="cart-badge">0</span>
-                </a>
+                </button>
             </div>
         </nav>
     )

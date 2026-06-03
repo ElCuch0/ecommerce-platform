@@ -33,3 +33,19 @@
     display: block;
     padding: 1rem;
 }
+
+.card-btn {
+    display: flex;
+    border: 1px solid rgba(0, 0, 0, 0.3);
+    background-color: #FF5100;
+    width: 100%;
+    justify-content: center;
+    margin-top: 5px;
+    padding: .3rem;
+    border-radius: 12px;
+}
+
+.card-btn:hover {
+    background-color: #e04e00;
+    border-color: rgba(0, 0, 0, 0.5);
+}
