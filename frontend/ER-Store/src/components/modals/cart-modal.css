@@ -68,3 +68,7 @@
   background-color: #FF5100;
   border-radius: 10px;
 }
+
+.btn-cart-view:hover {
+  background-color: #e04e00;
+}

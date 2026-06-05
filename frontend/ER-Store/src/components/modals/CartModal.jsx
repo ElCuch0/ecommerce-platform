@@ -1,3 +1,4 @@
+import { useNavigate } from 'react-router-dom'
 import { ModalContext } from '../../context/ModalContext.jsx'
 import './cart-modal.css'
 import { IconClose } from '../assets/Icons.jsx'
@@ -5,6 +6,7 @@ import { CartGrid } from '../grids/CartGrid.jsx'
 
 export function CartModal({ isOpen, onClose, items = [] }) {
     const total = items.reduce((sum, item) => sum + (item.price || 0) * (item.quantity || 1), 0)
+    const navigate = useNavigate()
 
     return (
         <ModalContext isOpen={isOpen} onClose={onClose}>
@@ -31,10 +33,8 @@ export function CartModal({ isOpen, onClose, items = [] }) {
                         <span className="cart-total-label">Total</span>
                         <strong className="cart-total-value">${total.toLocaleString()}</strong>
                     </div>
-                    <button type="button" className="btn-cart-view">
-                        <a href="/cart">
+                    <button type="button" className="btn-cart-view" onClick={() => navigate('/cart')}>
                             Ver carrito
-                        </a>
                     </button>
                 </footer>
             </div>

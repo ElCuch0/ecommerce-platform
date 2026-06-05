@@ -1,7 +1,7 @@
 import './cart-page.css'
 import { CartGrid } from '../../components/grids/CartGrid.jsx'
 
-export function CartPage({ items = [] }) {
+export function CartPage({items = []}) {
     const total = items.reduce((sum, item) => sum + (item.price || 0) * (item.quantity || 1), 0)
 
     return (

@@ -11,7 +11,7 @@ import { SearchModal } from '../../components/modals/SearchModal.jsx'
 import { LoginModal } from '../../components/modals/LoginModal.jsx'
 import { CartModal } from '../../components/modals/CartModal.jsx'
 
-export function AppClient({products}) {
+export function HomePage({products}) {
     const [searchOpen, setSearchOpen] = useState(false)
     const [loginOpen, setLoginOpen] = useState(false)
     const [cartOpen, setCartOpen] = useState(false)
