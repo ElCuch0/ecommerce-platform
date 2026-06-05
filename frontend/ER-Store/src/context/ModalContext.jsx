@@ -1,4 +1,5 @@
 import { useEffect, useRef } from "react"
+import './modal-context.css'
 
 export function ModalContext({ isOpen, onClose, children }) {
 

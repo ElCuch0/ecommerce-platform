@@ -1,4 +1,6 @@
 import { ModalContext } from '../../context/ModalContext.jsx'
+import './login-modal.css'
+import { IconClose } from '../assets/Icons.jsx'
 
 export function LoginModal({ isOpen, onClose }) {
     const handleSubmit = (event) => {
@@ -11,6 +13,15 @@ export function LoginModal({ isOpen, onClose }) {
             <form className="modal-card" onSubmit={handleSubmit}>
                 <header className="modal-header">
                     <h2>Iniciar sesión</h2>
+
+                    <button
+                        type="button"
+                        className="nav-dialog-close"
+                        aria-label="Cerrar"
+                        onClick={onClose}
+                    >
+                        <IconClose />
+                    </button>
                 </header>
 
                 <div className="modal-body">
@@ -38,15 +49,15 @@ export function LoginModal({ isOpen, onClose }) {
                 </div>
 
                 <footer className="modal-footer">
-                    <button type="submit" className="btn btn-primary" style={{ width: '100%' }}>
+                    <button type="submit" className="btn-register" style={{ width: '100%' }}>
                         Entrar
                     </button>
 
-                    <a href="/forgot-password" className="btn btn-link">
+                    <a href="/forgot-password" className="btn-link">
                         ¿Olvidaste tu contraseña?
                     </a>
 
-                    <a href="/register" className="btn btn-link">
+                    <a href="/register" className="btn-link">
                         ¿No tienes cuenta? Regístrate
                     </a>
 

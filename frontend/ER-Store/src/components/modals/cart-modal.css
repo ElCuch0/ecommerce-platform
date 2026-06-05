@@ -1,0 +1,70 @@
+.modal-card-cart {
+  display: flex;
+  position: fixed;
+  flex-direction: column;
+  right: 0;
+  top: 0;
+  width: 420px;
+  min-width: fit-content;
+  height: 100vh;
+
+  padding: 10px;
+
+  z-index: 1000;
+
+  background: white;
+  overflow-y: auto;
+}
+
+.modal-header-cart {
+  display: flex;
+  align-items: center;
+  padding: 10px;
+  justify-content: space-between;
+  font-size: .9rem;
+  box-shadow: 0 1px rgba(0, 0, 0, 0.3);
+}
+
+.nav-dialog-close:hover {
+  color: red;
+}
+
+.modal-body-cart {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  justify-content: center;
+  padding: 10px;
+  height: 100%;
+}
+
+.modal-cart-footer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px;
+  box-shadow: 0 -1px rgba(0, 0, 0, 0.3);
+}
+
+.cart-total-label {
+  font-size: .9rem;
+  color: #555;
+}
+
+.cart-total-value {
+  font-size: 1.2rem;
+  color: #111;
+}
+
+@media (max-width: 480px) {
+  .modal-card-cart {
+    width: 100%;
+  }
+}
+
+.btn-cart-view {
+  padding: 0.5rem 1rem;
+  font-size: 0.9rem;
+  background-color: #FF5100;
+  border-radius: 10px;
+}
