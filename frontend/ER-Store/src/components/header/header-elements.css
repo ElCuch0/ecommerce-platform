@@ -1,13 +1,20 @@
-.nav-container {
+.header {
+    position: relative;
+    width: 100%;
     display: flex;
-    position: sticky;
+    flex-direction: column;
+}
+
+.header-nav-container {
+    display: flex;
+    position: fixed;
     background-color: #fff;
     align-items: center;
-    top: 0;
     z-index: 100;
     justify-content: space-between;
     width: 100%;
     height: 70px;
+    top: 44px;
 }
 
 .logo-header img {

@@ -1,8 +1,13 @@
 .announcement-bar {
-    position: sticky;
+    display: flex;
+    position: fixed;
+    top: 0;
     background-color: #FF5100;
     color: white;
-    text-align: center;
-    padding: 0.5rem;
+    justify-content: center;
+    align-items: center;
+    height: 44px;
     font-size: 0.875rem;
+    width: 100%;
+    z-index: 101;
 }

@@ -15,9 +15,24 @@ export function HomePage({products}) {
     const [searchOpen, setSearchOpen] = useState(false)
     const [loginOpen, setLoginOpen] = useState(false)
     const [cartOpen, setCartOpen] = useState(false)
+    const [cartItems, setCartItems] = useState(() => JSON.parse(localStorage.getItem('cart')) || [])
+
+    const refreshCartItems = () => {
+        setCartItems(JSON.parse(localStorage.getItem('cart')) || [])
+    }
 
     const handleSearch = (query) => {
         console.log('Buscar:', query)
+    }
+
+    const handleOpenCart = () => {
+        refreshCartItems()
+        setCartOpen(true)
+    }
+
+    const handleAddToCart = () => {
+        refreshCartItems()
+        setCartOpen(true)
     }
 
     return(
@@ -25,7 +40,7 @@ export function HomePage({products}) {
             <HeaderNav
                 onOpenSearch={() => setSearchOpen(true)}
                 onOpenLogin={() => setLoginOpen(true)}
-                onOpenCart={() => setCartOpen(true)}
+                onOpenCart={handleOpenCart}
             />
 
             <SearchModal
@@ -35,13 +50,13 @@ export function HomePage({products}) {
                 onSearch={handleSearch}
             />
             <LoginModal isOpen={loginOpen} onClose={() => setLoginOpen(false)} />
-            <CartModal isOpen={cartOpen} onClose={() => setCartOpen(false)} />
+            <CartModal isOpen={cartOpen} onClose={() => setCartOpen(false)} items={cartItems} />
 
             <HeroSection />
             <CategoryGrid />
             <SellestProducts products={products}/>
             <CollectionsGrid />
-            <FeaturedProducts products={products}/>
+            <FeaturedProducts products={products} onAddToCart={handleAddToCart} />
             <SubscribeForm />
             <ErFooter onOpenLogin={() => setLoginOpen(true)} />
         </>

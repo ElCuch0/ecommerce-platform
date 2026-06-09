@@ -17,8 +17,8 @@ export function CartGrid({ items = [] }) {
 
                     <div className="cart-grid-item-body">
                         <h3 className="cart-grid-item-title">{item.name}</h3>
-                        {item.description ? (
-                            <p className="cart-grid-item-description">{item.description}</p>
+                        {(item.alternative || item.description) ? (
+                            <p className="cart-grid-item-description">{item.alternative || item.description}</p>
                         ) : null}
 
                         <div className="cart-grid-item-meta">

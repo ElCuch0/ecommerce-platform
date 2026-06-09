@@ -4,7 +4,7 @@ import { IconEr, IconSearch, IconAccount, IconCart } from '../assets/Icons.jsx'
 
 export function HeaderElements ({ onOpenSearch, onOpenLogin, onOpenCart }) {
     return(
-        <nav className = "nav-container">
+        <nav className = "header-nav-container">
             <a href="/" className = "logo-header" aria-label="Ir al inicio">
                 <IconEr />
             </a>
