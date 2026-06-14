@@ -1,0 +1,13 @@
+.announcement-bar {
+    display: flex;
+    position: fixed;
+    top: 0;
+    background-color: #FF5100;
+    color: white;
+    justify-content: center;
+    align-items: center;
+    height: 44px;
+    font-size: 0.875rem;
+    width: 100%;
+    z-index: 101;
+}
