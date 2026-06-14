@@ -111,6 +111,20 @@
   border-radius: 6px 6px 0 0;
 }
 
+.adm-topbar__link--disabled,
+.adm-sidebar__link--disabled {
+  opacity: 0.55;
+  cursor: default;
+  color: rgba(255, 255, 255, 0.55);
+  pointer-events: none;
+}
+
+.adm-sidebar__link--disabled {
+  display: block;
+  padding: 0.65rem 1.25rem 0.65rem 1rem;
+  border-left: 4px solid transparent;
+}
+
 /* ——— Body ——— */
 .adm-body {
   flex: 1;

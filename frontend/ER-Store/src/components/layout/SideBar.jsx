@@ -27,6 +27,16 @@ export default function SideBar({ onNavigate }) {
       <NavLink to="/admin/delete-product" className={sidebarLinkClass} onClick={onNavigate}>
         Eliminar
       </NavLink>
+
+      <p className="adm-sidebar__label" style={{ marginTop: "1rem" }}>
+        Informes
+      </p>
+      <NavLink to="/admin/reports" className={sidebarLinkClass} onClick={onNavigate}>
+        Ver informes
+      </NavLink>
+      <div className="adm-sidebar__link adm-sidebar__link--disabled" aria-disabled="true" title="Función futura">
+        Configuración
+      </div>
     </aside>
   );
 }

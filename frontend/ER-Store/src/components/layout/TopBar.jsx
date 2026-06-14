@@ -34,10 +34,10 @@ export default function TopBar({ onMenuClick }) {
         <NavLink to="/admin/invoice" className={topLinkClass}>
           Pedidos
         </NavLink>
-        <span className="adm-topbar__link" style={{ opacity: 0.5, cursor: "default" }}>
+        <NavLink to="/admin/reports" className={topLinkClass}>
           Informes
-        </span>
-        <span className="adm-topbar__link" style={{ opacity: 0.5, cursor: "default" }}>
+        </NavLink>
+        <span className="adm-topbar__link adm-topbar__link--disabled" aria-disabled="true" title="Función futura">
           Configuración
         </span>
       </nav>
