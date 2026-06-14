@@ -24,7 +24,7 @@ export default function Settings() {
           Configuración aún no disponible. Estamos preparando la integración y la interfaz de administración.
         </div>
 
-        // Volver al dashboard
+        {/* Botón de navegación para volver al dashboard, aunque la sección aún no tenga contenido funcional */}
         <Link to="/admin" className="adm-btn adm-btn--outline">
           Volver al dashboard
         </Link>
