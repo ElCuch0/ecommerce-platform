@@ -1,6 +1,9 @@
 import { UnathorizedError } from "../../utils/errors.js";
-import bcrypt from "bcrypt";
+import { generateToken } from "../../shared/utils/jwt.js";
 import { createUser, findUserByEmail } from "./auth.repository.js";
+
+import bcrypt from "bcrypt";
+import { process } from "node:process";
 
 export async function registerUser(data){
 
@@ -35,5 +38,7 @@ export async function loginUser(data){
     throw new UnauthorizedError("Usuario o contraseña incorrectos");
   }
 
-  return user;
+  const accessToken = generateToken({ id: user.id, role: user.role }, process.env.JWT_SECRET, process.env.JWT_EXPIRES_IN);
+
+  return { ...user, accessToken };
 }
