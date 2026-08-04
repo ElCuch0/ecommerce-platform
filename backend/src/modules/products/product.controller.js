@@ -1,9 +1,11 @@
+import { findAll, findById, createProduct, updateProduct, deleteProduct } from "./product.service.js";
+
 export async function findAll(req, res, next) {
 
   try {
     return res.status(200).json({
       message: "Productos encontrados con éxito",
-      data: await findAllProducts()
+      data: await findAll()
     });
   }catch (error) {
       next(error);
@@ -17,7 +19,7 @@ export async function findById(req, res, next) {
 
     return res.status(200).json({
       message: "Producto encontrado con éxito",
-      data: await findProductById(productId)
+      data: await findById(productId)
     });
   }catch (error) {
     next(error);

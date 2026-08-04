@@ -1,27 +1,21 @@
 import { ConflictError, NotFoundError } from "../../../utils/errors.js";
 import { createProduct, findAllProducts,  findProductById, updateProduct, deleteProduct } from "./product.repository.js";
 
-export async function findAll(data) {
+export async function findAll() {
 
   try {
-    return res.status(200).json({
-      message: "Productos encontrados con éxito",
-      data: await findAllProducts()
-    });
+    return await findAllProducts();
   }catch (error) {
-      next(error);
+    throw new NotFoundError("No se encontraron productos");
   }
 }
 
-export async function findById(data) {
+export async function findById(productId) {
 
   try {
-    return res.status(200).json({
-      message: "Producto encontrado con éxito",
-      data: await findProductById(productId)
-    });
+    return await findProductById(productId);
   }catch (error) {
-    next(error);
+    throw new NotFoundError("Producto no encontrado");
   }
 }
 
