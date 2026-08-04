@@ -1,9 +1,9 @@
 import { Router } from "express";
 
-import authRoutes from "./auth.routes.js";
-import productRoutes from "./products.routes.js";
+import authRoutes from "../modules/auth/auth.routes.js";
+import productRoutes from "../modules/products/product.routes.js"
 import categoryRoutes from "../modules/categories/categories.routes.js";
-import inventoryRoutes from "./inventory.routes.js";
+import inventoryRoutes from "../modules/inventory/inventory.routes.js";
 import cartRoutes from "../modules/cart/cart.routes.js";
 import checkoutRoutes from "../modules/checkout/checkout.routes.js";
 import invoiceRoutes from "../modules/invoices/invoices.routes.js";
