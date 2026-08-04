@@ -9,4 +9,5 @@ export const createCartSchema = z.object({
   userId: z
     .number({ invalid_type_error: "El ID del usuario debe ser un número" })
     .int("El ID del usuario debe ser un número entero"),
+    
 })
