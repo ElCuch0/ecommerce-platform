@@ -12,15 +12,30 @@ export async function findAll(req, res, next) {
   }
 }
 
-export async function update(req, res, next) {
+export async function patchStock(req, res, next) {
 
   try { 
-    const { inventoryId } = req.params;
-    const { productId, stock, minimumStock } = req.body;
+    const productId = req.params;
+    const stock = req.body;
 
     return res.status(200).json({
       message: "Inventario actualizado con éxito",
-      data: await InventoryService.updateInventory(inventoryId, { productId, stock, minimumStock })
+      data: await InventoryService.patchStock(productId, stock)
+    });
+  }catch (error) {
+    next(error);
+  }
+}
+
+export async function patchMinStock(req, res, next) {
+
+  try { 
+    const productId = req.params;
+    const min_stock = req.body;
+
+    return res.status(200).json({
+      message: "Inventario actualizado con éxito",
+      data: await InventoryService.patchStock(productId, min_stock)
     });
   }catch (error) {
     next(error);

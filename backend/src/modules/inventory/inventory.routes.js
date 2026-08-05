@@ -7,4 +7,6 @@ const router = Router();
 
 router.get("/", InventoryController.findAll);
 
-router.put("/:id", InventoryController.update);
+router.patch("/:productId/stock", InventoryController.patchStock);
+
+router.patch(":productId/min-stock", InventoryController.patchMinStock);
