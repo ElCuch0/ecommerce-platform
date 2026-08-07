@@ -1,5 +1,3 @@
-
-
 export async function findAllCategories(req, res, next) {
   try {
     return res.status(200).json({

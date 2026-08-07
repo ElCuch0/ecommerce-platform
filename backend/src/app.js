@@ -1,5 +1,6 @@
 import express from "express";
 import routes from "./routes/index.routes.js";
+import { errorMiddleware } from "./shared/middleware/error.middleware.js"
 
 const app = express();
 

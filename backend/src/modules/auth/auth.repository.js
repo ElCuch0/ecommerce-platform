@@ -1,4 +1,4 @@
-import { prisma } from 'prisma';
+import { prisma } from '../../infrastructure/database/prisma.js';
 
 export async function createUser(data) {
   return prisma.user.create({ data });
