@@ -1,17 +1,19 @@
-import { jwt } from "jsonwebtoken";
-import { dotenv } from "dotenv";
-import { UnauthorizedError } from "../errors/unauthorized.error.js";
+import jwt from "jsonwebtoken"
+import { env } from "../../config/env.js"
 
-dotenv.config();
-
-export function generateToken(payload, secret, expiresIn) {
-  return jwt.sign(payload, secret, { expiresIn });
+export function generateToken(payload) {
+  return jwt.sign(
+    payload,
+    env.jwtSecret,
+    {
+      expiresIn: env.jwtExpiresIn
+    }
+  )
 }
 
-export function verifyToken(token, secret) {
-  try {
-    return jwt.verify(token, secret);
-  } catch (error) {
-    throw new UnauthorizedError("Token inválido");
-  }
+export function verifyToken(token) {
+  return jwt.verifyToken(
+    token,
+    env.jwtSecret
+  )
 }

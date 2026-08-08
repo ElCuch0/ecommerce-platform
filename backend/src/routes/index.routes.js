@@ -2,22 +2,24 @@ import { Router } from "express";
 
 import rolesRoutes from "../modules/roles/role.routes.js"
 import authRoutes from "../modules/auth/auth.routes.js";
-import productRoutes from "../modules/products/product.routes.js"
-import categoryRoutes from "../modules/categories/categories.routes.js";
-import inventoryRoutes from "../modules/inventory/inventory.routes.js";
-import cartRoutes from "../modules/cart/cart.routes.js";
-import checkoutRoutes from "../modules/checkout/checkout.routes.js";
-import invoiceRoutes from "../modules/invoices/invoices.routes.js";
+import userRoutes from "../modules/users/user.routes.js"
+//import productRoutes from "../modules/products/product.routes.js"
+//import categoryRoutes from "../modules/categories/categories.routes.js";
+//import inventoryRoutes from "../modules/inventory/inventory.routes.js";
+//import cartRoutes from "../modules/cart/cart.routes.js";
+//import checkoutRoutes from "../modules/checkout/checkout.routes.js";
+//import invoiceRoutes from "../modules/invoices/invoices.routes.js";
 
 const router = Router();
 
 router.use("/roles", rolesRoutes)
 router.use("/auth", authRoutes);
-router.use("/products", productRoutes);
-router.use("/categories", categoryRoutes);
-router.use("/inventory", inventoryRoutes);
-router.use("/cart", cartRoutes);
-router.use("/checkout", checkoutRoutes);
-router.use("/invoices", invoiceRoutes);
+router.use("/users", userRoutes);
+//router.use("/products", productRoutes);
+//router.use("/categories", categoryRoutes);
+//router.use("/inventory", inventoryRoutes);
+//router.use("/cart", cartRoutes);
+//router.use("/checkout", checkoutRoutes);
+//router.use("/invoices", invoiceRoutes);
 
 export default router;

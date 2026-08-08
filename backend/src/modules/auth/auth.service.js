@@ -1,35 +1,47 @@
-import { UnathorizedError } from "../../utils/errors.js";
-import { generateToken } from "../../shared/utils/jwt.js";
-import { createUser, findUserByEmail } from "./auth.repository.js";
-
 import bcrypt from "bcrypt";
-import { process } from "node:process";
+import { generateToken } from "../../shared/utils/jwt.js"
+import * as userRepository from "../users/user.repository.js"
+import * as roleRepository from "../roles/role.repository.js"
+import { NotFoundError } from "../../shared/errors/NotFoundError.js";
+import { ConflictError } from "../../shared/errors/ConflictError.js";
+import { UnauthorizedError } from "../../shared/errors/UnauthorizedError.js"
 
-export async function registerUser(data){
+export async function register(data){
 
-  const existingUser = await findUserByEmail(data.email);
+  const existingUser = await userRepository.findByEmail(data.email);
 
   if (existingUser) {
-    throw new ConflictError("Este correo ya esta asociado a una cuenta");
+    throw new ConflictError("Este correo ya esta asociado a una cuenta", 409)
   }
 
+  const role = await roleRepository.findByName("CUSTOMER")
 
-  data.name = data.name.trim();
-  data.lastname = data.lastname.trim();
-  data.email = data.email.toLowerCase();
-  data.password = await bcrypt.hash(data.password, 10);
-  data.telephone = data.telephone.trim();
+  if (!role) {
+    throw new NotFoundError("El rol CUSTOMER no está configurado.")
+  }
 
-  return createUser(data);
+  const hashedPassword = await bcrypt.hash(data.password, 10)
+
+  const user = await userRepository.create({
+    name: data.name,
+    lastname: data.lastname,
+    email: data.email,
+    password: hashedPassword,
+    roleId: role.id
+  })
+
+  const { password, ...userWithoutPassword } = user
+
+  return userWithoutPassword
 
 }
 
-export async function loginUser(data){
+export async function login(data){
 
-  const user = await findUserByEmail(data.email);
+  const user = await userRepository.findByEmail(data.email)
 
   if (!user) {
-    throw new UnauthorizedError("Usuario o contraseña incorrectos");
+    throw new UnauthorizedError("Usuario o contraseña incorrectos")
   }
 
   const isMatch = await bcrypt.compare(data.password, user.password);
@@ -38,7 +50,15 @@ export async function loginUser(data){
     throw new UnauthorizedError("Usuario o contraseña incorrectos");
   }
 
-  const accessToken = generateToken({ id: user.id, role: user.role }, process.env.JWT_SECRET, process.env.JWT_EXPIRES_IN);
+  const accessToken = generateToken({
+    id: user.id,
+    role: user.role.name
+  })
 
-  return { ...user, accessToken };
+  const { password, ...userWithoutPassword } = user
+
+  return {
+    userWithoutPassword,
+    accessToken
+  };
 }
