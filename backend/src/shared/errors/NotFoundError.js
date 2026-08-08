@@ -1,9 +1,11 @@
 export class NotFoundError extends Error {
 
-    constructor(message, statusCode) {
+    constructor(message = "Recurso no encontrado") {
+
         super(message);
-        
-        this.statusCode = statusCode;
+
+        this.name = "NotFoundError";
+        this.statusCode = 404;
     }
 
 }

@@ -1,9 +1,11 @@
 export class ConflictError extends Error {
 
-    constructor(message, statusCode) {
+    constructor(message = "Conflicto") {
+
         super(message);
 
-        this.statusCode = statusCode;
+        this.name = "ConflictError";
+        this.statusCode = 409;
     }
 
 }

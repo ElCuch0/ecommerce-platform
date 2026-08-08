@@ -17,5 +17,4 @@ export default function errorMiddleware(error, req, res, next) {
         success: false,
         message: "Error interno del servidor"
     });
-
 }
