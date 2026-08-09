@@ -1,49 +1,81 @@
 import { z } from "zod";
 
 export const createProductSchema = z.object({
+    body: z.object({
+        reference: z
+            .string()
+            .min(2, "La referencia debe tener al menos 2 caracteres")
+            .max(50),
 
-  productId: z
-    .number({ invalid_type_error: "El ID del producto debe ser un número" })
-    .int("El ID del producto debe ser un número entero"),
+        name: z
+            .string()
+            .min(2, "El nombre debe tener al menos 2 caracteres")
+            .max(100),
 
-  categoryId: z
-    .number({ invalid_type_error: "El ID de la categoría debe ser un número" })
-    .int("El ID de la categoría debe ser un número entero"),
+        description: z
+            .string()
+            .min(1, "La descripción es obligatoria"),
 
-  name: z
-    .string()
-    .min(3, "El nombre del producto debe tener al menos 3 caracteres")
-    .max(100),
+        price: z
+            .number()
+            .positive("El precio debe ser mayor a 0"),
 
-  description: z
-    .string()
-    .min(10, "La descripción del producto debe tener al menos 10 caracteres")
-    .max(500)
-    .optional(),
+        image: z
+            .string()
+            .url("La imagen debe ser una URL válida")
+            .optional(),
 
-  price: z
-    .number({ invalid_type_error: "El precio debe ser un número" })
-    .positive("El precio debe ser un número positivo"),
+        brand: z
+            .string()
+            .min(2, "La marca debe tener al menos 2 caracteres")
+            .max(100),
 
-  color: z
-    .string()
-    .min(3, "El color del producto debe tener al menos 3 caracteres")
-    .max(50)
-    .optional(),
+        categoryId: z
+            .number()
+            .int()
+            .positive("La categoría no es válida")
+    })
+});
 
-  size: z
-    .string()
-    .min(1, "El tamaño del producto debe tener al menos 1 carácter")
-    .max(10),
+export const updateProductSchema = z.object({
 
-  type: z
-    .string()
-    .min(3, "El tipo del producto debe tener al menos 3 caracteres")
-    .max(50)
+    params: z.object({
+        id: z.coerce
+            .number()
+            .int()
+            .positive()
+    }),
 
-  status: z
-    .string()
-    .min(3, "El estado del producto debe tener al menos 3 caracteres")
-    .max(50)
+    body: z.object({
 
-})
+        reference: z
+            .string()
+            .min(2)
+            .max(50)
+            .optional(),
+
+        name: z
+            .string()
+            .min(2)
+            .max(100)
+            .optional(),
+
+        description: z
+            .string()
+            .max(500)
+            .optional(),
+
+        price: z
+            .number()
+            .positive()
+            .optional(),
+
+        brand: z
+            .string()
+            .min(2)
+            .max(100)
+            .optional()
+
+    })
+
+});

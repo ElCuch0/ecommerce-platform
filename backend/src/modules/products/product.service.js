@@ -1,48 +1,45 @@
-import { ConflictError, NotFoundError } from "../../../utils/errors.js";
-import { createProduct, findAllProducts,  findProductById, updateProduct, deleteProduct } from "./product.repository.js";
+import { ConflictError } from "../../shared/errors/Conflicterror.js";
+import { NotFoundError } from "../../shared/errors/NotFoundError.js";
+import * as productRepository from "./product.repository.js";
+import * as categoryRepository from "../categories/categories.repository.js"
 
 export async function findAll() {
-
-  try {
-    return await findAllProducts();
-  }catch (error) {
-    throw new NotFoundError("No se encontraron productos");
-  }
+  return await productRepository.findAll()
 }
 
-export async function findById(productId) {
+export async function findById(id) {
 
-  try {
-    return await findProductById(productId);
-  }catch (error) {
-    throw new NotFoundError("Producto no encontrado");
+  const product = await productRepository.findById(id)
+
+  if (!product) {
+    throw new NotFoundError("Producto no encontrado")
   }
+
+  return product
+
 }
 
-export async function createProduct(data) {
+export async function create(data) {
 
-  try {
-    
-    data.productId = Number(data.productId);
-    data.categoryId = Number(data.categoryId);
-    data.name = data.name.trim().toLowerCase();
-    data.description = data.description.trim();
-    data.price = Number(data.price);
-    data.color = data.color.trim().toLowerCase();
-    data.size = data.size.trim().toLowerCase();
-    data.type = data.type.trim().toLowerCase();
-    data.status = data.status.trim().toLowerCase();
+  const category = await categoryRepository.findById(data.categoryId)
 
-    return await createProduct(data);
-
-  }catch (error) {
-    throw new ConflictError("Error al crear el producto: " + error.message);
+  if (!category) {
+    throw new NotFoundError("La categoría indicada no existe")
   }
+
+  const product = await productRepository.findByReference(data.reference)
+
+  if (product) {
+    throw new ConflictError("Ya existe un producto con esa referencia")
+  }
+
+  return productRepository.create(data)
+
 }
 
-export async function updateProduct(productId, data) {
+export async function update(productId, data) {
 
-  const existingProduct = await findProductById(productId);
+  const existingProduct = await productRepository.findById(productId);
 
   if (!existingProduct) {
     throw new NotFoundError("Producto no encontrado");
@@ -58,19 +55,19 @@ export async function updateProduct(productId, data) {
     data.type = data.type.trim().toLowerCase();
     data.status = data.status.trim().toLowerCase();
 
-    return await updateProduct(productId, data);
+    return await productRepository.update(productId, data);
   }catch (error) {
     throw new ConflictError("Error al actualizar el producto: " + error.message);
   }
 }
 
-export async function deleteProduct(productId) {
+export async function remove(productId) {
 
-  const existingProduct = await findProductById(productId);
+  const existingProduct = await productRepository.findById(productId);
 
   if (!existingProduct) {
     throw new NotFoundError("Producto no encontrado");
   }
 
-  return await deleteProduct(productId);
+  return await productRepository.remove(productId);
 }

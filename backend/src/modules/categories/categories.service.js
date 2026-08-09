@@ -1,68 +1,43 @@
-import { NotFoundError, ConflictError } from "../../utils/errors.js";
-import { createCategory, findAllCategories, findCategoryById, updateCategory, deleteCategory } from "./categories.repository.js";
+import { NotFoundError } from "../../shared/errors/NotFoundError.js";
+import { ConflictError } from "../../shared/errors/Conflicterror.js";
+import * as repository from "./categories.repository.js";
 
-export async function findAllCategories() {
+export async function findAll() {
   
   try {
-    return await findAllCategories();
+    return await findAll();
   }catch (error) {
     throw new NotFoundError("Categorías no encontradas");
   }
 }
 
-export async function findCategoryById(categoryId) {
+export async function findById(id) {
 
   try {
-    return await findCategoryById(categoryId);
+    return await findById(id);
   }catch (error) {
     throw new NotFoundError("Categoría no encontrada");
   }
 }
 
-export async function createCategory(data) {
+export async function create(data) {
 
-  try { 
+  const category = await repository.findByName(data.name)
 
-    data.categoryId = Number(data.categoryId);
-    data.name = data.name.trim().toLowerCase();
-    data.description = data.description.trim();
-
-    return await createCategory(data);
-  }catch (error) {
-    throw new ConflictError("Error al crear la categoría: " + error.message);
+  if (category) {
+    throw new ConflictError("La categoría ya existe")
   }
+
+  return repository.create(data)
 }
 
-export async function updateCategory(categoryId, data) {
+export async function remove(id) {
 
-  const existingCategory = await findCategoryById(categoryId);
+  const category = await repository.findById(id)
 
-  if (!existingCategory) {
-    throw new NotFoundError("Categoría no encontrada");
+  if (!category) {
+    throw new NotFoundError("No se ha encontrado la categoría")
   }
 
-  try {
-    data.name = data.name.trim().toLowerCase();
-    data.description = data.description.trim();
-
-    return await updateCategory(categoryId, data);
-  }catch (error) {
-    throw new ConflictError("Error al actualizar la categoría: " + error.message);
-  }
-
-}
-
-export async function deleteCategory(categoryId) {
-
-  const existingCategory = await findCategoryById(categoryId);
-
-  if (!existingCategory) {
-    throw new NotFoundError("Categoría no encontrada");
-  }
-
-  try {
-    return await deleteCategory(categoryId);
-  }catch (error) {
-    throw new ConflictError("Error al eliminar la categoría: " + error.message);
-  }
+  return await repository.remove(id)
 }

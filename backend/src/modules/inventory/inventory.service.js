@@ -1,5 +1,5 @@
-import * as inventoryRepository from './inventory.inventoryRepository.js';
-import * as productRepository from '../products/product.inventoryRepository.js';
+import * as inventoryRepository from './inventory.repository.js';
+import * as productRepository from '../products/product.repository.js';
 
 export async function findAllInventory() {
 
@@ -29,7 +29,7 @@ export async function patchStock(id, data) {
   }
 }
 
-export async function patchStock(id, data) {
+export async function patchMinimumStock(id, data) {
 
   const existingProduct = await productRepository.findProductById(id);
 

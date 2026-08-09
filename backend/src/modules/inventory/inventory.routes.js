@@ -1,6 +1,6 @@
 import {Router} from "express";
 import * as controller from "./inventory.controller.js";
-import { validate } from "../../shared/middlewares/validation.middleware.js";
+import { validate } from "../../shared/middleware/validate.middleware.js";
 import { updateInventorySchema } from "./inventory.validate.js";
 import { authenticate } from "../../shared/middleware/authenticate.middleware.js";
 import { authorize } from "../../shared/middleware/authorize.middleware.js";
@@ -10,11 +10,6 @@ const router = Router();
 
 router.get("/",
   authenticate,
-  authorize(
-    ROLES.CUSTOMER,
-    ROLES.EMPLOYEE,
-    ROLES.ADMIN
-  ),
   controller.findAll);
 
 router.patch("/:productId/stock",

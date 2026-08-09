@@ -1,16 +1,44 @@
 import { Router } from "express";
-import controller from "../modules/products/product.controller.js";
+import * as controller from "../modules/products/product.controller.js";
 import { validate } from "../../shared/middlewares/validation.middleware.js";
-import { createProductSchema } from "./product.validation.js";
+import { createProductSchema, updateProductSchema } from "./product.validation.js";
+import { authenticate } from "../../shared/middleware/authenticate.middleware.js";
+import { authorize } from "../../shared/middleware/authorize.middleware.js";
+import { ROLES } from "../../shared/constants/roles.js";
 
 const router = Router();
 
-router.get("/", controller.findAll);
+router.get("/",
+  authenticate,
+  controller.findAll);
 
-router.get("/:id", controller.findById);
+router.get("/:id",
+  authenticate,
+  controller.findById);
 
-router.post("/", controller.create);
+router.post("/",
+  authenticate,
+  authorize(
+    ROLES.EMPLOYEE,
+    ROLES.ADMIN
+  ),
+  validate(createProductSchema),
+  controller.create);
 
-router.put("/:id", controller.update);
+router.put("/:id",
+  authenticate,
+  authorize(
+    ROLES.EMPLOYEE,
+    ROLES.ADMIN
+  ),
+  validate(updateProductSchema),
+  controller.update);
 
-router.delete("/:id", controller.remove);
+router.delete("/:id",
+  authenticate,
+  authorize(
+    ROLES.ADMIN
+  ),
+  controller.remove);
+
+export default router;

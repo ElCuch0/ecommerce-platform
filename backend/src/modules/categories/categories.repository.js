@@ -1,24 +1,23 @@
-import { prisma } from 'prisma';
+import prisma from '../../infrastructure/database/prisma.js';
 
-export async function findAllCategories() {
+export async function findAll() {
   return prisma.category.findMany();
 }
 
-export async function findCategoryById(categoryId) {
-  return prisma.category.findUnique({ where: { categoryId } });
+export async function findById(id) {
+  return prisma.category.findUnique({ where: { id } });
 }
 
-export async function createCategory(data) {
+export async function findByName(name) {
+  return prisma.category.findUnique({
+    where: {name}
+  })
+}
+
+export async function create(data) {
   return prisma.category.create({ data });
 }
 
-export async function updateCategory(categoryId, data) {
-  return prisma.category.update({
-    where: { categoryId },
-    data
-  });
-}
-
-export async function deleteCategory(categoryId) {
-  return prisma.category.delete({ where: { categoryId } });
+export async function remove(id) {
+  return prisma.category.remove({ where: { id } });
 }

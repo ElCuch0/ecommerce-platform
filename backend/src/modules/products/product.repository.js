@@ -1,24 +1,36 @@
-import { prisma } from "prisma";
+import prisma from "../../infrastructure/database/prisma.js";
 
-export async function findAllProducts() {
-  return prisma.product.findMany();
+export async function findAll() {
+  return prisma.product.findMany({
+    orderBy: {
+      id: "desc"
+    }
+  });
 }
 
-export async function findProductById(productId) {
-  return prisma.product.findUnique({ where: { productId } });
+export async function findById(id) {
+  return prisma.product.findUnique({
+    where: { id }
+  });
 }
 
-export async function createProduct(data) {
+export async function findByReference(reference) {
+  return prisma.product.findUnique({
+    where: {reference}
+  })
+}
+
+export async function create(data) {
   return prisma.product.create({ data });
 }
 
-export async function updateProduct(productId, data) {
+export async function update(id, data) {
   return prisma.product.update({
-    where: { productId },
+    where: { id },
     data
   });
 }
 
-export async function deleteProduct(productId) {
-  return prisma.product.delete({ where: { productId } });
+export async function remove(id) {
+  return prisma.product.delete({ where: { id } });
 }

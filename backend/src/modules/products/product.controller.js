@@ -1,8 +1,9 @@
-import { findAll, findById, createProduct, updateProduct, deleteProduct } from "./product.service.js";
+import * as service from "./product.service.js";
 
 export async function findAll(req, res, next) {
 
   try {
+
     return res.status(200).json({
       message: "Productos encontrados con éxito",
       data: await findAll()
@@ -15,11 +16,10 @@ export async function findAll(req, res, next) {
 export async function findById(req, res, next) {
 
   try {
-    const { productId } = req.params;
 
     return res.status(200).json({
       message: "Producto encontrado con éxito",
-      data: await findById(productId)
+      data: await findById(Number(req.params.id))
     });
   }catch (error) {
     next(error);
@@ -29,11 +29,10 @@ export async function findById(req, res, next) {
 export async function create(req, res, next) {
 
   try {
-    const { productId, categoryId, name, description, price, color, size, type, status } = req.body;
 
     return res.status(201).json({
-      message: "Producto creado con éxito",
-      data: await createProduct({ productId, categoryId, name, description, price, color, size, type, status })
+      message: "Producto creado correctamente",
+      data: await service.create(req.body)
     });
   } catch (error) {
     next(error);
@@ -43,12 +42,10 @@ export async function create(req, res, next) {
 export async function update(req, res, next) {
 
   try {
-    const { productId } = req.params;
-    const { categoryId, name, description, price, color, size, type, status } = req.body;
 
     return res.status(200).json({
       message: "Producto actualizado con éxito",
-      data: await updateProduct(productId, { categoryId, name, description, price, color, size, type, status })
+      data: await service.update(Number(req.params.id), req.body)
     });
   }catch (error) {
     next(error);
@@ -58,11 +55,10 @@ export async function update(req, res, next) {
 export async function remove(req, res, next) {
 
   try {
-    const { productId } = req.params;
 
     return res.status(200).json({
       message: "Producto eliminado con éxito",
-      data: await deleteProduct(productId)
+      data: await service.remove(Number(req.params.id))
     });
   }catch (error) {
     next(error);

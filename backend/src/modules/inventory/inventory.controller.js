@@ -1,4 +1,4 @@
-import InventoryService from './inventory.service.js';
+import * as inventoryService from './inventory.service.js';
 
 export async function findAll(req, res, next) {
 
