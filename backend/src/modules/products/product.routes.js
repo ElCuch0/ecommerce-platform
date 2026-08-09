@@ -1,16 +1,16 @@
 import { Router } from "express";
-import ProductController from "../modules/products/product.controller.js";
+import controller from "../modules/products/product.controller.js";
 import { validate } from "../../shared/middlewares/validation.middleware.js";
 import { createProductSchema } from "./product.validation.js";
 
 const router = Router();
 
-router.get("/", ProductController.findAll);
+router.get("/", controller.findAll);
 
-router.get("/:id", ProductController.findById);
+router.get("/:id", controller.findById);
 
-router.post("/", validate(createProductSchema), ProductController.create);
+router.post("/", controller.create);
 
-router.put("/:id", ProductController.update);
+router.put("/:id", controller.update);
 
-router.delete("/:id", ProductController.remove);
+router.delete("/:id", controller.remove);

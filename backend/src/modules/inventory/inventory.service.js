@@ -1,18 +1,18 @@
-import InventoryRepository from './inventory.repository.js';
-import { findProductById } from '../products/product.repository.js';
+import * as inventoryRepository from './inventory.inventoryRepository.js';
+import * as productRepository from '../products/product.inventoryRepository.js';
 
 export async function findAllInventory() {
 
   try {
-    return await InventoryRepository.findAllInventory();
+    return await inventoryRepository.findAllInventory();
   }catch (error) {
     throw new NotFoundError("No se encontraron productos");
   }
 }
 
-export async function patchStock(productId, data) {
+export async function patchStock(id, data) {
 
-  const existingProduct = await findProductById(productId);
+  const existingProduct = await productRepository.findProductById(id);
 
   if (!existingProduct) {
     throw new NotFoundError("Producto no encontrado");
@@ -20,18 +20,18 @@ export async function patchStock(productId, data) {
 
   try {
     
-    data.productId = Number(data.productId);
+    data.id = Number(data.id);
     data.stock = Number(data.stock);
 
-    return await InventoryRepository.updateStock(productIdId, stock);
+    return await inventoryRepository.updateStock(productIdId, stock);
   }catch (error) {
     throw new ConflictError("Error al actualizar el inventario: " + error.message);
   }
 }
 
-export async function patchStock(productId, data) {
+export async function patchStock(id, data) {
 
-  const existingProduct = await findProductById(productId);
+  const existingProduct = await productRepository.findProductById(id);
 
   if (!existingProduct) {
     throw new NotFoundError("Producto no encontrado");
@@ -39,10 +39,10 @@ export async function patchStock(productId, data) {
 
   try {
     
-    data.productId = Number(data.productId);
+    data.id = Number(data.id);
     data.min_stock = Number(data.min_stock);
 
-    return await InventoryRepository.updateStock(productIdId, min_stock);
+    return await inventoryRepository.updateStock(productIdId, min_stock);
   }catch (error) {
     throw new ConflictError("Error al actualizar el inventario: " + error.message);
   }

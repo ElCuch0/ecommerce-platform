@@ -4,9 +4,9 @@ export async function findAllInventory() {
   return prisma.inventory.findMany()
 }
 
-export async function updateStock(inventoryId, data) {
+export async function updateStock(id, data) {
   return prisma.inventory.update({ 
-    where: { inventoryId },
+    where: { id },
     data 
   })
 }
