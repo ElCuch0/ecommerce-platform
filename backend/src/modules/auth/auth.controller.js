@@ -30,6 +30,19 @@ export async function login(req, res, next){
   }
 }
 
+export async function me(req, res, next) {
+
+  try {
+
+    return res.status(200).json({
+      message: "Usuario obtenido correctamente",
+      data: await service.getCurrentUser(req.user.id)
+    })
+  }catch (error) {
+    next(error)
+  }
+}
+
 export async function refresh(req, res, next) {
   
   try {

@@ -11,7 +11,18 @@ export async function findAll() {
 
 export async function findById(id) {
   return prisma.user.findUnique({
-    where: {id}
+    where: {id},
+    select: {
+      id: true,
+      name: true,
+      lastname: true,
+      email: true,
+      phone: true,
+      isActive: true,
+      roleId: true,
+      createdAt: true,
+      updatedAt: true
+    }
   })
 }
 

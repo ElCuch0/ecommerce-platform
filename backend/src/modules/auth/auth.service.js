@@ -62,3 +62,14 @@ export async function login(data){
     accessToken
   };
 }
+
+export async function getCurrentUser(userId) {
+
+  const user = await userRepository.findById(userId)
+
+  if (!user) {
+    throw new NotFoundError("Usuario no encontrado")
+  }
+
+  return user
+}

@@ -12,7 +12,7 @@ export function generateToken(payload) {
 }
 
 export function verifyToken(token) {
-  return jwt.verifyToken(
+  return jwt.verify(
     token,
     env.jwtSecret
   )
