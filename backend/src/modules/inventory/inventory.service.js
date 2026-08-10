@@ -1,49 +1,30 @@
 import * as inventoryRepository from './inventory.repository.js';
 import * as productRepository from '../products/product.repository.js';
 
-export async function findAllInventory() {
+import { NotFoundError } from "../../shared/errors/NotFoundError.js"
 
-  try {
-    return await inventoryRepository.findAllInventory();
-  }catch (error) {
-    throw new NotFoundError("No se encontraron productos");
-  }
+export async function findAll() {
+  return inventoryRepository.findAll()
 }
 
-export async function patchStock(id, data) {
+export async function updateStock(id, stock) {
 
-  const existingProduct = await productRepository.findProductById(id);
+  const inventory = await inventoryRepository.findById(id)
 
-  if (!existingProduct) {
-    throw new NotFoundError("Producto no encontrado");
+  if (!inventory) {
+    throw new NotFoundError("El registro de inventario no existe")
   }
 
-  try {
-    
-    data.id = Number(data.id);
-    data.stock = Number(data.stock);
-
-    return await inventoryRepository.updateStock(productIdId, stock);
-  }catch (error) {
-    throw new ConflictError("Error al actualizar el inventario: " + error.message);
-  }
+  return inventoryRepository.updateStock(id, stock)
 }
 
-export async function patchMinimumStock(id, data) {
+export async function updateMinStock(id, minimumStock) {
 
-  const existingProduct = await productRepository.findProductById(id);
+  const inventory = await inventoryRepository.findById(id)
 
-  if (!existingProduct) {
-    throw new NotFoundError("Producto no encontrado");
+  if (!inventory) {
+    throw new NotFoundError("El registro de inventario no existe")
   }
 
-  try {
-    
-    data.id = Number(data.id);
-    data.min_stock = Number(data.min_stock);
-
-    return await inventoryRepository.updateStock(productIdId, min_stock);
-  }catch (error) {
-    throw new ConflictError("Error al actualizar el inventario: " + error.message);
-  }
+  return inventoryRepository.updateMinStock(id, minimumStock)
 }

@@ -1,41 +1,42 @@
-import * as inventoryService from './inventory.service.js';
+import * as service from './inventory.service.js';
 
 export async function findAll(req, res, next) {
 
   try {
     return res.status(200).json({
-      message: "Inventarios encontrados con éxito",
-      data: await InventoryService.findAllInventory()
+      message: "Inventarios encontrados correctamente",
+      data: await service.findAll()
     });
   }catch (error) {
       next(error);
   }
 }
 
-export async function patchStock(req, res, next) {
+export async function updateStock(req, res, next) {
 
   try { 
-    const productId = req.params;
-    const stock = req.body;
+
+    const { id } = req.params;
+    const { stock } = req.body;
 
     return res.status(200).json({
-      message: "Inventario actualizado con éxito",
-      data: await InventoryService.patchStock(productId, stock)
+      message: "Stock actualizado correctamente",
+      data: await service.updateStock(Number(id), Number(stock))
     });
   }catch (error) {
     next(error);
   }
 }
 
-export async function patchMinStock(req, res, next) {
+export async function updateMinStock(req, res, next) {
 
   try { 
-    const productId = req.params;
-    const min_stock = req.body;
+    const { id } = req.params;
+    const { minimumStock } = req.body;
 
     return res.status(200).json({
       message: "Inventario actualizado con éxito",
-      data: await InventoryService.patchStock(productId, min_stock)
+      data: await service.updateMinStock(Number(id), Number(minimumStock))
     });
   }catch (error) {
     next(error);

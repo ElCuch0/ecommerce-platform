@@ -1,22 +1,33 @@
 import { z } from "zod";
 
-export const updateInventorySchema = z.object({
-    body: z.object({
-        quantity: z
-            .number()
-            .int()
-            .min(0, "La cantidad no puede ser negativa"),
-
-        minimumStock: z
-            .number()
-            .int()
-            .min(0, "El stock mínimo no puede ser negativo")
-    }),
-
+export const updateStockSchema = z.object({
     params: z.object({
         id: z.coerce
             .number()
             .int()
-            .positive()
+            .positive("El id debe ser un número positivo")
+    }),
+
+    body: z.object({
+        stock: z
+            .number()
+            .int()
+            .min(0, "El stock no puede ser negativo")
     })
 });
+
+export const updateMinStockSchema = z.object({
+    params: z.object({
+        id: z.coerce
+            .number()
+            .int()
+            .positive("El id debe ser un número positivo")
+    }),
+
+    body: z.object({
+        minimumStock: z
+            .number()
+            .int()
+            .min(0, "El stock minimo no puede ser negativo")
+    })
+})
