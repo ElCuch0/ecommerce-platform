@@ -3,21 +3,18 @@ import { ConflictError } from "../../shared/errors/Conflicterror.js";
 import * as repository from "./categories.repository.js";
 
 export async function findAll() {
-  
-  try {
-    return await findAll();
-  }catch (error) {
-    throw new NotFoundError("Categorías no encontradas");
-  }
+  return repository.findAll()
 }
 
 export async function findById(id) {
 
-  try {
-    return await findById(id);
-  }catch (error) {
-    throw new NotFoundError("Categoría no encontrada");
+  const category = await repository.findById(id)
+
+  if (!category) {
+    throw new NotFoundError("Categoria no encontrada")
   }
+
+  return category
 }
 
 export async function create(data) {
@@ -31,7 +28,18 @@ export async function create(data) {
   return repository.create(data)
 }
 
-export async function remove(id) {
+export async function update(id, data) {
+
+  const category = await repository.findById(id)
+
+  if (!category) {
+    throw new NotFoundError("Categoria no encontrada")
+  }
+
+  return repository.update(id, data)
+}
+
+export async function deactivate(id) {
 
   const category = await repository.findById(id)
 
@@ -39,5 +47,24 @@ export async function remove(id) {
     throw new NotFoundError("No se ha encontrado la categoría")
   }
 
-  return await repository.remove(id)
+  if (!category.isActive) {
+    throw new ConflictError("La categoría ya está inactiva")
+  }
+
+  return await repository.deactivate(id)
+}
+
+export async function activate(id) {
+
+  const category = await repository.findById(id)
+
+  if (!category) {
+    throw new NotFoundError("No se ha encontrado la categoría")
+  }
+
+  if (category.isActive) {
+    throw new ConflictError("La categoría ya está activa")
+  }
+
+  return await repository.activate(id)
 }

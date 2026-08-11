@@ -1,11 +1,10 @@
-import { serialize } from "node:v8";
 import * as service from "./categories.service.js"
 
 export async function findAll(req, res, next) {
   try {
     return res.status(200).json({
       message: "Categorías encontradas con éxito",
-      data: await findAll()
+      data: await service.findAll()
     });
   } catch (error) {
     next(error);
@@ -13,20 +12,17 @@ export async function findAll(req, res, next) {
 }
 
 export async function findById(req, res, next) {
+  
   try {
-    const { id } = req.params;
-    const category = await findById(id);
-    if (!category) {
-      return res.status(404).json({
-        message: "Categoría no encontrada"
-      });
-    }
+
+    const { id } = req.params
+
     return res.status(200).json({
-      message: "Categoría encontrada con éxito",
-      data: category
-    });
-  } catch (error) {
-    next(error);
+      message: "Categoría encontrada correctamente",
+      data: await service.findById(Number(id))
+    })
+  }catch (error) {
+    next(error)
   }
 }
 
@@ -44,28 +40,46 @@ export async function create(req, res, next) {
 }
 
 export async function update(req, res, next) {
+  
   try {
-    const { categoryId } = req.params;
-    const { name, description } = req.body;
-    const category = await update(categoryId, { name, description });
+
+    const { id } = req.params
+
     return res.status(200).json({
-      message: "Categoría actualizada con éxito",
-      data: category
-    });
-  } catch (error) {
-    next(error);
+      message: "Categoria actualizada con éxito",
+      data: await service.update(Number(id), data)
+    })
+  }catch (error) {
+    next(error)
   }
 }
 
-export async function remove(req, res, next) {
+export async function deactivate(req, res, next) {
+  
   try {
-    const { categoryId } = req.params;
-    const category = await remove(categoryId);
+
+    const { id } = req.params
+
     return res.status(200).json({
-      message: "Categoría eliminada con éxito",
-      data: category
-    });
-  } catch (error) {
-    next(error);
+      message: "Categoria desactivada correctamente",
+      data: await service.deactivate(Number(id))
+    })
+  }catch (error) {
+    next(error)
+  }
+}
+
+export async function activate(req, res, next) {
+  
+  try {
+
+    const { id } = req.params
+
+    return res.status(200).json({
+      message: "Categoria activada correctamente",
+      data: await service.activate(Number(id))
+    })
+  }catch (error) {
+    next(error)
   }
 }

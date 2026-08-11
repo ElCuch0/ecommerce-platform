@@ -9,8 +9,17 @@ export const categorySchema = z.object({
             .trim(),
         
         description: z
-          .string()
-          .trim()
-          .optional()
+            .string()
+            .trim()
+            .optional()
     })
 });
+
+export const categoryIdSchema = z.object({
+    params: z.object({
+        id: z.coerce
+            .number()
+            .int()
+            .positive()
+    })
+})
