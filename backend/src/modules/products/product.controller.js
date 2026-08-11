@@ -6,10 +6,10 @@ export async function findAll(req, res, next) {
 
     return res.status(200).json({
       message: "Productos encontrados con éxito",
-      data: await findAll()
+      data: await service.findAll()
     });
   }catch (error) {
-      next(error);
+      next(error)
   }
 }
 
@@ -19,10 +19,10 @@ export async function findById(req, res, next) {
 
     return res.status(200).json({
       message: "Producto encontrado con éxito",
-      data: await findById(Number(req.params.id))
+      data: await service.findById(Number(req.params.id))
     });
   }catch (error) {
-    next(error);
+    next(error)
   }
 }
 
@@ -35,7 +35,7 @@ export async function create(req, res, next) {
       data: await service.create(req.body)
     });
   } catch (error) {
-    next(error);
+    next(error)
   }
 }
 
@@ -43,24 +43,28 @@ export async function update(req, res, next) {
 
   try {
 
+    const { id } = req.params
+
     return res.status(200).json({
       message: "Producto actualizado con éxito",
-      data: await service.update(Number(req.params.id), req.body)
+      data: await service.update(Number(id), req.body)
     });
   }catch (error) {
     next(error);
   }
 }
 
-export async function remove(req, res, next) {
+export async function deactivate(req, res, next) {
 
   try {
 
+    const { id } = req.params
+
     return res.status(200).json({
-      message: "Producto eliminado con éxito",
-      data: await service.remove(Number(req.params.id))
+      message: "Producto desactivado correctamente",
+      data: await service.deactivate(Number(id))
     });
   }catch (error) {
-    next(error);
+    next(error)
   }
 }

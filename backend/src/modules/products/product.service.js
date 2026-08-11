@@ -37,37 +37,48 @@ export async function create(data) {
 
 }
 
-export async function update(productId, data) {
+export async function update(id, data) {
 
-  const existingProduct = await productRepository.findById(productId);
+  if (data.categoryId) {
 
-  if (!existingProduct) {
+    const category = await categoryRepository.findById(data.categoryId)
+
+    if (!category) {
+      throw new NotFoundError("La categoría indicada no existe")
+    }
+  }
+
+  const product = await productRepository.findById(id);
+
+  if (!product) {
     throw new NotFoundError("Producto no encontrado");
   }
 
-  try {
-    data.categoryId = Number(data.categoryId);
-    data.name = data.name.trim().toLowerCase();
-    data.description = data.description.trim();
-    data.price = Number(data.price);
-    data.color = data.color.trim().toLowerCase();
-    data.size = data.size.trim().toLowerCase();
-    data.type = data.type.trim().toLowerCase();
-    data.status = data.status.trim().toLowerCase();
+  if (data.reference) {
 
-    return await productRepository.update(productId, data);
-  }catch (error) {
-    throw new ConflictError("Error al actualizar el producto: " + error.message);
+    const existingProduct = await productRepository.findByReference(data.reference)
+    
+    if (
+      existingProduct && existingProduct.id !== id
+    ) {
+      throw new ConflictError("La referencia ya esta asociada a otro producto")
+    }
   }
+
+  return productRepository.update(id, data)
 }
 
-export async function remove(productId) {
+export async function deactivate(id) {
 
-  const existingProduct = await productRepository.findById(productId);
+  const product = await productRepository.findById(id)
 
-  if (!existingProduct) {
-    throw new NotFoundError("Producto no encontrado");
+  if (!product) {
+    throw new NotFoundError("Producto no encontrado")
   }
 
-  return await productRepository.remove(productId);
+  if (!product.isActive) {
+    throw new ConflictError("El producto ya está inactivo")
+  }
+
+  return productRepository.deactivate(id)
 }

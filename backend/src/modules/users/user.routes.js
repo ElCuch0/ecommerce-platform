@@ -6,9 +6,19 @@ import { ROLES } from "../../shared/constants/roles.js";
 
 const router = Router();
 
-router.get("/", controller.findAll)
+router.get("/",
+  authenticate,
+  authorize(
+    ROLES.ADMIN
+  ),
+  controller.findAll)
 
-router.get("/:id", controller.findById)
+router.get("/:id",
+  authenticate,
+  authorize(
+    ROLES.ADMIN
+  ),
+  controller.findById)
 
 router.patch("/:id",
   authenticate,

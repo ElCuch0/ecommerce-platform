@@ -74,8 +74,22 @@ export const updateProductSchema = z.object({
             .string()
             .min(2)
             .max(100)
-            .optional()
+            .optional(),
 
+        categoryId: z.coerce
+            .number()
+            .int()
+            .positive()
+            .optional()
     })
 
 });
+
+export const productIdSchema = z.object({
+    params: z.object({
+        id: z.coerce
+            .number()
+            .int()
+            .positive()
+    })
+})

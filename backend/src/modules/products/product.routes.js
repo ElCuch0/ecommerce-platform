@@ -1,7 +1,7 @@
 import { Router } from "express";
 import * as controller from "./product.controller.js";
 import { validate } from "../../shared/middleware/validate.middleware.js";
-import { createProductSchema, updateProductSchema } from "./product.validate.js";
+import { createProductSchema, productIdSchema, updateProductSchema } from "./product.validate.js";
 import { authenticate } from "../../shared/middleware/authenticate.middleware.js";
 import { authorize } from "../../shared/middleware/authorize.middleware.js";
 import { ROLES } from "../../shared/constants/roles.js";
@@ -28,7 +28,6 @@ router.post("/",
 router.put("/:id",
   authenticate,
   authorize(
-    ROLES.EMPLOYEE,
     ROLES.ADMIN
   ),
   validate(updateProductSchema),
@@ -39,6 +38,7 @@ router.delete("/:id",
   authorize(
     ROLES.ADMIN
   ),
-  controller.remove);
+  validate(productIdSchema),
+  controller.deactivate);
 
 export default router;
