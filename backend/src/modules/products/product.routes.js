@@ -10,11 +10,13 @@ const router = Router();
 
 router.get("/",
   authenticate,
-  controller.findAll);
+  controller.findAll
+)
 
 router.get("/:id",
   authenticate,
-  controller.findById);
+  controller.findById
+)
 
 router.post("/",
   authenticate,
@@ -23,7 +25,8 @@ router.post("/",
     ROLES.ADMIN
   ),
   validate(createProductSchema),
-  controller.create);
+  controller.create
+)
 
 router.put("/:id",
   authenticate,
@@ -31,7 +34,8 @@ router.put("/:id",
     ROLES.ADMIN
   ),
   validate(updateProductSchema),
-  controller.update);
+  controller.update
+)
 
 router.delete("/:id",
   authenticate,
@@ -39,6 +43,16 @@ router.delete("/:id",
     ROLES.ADMIN
   ),
   validate(productIdSchema),
-  controller.deactivate);
+  controller.deactivate
+)
+
+router.patch("/:id",
+  authenticate,
+  authorize(
+    ROLES.ADMIN
+  ),
+  validate(productIdSchema),
+  controller.activate
+)
 
 export default router;

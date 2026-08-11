@@ -82,3 +82,18 @@ export async function deactivate(id) {
 
   return productRepository.deactivate(id)
 }
+
+export async function activate(id) {
+
+  const product = await productRepository.findById(id)
+
+  if (!product) {
+    throw new NotFoundError("Producto no encontrado")
+  }
+
+  if (product.isActive) {
+    throw new ConflictError("El producto ya está activo")
+  }
+
+  return productRepository.activate(id)
+}

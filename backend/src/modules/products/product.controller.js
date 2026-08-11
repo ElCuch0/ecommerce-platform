@@ -68,3 +68,18 @@ export async function deactivate(req, res, next) {
     next(error)
   }
 }
+
+export async function activate(req, res, next) {
+
+  try {
+
+    const { id } = req.params
+
+    return res.status(200).json({
+      message: "Producto activado correctamente",
+      data: await service.activate(Number(id))
+    })
+  }catch (error) {
+    next(error)
+  }
+}

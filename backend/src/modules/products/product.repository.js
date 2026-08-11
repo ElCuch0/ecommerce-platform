@@ -50,3 +50,14 @@ export async function deactivate(id) {
     }
   });
 }
+
+export async function activate(id) {
+  return prisma.product.update({
+    where: {
+      id
+    },
+    data: {
+      isActive: true
+    }
+  })
+}
