@@ -6,7 +6,11 @@ export async function findAll() {
       id: "desc"
     },
     where: {
-      isActive: true
+      isActive: true,
+
+      category: {
+        isActive: true
+      }
     }
   });
 }

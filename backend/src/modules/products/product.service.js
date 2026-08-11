@@ -3,6 +3,21 @@ import { NotFoundError } from "../../shared/errors/NotFoundError.js";
 import * as productRepository from "./product.repository.js";
 import * as categoryRepository from "../categories/categories.repository.js"
 
+async function validateCategory(categoryId) {
+
+  const category = await categoryRepository.findById(categoryId)
+
+  if (!category) {
+    throw new NotFoundError("La categoría no existe")
+  }
+
+  if (!category.isActive) {
+    throw new ConflictError("No se puede utilizar una categoría desactivada")
+  }
+
+  return category
+}
+
 export async function findAll() {
   return await productRepository.findAll()
 }
@@ -21,11 +36,7 @@ export async function findById(id) {
 
 export async function create(data) {
 
-  const category = await categoryRepository.findById(data.categoryId)
-
-  if (!category) {
-    throw new NotFoundError("La categoría indicada no existe")
-  }
+  await validateCategory(data.categoryId)
 
   const product = await productRepository.findByReference(data.reference)
 
@@ -39,19 +50,15 @@ export async function create(data) {
 
 export async function update(id, data) {
 
-  if (data.categoryId) {
-
-    const category = await categoryRepository.findById(data.categoryId)
-
-    if (!category) {
-      throw new NotFoundError("La categoría indicada no existe")
-    }
-  }
-
   const product = await productRepository.findById(id);
 
   if (!product) {
     throw new NotFoundError("Producto no encontrado");
+  }
+
+  if (data.categoryId) {
+
+    await validateCategory(data.categoryId)
   }
 
   if (data.reference) {
