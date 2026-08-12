@@ -1,3 +1,4 @@
+import { tuple } from "zod";
 import prisma from "../../infrastructure/database/prisma.js";
 
 export async function findAll() {
@@ -19,6 +20,21 @@ export async function findById(id) {
   return prisma.product.findFirst({
     where: {
       id
+    },
+    select: {
+      id: true,
+      name: true,
+      reference: true,
+      price: true,
+      isActive: true,
+
+
+      category: {
+        select: {
+          id: true,
+          isActive: true
+        }
+      }
     }
   });
 }

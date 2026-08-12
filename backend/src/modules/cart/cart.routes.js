@@ -1,20 +1,30 @@
 import {Router} from "express";
-import CartController from "./cart.controller.js";
-import { validate } from "../../shared/middlewares/validation.middleware.js";
-import { createCartSchema } from "./cart.validation.js";
+import * as controller from "./cart.controller.js";
+import { validate } from "../../shared/middleware/validate.middleware.js";
+import { createCartItemSchema, updateCartItemSchema } from "./cart.validate.js";
 import { authenticate } from "../../shared/middleware/authenticate.middleware.js";
 import { authorize } from "../../shared/middleware/authorize.middleware.js";
 import { ROLES } from "../../shared/constants/roles.js";
 
 const router = Router();
 
-router.get("/:id",
-  authenticate,
-  authorize(
-    ROLES.CUSTOMER
-  ),
-  CartController.findById);
+router.use(authenticate)
 
-router.post("/", validate(createCartSchema), CartController.create);
+router.get("/",
+  controller.getCart);
 
-router.delete("/:id", CartController.remove);
+router.post("/",
+  validate(createCartItemSchema),
+  controller.addToCart
+)
+
+router.patch("/:id",
+  validate(updateCartItemSchema),
+  controller.updateQuantity
+)
+
+router.delete("/:id",
+  controller.removeFromCart
+);
+
+export default router;

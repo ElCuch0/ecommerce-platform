@@ -1,46 +1,65 @@
-import CartService from "./cart.service.js"
+import * as service from "./cart.service.js"
 
-export async function findById(req, res, next) {
+export async function addToCart(req, res, next) {
 
   try {
 
-    const { cartId } = req.params
+    const userId = req.user.id
 
-    return res.status(200).json({
-      message: "El carrito se ha encontrado con éxito",
-      data: await CartService.findCartById({ cartId })
+    return res.status(201).json({
+      success: true,
+      message: "Producto agregado al carrito",
+      data: await service.addToCart(Number(userId), req.body)
     })
   }catch (error) {
     next(error)
   }
 }
 
-export async function create(req, res, next) {
+export async function getCart(req, res, next) {
 
   try {
 
-    const { cartID, cartId } = req.body;
+    const userId = req.user.id
 
-    return res.status(201).json({
-      message: "El carrito se ha creado con éxito",
-      data: await CartService.createCart({ cartId, cartId })
+    return res.status(200).json({
+      success: true,
+      data: await service.getCart(Number(userId))
     })
   }catch (error) {
-    next(error);
+    next(error)
   }
 }
 
-export async function remove(req, res, next) {
+export async function updateQuantity(req, res, next) {
+  
+  try {
+
+    const itemId = req.params.id
+
+    return res.status(200).json({
+      success: true,
+      message: "Cantidad actualizada correctamente",
+      data: await service.updateQuantity(req.user.id, Number(itemId), req.body.quantity)
+    })
+  }catch (error) {
+    next(error)
+  }
+}
+
+export async function removeFromCart(req, res, next) {
 
   try {
 
-    const { cartId } = req.params;
+    const itemId = req.params.id
+
+    await service.removeFromCart(req.user.id, Number(itemId))
 
     return res.status(200).json({
-      message: "El carrito se eliminó con éxito",
-      data: await CartService.removeCart({ cartId })
+      success: true,
+      message: "Producto eliminado del carrito"
     })
   }catch (error) {
-      next(error)
+    next(error)
   }
 }
