@@ -1,8 +1,12 @@
 import { Router } from "express";
-import { create } from "./checkout.controller.js";
-import { validate } from "../../shared/middlewares/validation.middleware.js";
-import { createCheckoutSchema } from "./checkout.validation";
+import * as controller from "./checkout.controller.js";
+import { authenticate } from "../../shared/middleware/authenticate.middleware.js"
 
 const router = Router();
 
-router.post("/", validate(createCheckoutSchema), checkoutController.create)
+router.post("/",
+  authenticate,
+  controller.checkout
+)
+
+export default router;
