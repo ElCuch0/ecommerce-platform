@@ -1,13 +1,23 @@
+import * as invoiceRepository from "./invoices.repository.js"
+import * as orderRepository from "../orders/order.repository.js"
+import { NotFoundError } from "../../shared/errors/NotFoundError.js"
+import { ConflictError } from "../../shared/errors/ConflictError.js"
 
+export async function getMyInvoice(userId, invoiceId) {
 
-export async function createInvoice(data){
+  const invoice = await invoiceRepository.findById(invoiceId)
 
-  try{
-
-    data.invoiceId = Number(data.invoiceId)
-    
-    return await invoiceRepository.createInvoice(data)
-  }catch (error) {
-    throw new error
+  if (!invoice) {
+    throw new NotFoundError("La factura no existe")
   }
+
+  if (invoice.order.userId !== userId) {
+    throw new NotFoundError("La factura no existe")
+  }
+
+  return invoice
+}
+
+export async function getAllInvoices() {
+  return await invoiceRepository.findAll()
 }

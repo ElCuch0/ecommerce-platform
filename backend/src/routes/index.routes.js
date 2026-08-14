@@ -9,7 +9,7 @@ import inventoryMovementRoutes from "../modules/inventory-movements/inventoryMov
 import cartRoutes from "../modules/cart/cart.routes.js";
 import orderRoutes from "../modules/orders/order.routes.js"
 import checkoutRoutes from "../modules/checkout/checkout.routes.js";
-//import invoiceRoutes from "../modules/invoices/invoices.routes.js";
+import invoiceRoutes from "../modules/invoices/invoices.routes.js";
 
 const router = Router();
 
@@ -22,6 +22,6 @@ router.use("/inventory-movements", inventoryMovementRoutes)
 router.use("/cart", cartRoutes);
 router.use("/orders", orderRoutes)
 router.use("/checkout", checkoutRoutes);
-//router.use("/invoices", invoiceRoutes);
+router.use("/invoices", invoiceRoutes);
 
 export default router;

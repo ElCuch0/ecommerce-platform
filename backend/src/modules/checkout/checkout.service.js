@@ -1,9 +1,6 @@
 import prisma from "../../infrastructure/database/prisma.js"
-import * as repository from "./checkout.repository.js"
 import { NotFoundError } from "../../shared/errors/NotFoundError.js"
 import { ConflictError } from "../../shared/errors/ConflictError.js"
-import { zhCN } from "zod/v4/locales"
-import { connect } from "node:http2"
 
 export async function checkout(userId){
 
@@ -77,21 +74,6 @@ export async function checkout(userId){
       })
     }
 
-    const order = await tx.order.create({
-      data: {
-        userId,
-        total,
-        status: "PENDING",
-
-        items: {
-          create: orderItems
-        }
-      },
-      include: {
-        items: true
-      }
-    })
-
     for (const item of cart.items) {
 
       const inventory = await tx.inventory.findUnique({
@@ -136,6 +118,40 @@ export async function checkout(userId){
       }
     })
 
-    return order
+    const order = await tx.order.create({
+      data: {
+        userId,
+        total,
+        status: "PENDING",
+
+        items: {
+          create: orderItems
+        }
+      },
+      include: {
+        items: true
+      }
+    })
+
+    const invoiceNumber = `FAC-${Date.now().toString().slice(-6)}-${Math.floor(Math.random() * 900) + 100}`
+
+    const invoice = await tx.invoice.create({
+      data: {
+        order: {
+          connect: {
+            id: order.id
+          }
+        },
+        invoiceNumber,
+        total: order.total
+      }
+    })
+
+    return {
+      order,
+      invoice
+    }
+
   })
+  
 }

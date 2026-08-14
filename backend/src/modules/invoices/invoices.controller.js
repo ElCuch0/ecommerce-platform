@@ -1,13 +1,28 @@
+import * as service from "./invoices.service.js"
 
+export async function getMyInvoice(req, res, next) {
 
-export async function create(req, res, next){
+  try {
 
-  try{
-    const {} = req.body
+    const userId = req.user.id
+    const invoiceId = req.params.id
 
-    return res.status(201).json({
-      message: "La factura se ha generado con éxito",
-      data: await invoicesService.createInvoice(data)
+    return res.status(200).json({
+      success: true,
+      data: await service.getMyInvoice(Number(userId), Number(invoiceId))
+    })
+  }catch (error) {
+    next(error)
+  }
+}
+
+export async function getAll(req, res, next) {
+
+  try {
+
+    return res.status(200).json({
+      success: true,
+      data: await service.getAllInvoices()
     })
   }catch (error) {
     next(error)
