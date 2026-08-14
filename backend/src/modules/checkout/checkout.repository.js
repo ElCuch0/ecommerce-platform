@@ -1,4 +1,4 @@
-import prisma from "../../infrastructure/database/prisma"
+import prisma from "../../infrastructure/database/prisma.js"
 
 export async function executeCheckout(userId){
   return prisma.$transaction(async (tx) => {

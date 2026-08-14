@@ -3,6 +3,7 @@ import * as repository from "./checkout.repository.js"
 import { NotFoundError } from "../../shared/errors/NotFoundError.js"
 import { ConflictError } from "../../shared/errors/ConflictError.js"
 import { zhCN } from "zod/v4/locales"
+import { connect } from "node:http2"
 
 export async function checkout(userId){
 
@@ -41,8 +42,14 @@ export async function checkout(userId){
 
       const product = item.product
 
-      if (!product) {
-        throw new NotFoundError(`El producto ${item.productId} no existe`)
+      const inventory = await tx.inventory.findUnique({
+        where: {
+          productId: item.productId
+        }
+      })
+
+      if (!inventory) {
+        throw new NotFoundError(`El producto ${item.productId} no tiene inventario`)
       }
 
       if (!product.isActive) {
@@ -53,7 +60,7 @@ export async function checkout(userId){
         throw new ConflictError(`La categoría del producto ${product.name} esta desactivada`)
       }
 
-      if (product.stock < item.quantity) {
+      if (inventory.stock < item.quantity) {
         throw new ConflictError(`Stock insuficiente para el producto ${product.name}`)
       }
 
@@ -81,15 +88,21 @@ export async function checkout(userId){
         }
       },
       include: {
-        item: true
+        items: true
       }
     })
 
     for (const item of cart.items) {
 
-      await tx.product.update({
+      const inventory = await tx.inventory.findUnique({
         where: {
-          id: item.productId
+          productId: item.productId
+        }
+      })
+
+      await tx.inventory.update({
+        where: {
+          productId: item.productId
         },
         data: {
           stock: {
@@ -100,10 +113,19 @@ export async function checkout(userId){
 
       await tx.inventoryMovement.create({
         data: {
-          productId: item.productId,
-          userId,
+          inventory: {
+            connect: {
+              id: inventory.id
+            }
+          },
+          user: {
+            connect: {
+              id: userId
+            }
+          },
           type: "EXIT",
-          quantity: item.quantity
+          quantity: item.quantity,
+          reason: "Compra realizada"
         }
       })
     }

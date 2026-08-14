@@ -1,4 +1,4 @@
-import prisma from "../../infrastructure/database/prisma";
+import prisma from "../../infrastructure/database/prisma.js";
 
 export async function create(data) {
   return prisma.order.create({

@@ -20,7 +20,7 @@ router.use("/categories", categoryRoutes);
 router.use("/inventory", inventoryRoutes);
 router.use("/inventory-movements", inventoryMovementRoutes)
 router.use("/cart", cartRoutes);
-router.use("orders", orderRoutes)
+router.use("/orders", orderRoutes)
 router.use("/checkout", checkoutRoutes);
 //router.use("/invoices", invoiceRoutes);
 

@@ -56,5 +56,7 @@ export async function updateOrderStatus(req, res, next) {
       message: "Estado de la orden actualizado correctamente",
       data: await service.updateOrderStatus(Number(orderId), status)
     })
+  }catch (error) {
+    next(error)
   }
 }
