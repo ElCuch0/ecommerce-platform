@@ -17,42 +17,41 @@ export async function findById(req, res, next) {
 
   try {
 
-    const id = req.params
+    const id = req.params.id
 
     return res.status(200).json({
       message: "Se ha encontrado el usuario",
-      data: await service.findById(id)
+      data: await service.findById(Number(id))
     })
   }catch (error) {
     next(error)
   }
 }
 
-export async function update(req, res, next) {
+export async function activate(req, res, next) {
 
   try {
 
-    const id = req.params
-    const data = req.body
+    const id = req.params.id
 
     return res.status(201).json({
-      message: "Se ha actualizado el usuario",
-      data: await service.update(id, data)
+      message: "Se ha activado el usuario",
+      data: await service.activate(Number(id))
     })
   }catch (error) {
     next(error)
   }
 }
 
-export async function remove(req, res, next) {
+export async function deactivate(req, res, next) {
 
   try {
 
-    const { id } = req.params
+    const id = req.params.id
 
     return res.status(200).json({
-      message: "Se ha eliminado el usuario",
-      data: await service.remove(Number(id))
+      message: "Se ha desactivado el usuario",
+      data: await service.deactivate(Number(id))
     })
   }catch (error) {
     next(error)

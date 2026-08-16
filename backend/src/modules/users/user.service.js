@@ -1,3 +1,5 @@
+import { ConflictError } from "../../shared/errors/ConflictError.js"
+import { NotFoundError } from "../../shared/errors/NotFoundError.js"
 import * as repository from "./user.repository.js"
 
 export async function findAll() {
@@ -5,24 +7,42 @@ export async function findAll() {
 }
 
 export async function findById(id) {
-  return await repository.findById(id)
+
+  const user = await repository.findById(id)
+
+  if (!user) {
+    throw new NotFoundError("El usuario no existe")
+  }
+
+  return user
 }
 
-export async function update(id, data) {
+export async function activate(id) {
   
-  const exists = await repository.findById(id)
+  const user = await repository.findById(id)
 
-  if (exists) {
-    return await repository.update(id, data)
+  if (!user) {
+    throw new NotFoundError("El usuario no existe")
   }
+
+  if (user.isActive) {
+    throw new ConflictError("El usuario ya está activo")
+  }
+
+  return repository.activate(id)
 }
 
-export async function remove(id) {
+export async function deactivate(id) {
   
-  const exists = await repository.findById(id)
+  const user = await repository.findById(id)
 
-  if (exists) {
-    return await repository.remove(id)
+  if (!user) {
+    throw new NotFoundError("El usuario no existe")
   }
-  
+
+  if (!user.isActive) {
+    throw new ConflictError("El usuario ya esta desactivado")
+  }
+
+  return repository.deactivate(id)
 }

@@ -70,7 +70,7 @@ export async function findAll() {
       }
     },
     orderBy: {
-      createdAt: "desc"
+      issueDate: "desc"
     }
   })
 }
