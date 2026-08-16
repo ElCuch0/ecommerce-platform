@@ -50,7 +50,7 @@ export const registerSchema = z.object({
         /^[0-9]{10}/,
         "El teléfono debe contener 10 dígitos"
       )
-      .optional() 
+      .optional()
 
   }),
 

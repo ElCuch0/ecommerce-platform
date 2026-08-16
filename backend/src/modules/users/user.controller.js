@@ -48,11 +48,11 @@ export async function remove(req, res, next) {
 
   try {
 
-    const id = req.params
+    const { id } = req.params
 
     return res.status(200).json({
       message: "Se ha eliminado el usuario",
-      data: await service.remove(id)
+      data: await service.remove(Number(id))
     })
   }catch (error) {
     next(error)

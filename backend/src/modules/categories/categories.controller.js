@@ -43,11 +43,11 @@ export async function update(req, res, next) {
   
   try {
 
-    const { id } = req.params
+    const id = req.params.id
 
     return res.status(200).json({
       message: "Categoria actualizada con éxito",
-      data: await service.update(Number(id), data)
+      data: await service.update(Number(id), req.body)
     })
   }catch (error) {
     next(error)

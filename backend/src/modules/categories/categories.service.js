@@ -36,6 +36,15 @@ export async function update(id, data) {
     throw new NotFoundError("Categoria no encontrada")
   }
 
+  const categories = await repository.findAll()
+
+  for (const newCategory of categories) {
+
+    if (newCategory.name === data.name) {
+      throw new ConflictError("La categoría ya existe")
+    }
+  }
+
   return repository.update(id, data)
 }
 

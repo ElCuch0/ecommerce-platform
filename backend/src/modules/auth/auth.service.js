@@ -27,6 +27,7 @@ export async function register(data){
     lastname: data.lastname,
     email: data.email,
     password: hashedPassword,
+    phone: data.phone,
     roleId: role.id
   })
 
