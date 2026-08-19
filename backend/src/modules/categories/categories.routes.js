@@ -4,7 +4,7 @@ import { authenticate } from "../../shared/middleware/authenticate.middleware.js
 import { authorize } from "../../shared/middleware/authorize.middleware.js";
 import { ROLES } from "../../shared/constants/roles.js";
 import { validate } from "../../shared/middleware/validate.middleware.js";
-import { categorySchema, categoryIdSchema } from "./categories.validate.js";
+import { categorySchema, categoryIdSchema, categoryUpdateSchema } from "./categories.validate.js";
 
 const router = Router();
 
@@ -15,6 +15,7 @@ router.get("/",
 
 router.get("/:id",
   authenticate,
+  validate(categoryIdSchema),
   controller.findById
 )
 
@@ -33,7 +34,7 @@ router.put("/:id",
   authorize(
     ROLES.ADMIN
   ),
-  validate(categorySchema),
+  validate(categoryUpdateSchema),
   controller.update
 )
 

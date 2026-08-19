@@ -14,6 +14,22 @@ export async function findAll(req, res, next) {
   }
 }
 
+export async function findByProductId(req, res, next) {
+
+  try {
+
+    const productId = req.params.id
+
+    return res.status(200).json({
+      success: true,
+      message: "Inventario encontrado correctamente",
+      data: await service.findByProductId(Number(productId))
+    })
+  }catch (error) {
+    next(error)
+  }
+}
+
 export async function updateStock(req, res, next) {
 
   try { 

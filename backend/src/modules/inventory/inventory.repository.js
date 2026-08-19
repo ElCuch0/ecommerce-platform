@@ -19,6 +19,22 @@ export async function findById(id) {
   })
 }
 
+export async function findByProductId(productId) {
+  return prisma.inventory.findUnique({
+    where: {
+      productId
+    }
+  })
+}
+
+export async function createStock(productId) {
+  return prisma.inventory.create({
+    productId,
+    stock: 0,
+    minimumStock: 0
+  })
+}
+
 export async function updateStock(id, stock) {
   return prisma.inventory.update({ 
     where: {

@@ -31,3 +31,12 @@ export const updateMinStockSchema = z.object({
             .min(0, "El stock minimo no puede ser negativo")
     })
 })
+
+export const inventoryIdSchema = z.object({
+    params: z.object({
+        id: z.coerce
+            .number()
+            .int()
+            .positive()
+    })
+})

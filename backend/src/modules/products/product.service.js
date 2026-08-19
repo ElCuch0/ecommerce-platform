@@ -1,6 +1,7 @@
 import { ConflictError } from "../../shared/errors/Conflicterror.js";
 import { NotFoundError } from "../../shared/errors/NotFoundError.js";
 import * as productRepository from "./product.repository.js";
+import * as inventoryRepository from "../inventory/inventory.repository.js"
 import * as categoryRepository from "../categories/categories.repository.js"
 
 async function validateCategory(categoryId) {
@@ -45,7 +46,6 @@ export async function create(data) {
   }
 
   return productRepository.create(data)
-
 }
 
 export async function update(id, data) {

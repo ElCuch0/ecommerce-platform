@@ -1,4 +1,3 @@
-import { tuple } from "zod";
 import prisma from "../../infrastructure/database/prisma.js";
 
 export async function findAll() {
@@ -48,9 +47,24 @@ export async function findByReference(reference) {
 }
 
 export async function create(data) {
-  return prisma.product.create({
-    data
-  });
+  const result = prisma.$transaction(async (tx) => {
+
+    const newProduct = await tx.product.create({
+      data
+    })
+
+    const newInventory = await tx.inventory.create({
+      data: {
+        productId: newProduct.id,
+        stock: 0,
+        minimumStock: 0
+      }
+    })
+
+    return {...newProduct, inventory: newInventory}
+  })
+
+  return result
 }
 
 export async function update(id, data) {
