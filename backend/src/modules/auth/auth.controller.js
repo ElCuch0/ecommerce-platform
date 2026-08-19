@@ -1,3 +1,4 @@
+import { success } from "zod";
 import * as service from "./auth.service.js"
 
 export async function register(req, res, next){
@@ -7,6 +8,7 @@ export async function register(req, res, next){
     const { name, lastname, email, password, phone } = req.body
 
     return res.status(201).json({
+      success: true,
       message: "Usuario registrado con éxito",
       data: await service.register({ name, lastname, email, password, phone })
     });
@@ -22,6 +24,7 @@ export async function login(req, res, next){
     const { email, password } = req.body
 
     return res.status(200).json({
+      success: true,
       message: "Usuario logueado con éxito",
       data: await service.login({ email, password })
     });
@@ -35,27 +38,10 @@ export async function me(req, res, next) {
   try {
 
     return res.status(200).json({
+      success: true,
       message: "Usuario obtenido correctamente",
       data: await service.getCurrentUser(req.user.id)
     })
-  }catch (error) {
-    next(error)
-  }
-}
-
-export async function refresh(req, res, next) {
-  
-  try {
-
-  }catch (error) {
-    next(error)
-  }
-}
-
-export async function logout(req, res, next) {
-
-  try {
-
   }catch (error) {
     next(error)
   }

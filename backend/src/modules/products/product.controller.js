@@ -1,3 +1,4 @@
+import { success } from "zod";
 import * as service from "./product.service.js";
 
 export async function findAll(req, res, next) {
@@ -5,6 +6,7 @@ export async function findAll(req, res, next) {
   try {
 
     return res.status(200).json({
+      success: true,
       message: "Productos encontrados con éxito",
       data: await service.findAll()
     });
@@ -18,6 +20,7 @@ export async function findById(req, res, next) {
   try {
 
     return res.status(200).json({
+      success: true,
       message: "Producto encontrado con éxito",
       data: await service.findById(Number(req.params.id))
     });
@@ -31,6 +34,7 @@ export async function create(req, res, next) {
   try {
 
     return res.status(201).json({
+      success: true,
       message: "Producto creado correctamente",
       data: await service.create(req.body)
     });
@@ -46,6 +50,7 @@ export async function update(req, res, next) {
     const { id } = req.params
 
     return res.status(200).json({
+      success: true,
       message: "Producto actualizado con éxito",
       data: await service.update(Number(id), req.body)
     });
@@ -61,6 +66,7 @@ export async function deactivate(req, res, next) {
     const { id } = req.params
 
     return res.status(200).json({
+      success: true,
       message: "Producto desactivado correctamente",
       data: await service.deactivate(Number(id))
     });
@@ -76,6 +82,7 @@ export async function activate(req, res, next) {
     const { id } = req.params
 
     return res.status(200).json({
+      success: true,
       message: "Producto activado correctamente",
       data: await service.activate(Number(id))
     })

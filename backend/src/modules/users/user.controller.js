@@ -1,3 +1,4 @@
+import { success } from "zod"
 import * as service from "./user.service.js"
 
 export async function findAll(req, res, next) {
@@ -5,6 +6,7 @@ export async function findAll(req, res, next) {
   try {
 
     return res.status(200).json({
+      success: true,
       message: "Se han encontrado los usuarios con éxito",
       data: await service.findAll()
     })
@@ -20,6 +22,7 @@ export async function findById(req, res, next) {
     const id = req.params.id
 
     return res.status(200).json({
+      success: true,
       message: "Se ha encontrado el usuario",
       data: await service.findById(Number(id))
     })
@@ -35,6 +38,7 @@ export async function activate(req, res, next) {
     const id = req.params.id
 
     return res.status(201).json({
+      success: true,
       message: "Se ha activado el usuario",
       data: await service.activate(Number(id))
     })
@@ -50,6 +54,7 @@ export async function deactivate(req, res, next) {
     const id = req.params.id
 
     return res.status(200).json({
+      success: true,
       message: "Se ha desactivado el usuario",
       data: await service.deactivate(Number(id))
     })

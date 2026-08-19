@@ -1,9 +1,11 @@
+import { success } from 'zod';
 import * as service from './inventory.service.js';
 
 export async function findAll(req, res, next) {
 
   try {
     return res.status(200).json({
+      success: true,
       message: "Inventarios encontrados correctamente",
       data: await service.findAll()
     });
@@ -20,6 +22,7 @@ export async function updateStock(req, res, next) {
     const { stock } = req.body;
 
     return res.status(200).json({
+      success: true,
       message: "Stock actualizado correctamente",
       data: await service.updateStock(Number(id), Number(stock))
     });
@@ -35,6 +38,7 @@ export async function updateMinStock(req, res, next) {
     const { minimumStock } = req.body;
 
     return res.status(200).json({
+      success: true,
       message: "Inventario actualizado con éxito",
       data: await service.updateMinStock(Number(id), Number(minimumStock))
     });

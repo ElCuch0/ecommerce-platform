@@ -1,3 +1,4 @@
+import { success } from "zod"
 import * as service from "./inventoryMovement.service.js"
 
 export async function create(req, res, next) {
@@ -5,6 +6,7 @@ export async function create(req, res, next) {
   try {
 
     return res.status(201).json({
+      success: true,
       message: "Movimiento de inventario registrado correctamente",
       data: await service.create(req.body, req.user.id)
     })
@@ -18,6 +20,7 @@ export async function findAll(req, res, next) {
   try {
 
     return res.status(200).json({
+      success: true,
       message: "Movimientos obtenidos correctamente",
       data: await service.findAll()
     })
@@ -33,6 +36,7 @@ export async function findById(req, res, next) {
     const { id } = req.params
 
     return res.status(200).json({
+      success: true,
       message: "Movimiento obtenido correctamente",
       data: await service.findById(Number(id))
     })
@@ -48,6 +52,7 @@ export async function findByInventoryId(req, res, next) {
     const { inventoryId } = req.params
 
     return res.status(200).json({
+      success: true,
       message: "Movimientos obtenidos correctamente",
       data: await service.findByInventoryId(Number(inventoryId))
     })

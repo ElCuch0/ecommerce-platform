@@ -48,7 +48,9 @@ export async function findByReference(reference) {
 }
 
 export async function create(data) {
-  return prisma.product.create({ data });
+  return prisma.product.create({
+    data
+  });
 }
 
 export async function update(id, data) {

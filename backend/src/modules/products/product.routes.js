@@ -15,6 +15,7 @@ router.get("/",
 
 router.get("/:id",
   authenticate,
+  validate(productIdSchema),
   controller.findById
 )
 
