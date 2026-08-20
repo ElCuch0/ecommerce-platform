@@ -35,10 +35,10 @@ export async function createStock(productId) {
   })
 }
 
-export async function updateStock(id, stock) {
+export async function updateStock(productId, stock) {
   return prisma.inventory.update({ 
     where: {
-      id: id
+      productId
     },
     data: {
       stock
@@ -49,10 +49,10 @@ export async function updateStock(id, stock) {
   })
 }
 
-export async function updateMinStock(id, minimumStock) {
+export async function updateMinStock(productId, minimumStock) {
   return prisma.inventory.update({
     where: {
-      id: id
+      productId
     },
     data: {
       minimumStock

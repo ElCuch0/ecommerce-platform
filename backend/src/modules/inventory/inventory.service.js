@@ -19,24 +19,24 @@ export async function findByProductId(productId) {
   return inventoryRepository.findByProductId(productId)
 }
 
-export async function updateStock(id, stock) {
+export async function updateStock(productId, stock) {
 
-  const inventory = await inventoryRepository.findById(id)
+  const product = await productRepository.findById(productId)
 
-  if (!inventory) {
+  if (!product) {
     throw new NotFoundError("El registro de inventario no existe")
   }
 
-  return inventoryRepository.updateStock(id, stock)
+  return inventoryRepository.updateStock(productId, stock)
 }
 
-export async function updateMinStock(id, minimumStock) {
+export async function updateMinStock(productId, minimumStock) {
 
-  const inventory = await inventoryRepository.findById(id)
+  const product = await productRepository.findById(productId)
 
-  if (!inventory) {
+  if (!product) {
     throw new NotFoundError("El registro de inventario no existe")
   }
 
-  return inventoryRepository.updateMinStock(id, minimumStock)
+  return inventoryRepository.updateMinStock(productId, minimumStock)
 }

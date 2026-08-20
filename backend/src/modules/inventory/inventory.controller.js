@@ -18,7 +18,7 @@ export async function findByProductId(req, res, next) {
 
   try {
 
-    const productId = req.params.id
+    const productId = req.params.productId
 
     return res.status(200).json({
       success: true,
@@ -34,13 +34,13 @@ export async function updateStock(req, res, next) {
 
   try { 
 
-    const { id } = req.params;
+    const { productId } = req.params;
     const { stock } = req.body;
 
     return res.status(200).json({
       success: true,
       message: "Stock actualizado correctamente",
-      data: await service.updateStock(Number(id), Number(stock))
+      data: await service.updateStock(Number(productId), Number(stock))
     });
   }catch (error) {
     next(error);
@@ -50,13 +50,13 @@ export async function updateStock(req, res, next) {
 export async function updateMinStock(req, res, next) {
 
   try { 
-    const { id } = req.params;
+    const { productId } = req.params;
     const { minimumStock } = req.body;
 
     return res.status(200).json({
       success: true,
       message: "Inventario actualizado con éxito",
-      data: await service.updateMinStock(Number(id), Number(minimumStock))
+      data: await service.updateMinStock(Number(productId), Number(minimumStock))
     });
   }catch (error) {
     next(error);

@@ -4,7 +4,7 @@ import { authenticate } from "../../shared/middleware/authenticate.middleware.js
 import { authorize } from "../../shared/middleware/authorize.middleware.js";
 import { ROLES } from "../../shared/constants/roles.js";
 import { validate } from "../../shared/middleware/validate.middleware.js";
-import { createinventoryMovementSchema } from "./inventoryMovement.validate.js";
+import { createInventoryMovementSchema } from "./inventoryMovement.validate.js";
 
 const router = Router();
 
@@ -14,7 +14,7 @@ router.post("/",
     ROLES.EMPLOYEE,
     ROLES.ADMIN
   ),
-  validate(createinventoryMovementSchema),
+  validate(createInventoryMovementSchema),
   controller.create)
 
 router.get("/",

@@ -1,6 +1,6 @@
 import { z } from "zod"
 
-export const createinventoryMovementSchema = z.object({
+export const createInventoryMovementSchema = z.object({
   body: z.object({
     inventoryId: z.coerce
       .number()

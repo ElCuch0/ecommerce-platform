@@ -67,7 +67,7 @@ export async function create({
         "El quantity no puede quedar en negativo"
       )
 
-      error.statusCode = 400
+      error.statusCode = 409
 
       throw error
     }

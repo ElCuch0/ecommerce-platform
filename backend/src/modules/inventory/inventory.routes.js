@@ -16,7 +16,7 @@ router.get("/",
   ),
   controller.findAll);
 
-router.get("/:id",
+router.get("/:productId",
   authenticate,
   authorize(
     ROLES.EMPLOYEE,
@@ -25,7 +25,7 @@ router.get("/:id",
   validate(inventoryIdSchema),
   controller.findByProductId)
 
-router.patch("/:id/stock",
+router.patch("/:productId/stock",
   authenticate,
   authorize(
     ROLES.EMPLOYEE,
@@ -34,7 +34,7 @@ router.patch("/:id/stock",
   validate(updateStockSchema),
   controller.updateStock);
 
-router.patch("/:id/min-stock",
+router.patch("/:productId/min-stock",
   authenticate,
   authorize(
     ROLES.EMPLOYEE,

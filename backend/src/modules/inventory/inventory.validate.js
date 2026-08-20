@@ -2,7 +2,7 @@ import { z } from "zod";
 
 export const updateStockSchema = z.object({
     params: z.object({
-        id: z.coerce
+        productId: z.coerce
             .number()
             .int()
             .positive("El id debe ser un número positivo")
@@ -18,7 +18,7 @@ export const updateStockSchema = z.object({
 
 export const updateMinStockSchema = z.object({
     params: z.object({
-        id: z.coerce
+        productId: z.coerce
             .number()
             .int()
             .positive("El id debe ser un número positivo")
@@ -34,7 +34,7 @@ export const updateMinStockSchema = z.object({
 
 export const inventoryIdSchema = z.object({
     params: z.object({
-        id: z.coerce
+        productId: z.coerce
             .number()
             .int()
             .positive()

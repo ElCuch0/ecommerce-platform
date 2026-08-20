@@ -1,14 +1,15 @@
-import { success } from "zod"
 import * as service from "./inventoryMovement.service.js"
 
 export async function create(req, res, next) {
 
   try {
 
+    const userId = req.user.id
+
     return res.status(201).json({
       success: true,
       message: "Movimiento de inventario registrado correctamente",
-      data: await service.create(req.body, req.user.id)
+      data: await service.create(req.body, Number(userId))
     })
   }catch (error) {
     next(error)
