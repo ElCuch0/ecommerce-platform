@@ -1,3 +1,4 @@
+import { Param } from "@prisma/client/runtime/library"
 import { z } from "zod"
 
 export const createInventoryMovementSchema = z.object({
@@ -21,5 +22,23 @@ export const createInventoryMovementSchema = z.object({
       .string()
       .min(3, "El motivo debe contener al menos 3 caracteres")
       .max(255)
+  })
+})
+
+export const inventoryMovementIdSchema = z.object({
+  params: z.object({
+    id: z.coerce
+      .number()
+      .int()
+      .positive()
+  })
+})
+
+export const inventoryIdSchema = z.object({
+  params: z.object({
+    inventoryId: z.coerce
+      .number()
+      .int()
+      .positive()
   })
 })

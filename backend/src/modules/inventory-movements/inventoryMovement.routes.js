@@ -4,7 +4,7 @@ import { authenticate } from "../../shared/middleware/authenticate.middleware.js
 import { authorize } from "../../shared/middleware/authorize.middleware.js";
 import { ROLES } from "../../shared/constants/roles.js";
 import { validate } from "../../shared/middleware/validate.middleware.js";
-import { createInventoryMovementSchema } from "./inventoryMovement.validate.js";
+import { createInventoryMovementSchema, inventoryIdSchema, inventoryMovementIdSchema } from "./inventoryMovement.validate.js";
 
 const router = Router();
 
@@ -31,6 +31,7 @@ router.get("/:id",
     ROLES.EMPLOYEE,
     ROLES.ADMIN
   ),
+  validate(inventoryMovementIdSchema),
   controller.findById)
 
 router.get("/inventory/:inventoryId",
@@ -39,6 +40,7 @@ router.get("/inventory/:inventoryId",
     ROLES.EMPLOYEE,
     ROLES.ADMIN
   ),
+  validate(inventoryIdSchema),
   controller.findByInventoryId
 )
 
