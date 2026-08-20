@@ -33,6 +33,11 @@ export async function findById(id) {
           id: true,
           isActive: true
         }
+      },
+      inventory: {
+        select: {
+          stock: true
+        }
       }
     }
   });

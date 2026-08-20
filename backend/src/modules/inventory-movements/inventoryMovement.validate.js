@@ -1,4 +1,3 @@
-import { Param } from "@prisma/client/runtime/library"
 import { z } from "zod"
 
 export const createInventoryMovementSchema = z.object({

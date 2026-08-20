@@ -21,6 +21,10 @@ export async function addToCart(userId, data) {
     throw new ConflictError("No se pueden agregar productos con la categoría desactivada")
   }
 
+  if (product.inventory.stock < quantity) {
+    throw new ConflictError("La cantidad no puede superar el stock")
+  }
+
   let cart = await cartRepository.findByUser(userId)
 
   if (!cart) {
@@ -40,17 +44,25 @@ export async function addToCart(userId, data) {
 
   if (existingItem) {
 
-    return cartRepository.updateItemQuantity(
+    await cartRepository.updateItemQuantity(
       existingItem.id,
       finalQuantity
     )
+
+    cart = await cartRepository.findByUser(userId)
+
+    return cart
   }
 
-  return cartRepository.createItem(
+  await cartRepository.createItem(
     cart.id,
     productId,
     quantity
   )
+
+  cart = await cartRepository.findByUser(userId)
+
+  return cart
 
 }
 
