@@ -56,6 +56,33 @@ export async function findByOrderId(orderId) {
   })
 }
 
+export async function findByUserId(userId) {
+  return prisma.invoice.findMany({
+    where: {
+      order: {
+        userId
+      }
+    },
+    include: {
+      order: {
+        include: {
+          items: {
+            include: {
+              product: {
+                select: {
+                  id: true,
+                  name: true,
+                  reference: true
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  })
+}
+
 export async function findAll() {
   return await prisma.invoice.findMany({
     include: {

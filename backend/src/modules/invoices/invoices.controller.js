@@ -16,6 +16,21 @@ export async function getMyInvoice(req, res, next) {
   }
 }
 
+export async function getMyInvoices(req, res, next) {
+
+  try {
+
+    const userId = req.user.id
+
+    return res.status(200).json({
+      success: true,
+      data: await service.getMyInvoices(Number(userId))
+    })
+  }catch (error) {
+    next(error)
+  }
+}
+
 export async function getAll(req, res, next) {
 
   try {

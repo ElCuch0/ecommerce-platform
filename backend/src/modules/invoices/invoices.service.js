@@ -1,7 +1,5 @@
 import * as invoiceRepository from "./invoices.repository.js"
-import * as orderRepository from "../orders/order.repository.js"
 import { NotFoundError } from "../../shared/errors/NotFoundError.js"
-import { ConflictError } from "../../shared/errors/ConflictError.js"
 
 export async function getMyInvoice(userId, invoiceId) {
 
@@ -16,6 +14,11 @@ export async function getMyInvoice(userId, invoiceId) {
   }
 
   return invoice
+}
+
+export async function getMyInvoices(userId) {
+  
+  return invoiceRepository.findByUserId(userId)
 }
 
 export async function getAllInvoices() {

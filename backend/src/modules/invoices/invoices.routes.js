@@ -17,6 +17,10 @@ router.get("/all",
   controller.getAll
 )
 
+router.get("/",
+  controller.getMyInvoices
+)
+
 router.get("/:id",
   validate(invoiceIdSchema),
   controller.getMyInvoice

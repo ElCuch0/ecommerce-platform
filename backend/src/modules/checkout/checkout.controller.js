@@ -6,7 +6,7 @@ export async function checkout(req, res, next) {
 
     const userId = req.user.id
 
-    return res.status(201).json({
+    return res.status(200).json({
       success: true,
       message: "Compra realizada con éxito",
       data: await service.checkout(Number(userId))
