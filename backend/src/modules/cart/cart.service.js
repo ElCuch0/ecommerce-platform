@@ -111,12 +111,12 @@ export async function updateQuantity(userId, productId, quantity) {
     throw new ConflictError("La cantidad solicitada supera el stock disponible")
   }
 
-  const itemId = await cartRepository.findCartItem(cart.id, productId)
+  const itemId = item.id
 
-  return cartRepository.updateItemQuantity(itemId.id, quantity)
+  return cartRepository.updateItemQuantity(itemId, quantity)
 }
 
-export async function removeFromCart(userId, itemId) {
+export async function removeFromCart(userId, productId) {
 
   const cart = await cartRepository.findByUser(userId)
 
@@ -125,12 +125,14 @@ export async function removeFromCart(userId, itemId) {
   }
 
   const item = cart.items.find(
-    item => item.id === itemId
+    item => item.productId === productId
   )
 
   if (!item) {
     throw new NotFoundError("El producto no está en el carrito")
   }
+
+  const itemId = item.id
 
   return cartRepository.deleteItem(itemId)
 }

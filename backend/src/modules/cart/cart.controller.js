@@ -51,13 +51,12 @@ export async function removeFromCart(req, res, next) {
 
   try {
 
-    const itemId = req.params.id
-
-    await service.removeFromCart(req.user.id, Number(itemId))
+    const productId = req.params.id
 
     return res.status(200).json({
       success: true,
-      message: "Producto eliminado del carrito"
+      message: "Producto eliminado del carrito",
+      data: await service.removeFromCart(req.user.id, Number(productId))
     })
   }catch (error) {
     next(error)
