@@ -1,10 +1,8 @@
 import {Router} from "express";
 import * as controller from "./cart.controller.js";
 import { validate } from "../../shared/middleware/validate.middleware.js";
-import { createCartItemSchema, updateCartItemSchema } from "./cart.validate.js";
+import { createCartItemSchema, updateCartItemSchema, productIdSchema } from "./cart.validate.js";
 import { authenticate } from "../../shared/middleware/authenticate.middleware.js";
-import { authorize } from "../../shared/middleware/authorize.middleware.js";
-import { ROLES } from "../../shared/constants/roles.js";
 
 const router = Router();
 
@@ -24,6 +22,7 @@ router.patch("/:id",
 )
 
 router.delete("/:id",
+  validate(productIdSchema),
   controller.removeFromCart
 );
 

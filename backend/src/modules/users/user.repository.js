@@ -42,6 +42,11 @@ export async function findById(id) {
       phone: true,
       isActive: true,
       roleId: true,
+      role: {
+        select: {
+          name: true
+        }
+      },
       createdAt: true,
       updatedAt: true
     }

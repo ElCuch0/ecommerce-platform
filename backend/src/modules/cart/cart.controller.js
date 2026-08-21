@@ -35,12 +35,12 @@ export async function updateQuantity(req, res, next) {
   
   try {
 
-    const itemId = req.params.id
+    const productId = req.params.id
 
     return res.status(200).json({
       success: true,
       message: "Cantidad actualizada correctamente",
-      data: await service.updateQuantity(req.user.id, Number(itemId), req.body.quantity)
+      data: await service.updateQuantity(req.user.id, Number(productId), req.body.quantity)
     })
   }catch (error) {
     next(error)

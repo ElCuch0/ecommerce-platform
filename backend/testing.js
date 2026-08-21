@@ -1,11 +1,9 @@
-import pkg from "@prisma/client";
-const { PrismaClient } = pkg;
+import prisma from "./src/infrastructure/database/prisma.js";
 
-const prisma = new PrismaClient();
+const products = await prisma.product.deleteMany({
+    where: {
+        inventory: null
+    }
+})
 
-async function test() {
-    const roles = await prisma.role.findMany();
-    console.log(roles);
-}
-
-test();
+console.log("Se eliminaron: ", products)

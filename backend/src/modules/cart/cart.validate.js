@@ -31,3 +31,12 @@ export const updateCartItemSchema = z.object({
             .positive("El id debe ser mayor que 0")
     })
 });
+
+export const productIdSchema = z.object({
+    params: z.object({
+        id: z.coerce
+            .number()
+            .int()
+            .positive()
+    })
+})

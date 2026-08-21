@@ -44,10 +44,10 @@ export async function createItem(cartId, productId, quantity) {
   })
 }
 
-export async function updateItemQuantity(itemId, quantity) {
+export async function updateItemQuantity(id, quantity) {
   return prisma.cartItem.update({
     where: {
-      id: itemId
+      id
     },
     data: {
       quantity
