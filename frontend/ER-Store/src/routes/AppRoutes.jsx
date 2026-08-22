@@ -14,6 +14,7 @@ import DeleteProduct from "../pages/admin/DeleteProduct.jsx";
 import Invoice from "../pages/admin/Invoice.jsx";
 import Reports from "../pages/admin/Reports.jsx";
 import Settings from "../pages/admin/Settings.jsx";
+import ProtectedRoute from "../components/common/ProtectedRoute.jsx";
 
 export function AppRoutes() {
   return (
@@ -27,7 +28,7 @@ export function AppRoutes() {
         <Route path="/register" element={<RegisterPage />} />
 
         {/* Panel administrativo (independiente del layout de la tienda) */}
-        <Route path="/admin" element={<AdminLayout />}>
+        <Route path="/admin" element={<ProtectedRoute allowedRoles={["ADMIN"]}><AdminLayout /></ProtectedRoute>}>
           <Route index element={<DashboardHome />} />
           <Route path="inventory" element={<InventoryTable />} />
           <Route path="add-product" element={<AddProduct />} />
