@@ -37,7 +37,7 @@ export async function activate(req, res, next) {
 
     const id = req.params.id
 
-    return res.status(201).json({
+    return res.status(200).json({
       success: true,
       message: "Se ha activado el usuario",
       data: await service.activate(Number(id))
