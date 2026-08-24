@@ -9,12 +9,10 @@ import { ROLES } from "../../shared/constants/roles.js";
 const router = Router();
 
 router.get("/",
-  authenticate,
   controller.findAll
 )
 
 router.get("/:id",
-  authenticate,
   validate(productIdSchema),
   controller.findById
 )

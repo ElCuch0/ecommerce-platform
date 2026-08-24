@@ -11,6 +11,14 @@ export async function findAll() {
       category: {
         isActive: true
       }
+    },
+    include: {
+      inventory: {
+        select: {
+          stock: true,
+          minimumStock: true
+        }
+      }
     }
   });
 }

@@ -5,24 +5,30 @@ export async function apiRequest(
   options = {}
 ) {
 
+  const { requiresAuth = true, ...fetchOptions } = options
   const token = localStorage.getItem("accessToken")
 
   const response = await fetch(
     `${API_URL}${endpoint}`,
     {
 
-      ...options,
+      ...fetchOptions,
       headers: {
         "Content-Type": "application/json",
-        ...(token && {
+        ...(requiresAuth && token && {
           Authorization: `Bearer ${token}`
         }),
-        ...options.headers
+        ...fetchOptions.headers
       }
     }
   )
 
+  console.log("STATUS: ", response.status)
+  console.log("OK: ", response.ok)
+
   const data = await response.json()
+
+  console.log("RESPONSE DATA: ", data)
 
   if (!response.ok) {
     throw {
@@ -30,6 +36,11 @@ export async function apiRequest(
       ...data
     }
   }
+
+  console.log("REQUEST:", {
+    url: `${API_URL}${endpoint}`,
+    method: options.method || "GET",
+});
 
   return data
 }

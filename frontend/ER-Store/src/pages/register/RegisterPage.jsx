@@ -1,29 +1,32 @@
 import { HeaderNav } from "../../components/HeaderNav.jsx";
 import { ErFooter } from "../../components/ErFooter.jsx";
-import { useAuth } from "../../context/useAuth.js";
 import { useState } from "react";
+import { useNavigate } from "react-router-dom";
+import { register } from "../../api/auth.api.js";
 import "./register-page.css";
 
 export function RegisterPage() {
-  const { register } = useAuth();
-  const [error, setError] = useState("");
+  const navigate = useNavigate();
   const [isSubmitting, setIsSubmitting] = useState(false);
+  const [error, setError] = useState("");
 
-  async function handleSubmit(event) {
+  const handleSubmit = async (event) => {
     event.preventDefault();
     setError("");
     setIsSubmitting(true);
+
     const formData = new FormData(event.currentTarget);
+    const credentials = Object.fromEntries(formData.entries());
 
     try {
-      await register(Object.fromEntries(formData.entries()));
-      window.location.assign("/");
-    } catch (submitError) {
-      setError(submitError.message);
+      await register(credentials);
+      navigate("/", { state: { registrationSuccess: true } });
+    } catch (requestError) {
+      setError(requestError.message || "No fue posible crear la cuenta");
     } finally {
       setIsSubmitting(false);
     }
-  }
+  };
 
   return(
     <>
