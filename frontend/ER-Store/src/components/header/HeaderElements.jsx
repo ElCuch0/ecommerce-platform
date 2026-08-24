@@ -2,10 +2,12 @@ import React from "react";
 import "./header-elements.css"
 import { IconEr, IconSearch, IconAccount, IconCart } from '../assets/Icons.jsx'
 import { useAuth } from "../../context/AuthContext.jsx";
+import { useCart } from "../../context/cartContext.jsx";
 
 export function HeaderElements ({ onOpenSearch, onOpenLogin, onOpenCart }) {
 
     const { user, logout } = useAuth()
+    const { totalItems } = useCart()
 
     return(
         <nav className = "header-nav-container">
@@ -28,7 +30,7 @@ export function HeaderElements ({ onOpenSearch, onOpenLogin, onOpenCart }) {
                 )}
                 <button type="button" className="nav-link" onClick={onOpenCart} aria-label="Abrir carrito">
                     <IconCart />
-                    <span className="cart-badge">0</span>
+                    <span className="cart-badge">{totalItems}</span>
                 </button>
             </div>
         </nav>

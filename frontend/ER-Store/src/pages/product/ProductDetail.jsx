@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react'
 import { useNavigate, useParams } from 'react-router-dom'
 import { products } from '../../data.jsx'
-import { addToCart } from '../../services/cartService.js'
+import { useCart } from '../../context/cartContext.jsx'
 import './product-detail.css'
 
 export function ProductDetail() {
@@ -9,6 +9,7 @@ export function ProductDetail() {
     const navigate = useNavigate()
     const [product, setProduct] = useState(null)
     const [message, setMessage] = useState('')
+    const { addItem } = useCart()
 
     useEffect(() => {
         const productId = Number(id)
@@ -29,13 +30,13 @@ export function ProductDetail() {
         )
     }
 
-    const handleAddToCart = () => {
-        addToCart(product)
+    const handleAddToCart = async () => {
+        await addItem(product.id)
         setMessage('Producto agregado al carrito')
     }
 
-    const handleBuyNow = () => {
-        addToCart(product)
+    const handleBuyNow = async () => {
+        await addItem(product.id)
         navigate('/checkout')
     }
 

@@ -1,9 +1,43 @@
 import { useEffect, useState } from 'react'
+import { useCart } from "../../context/CartContext.jsx"
+import { processCheckout } from '../../api/checkout.api.js'
 import { useNavigate } from 'react-router-dom'
 import { CartGrid } from '../../components/grids/CartGrid.jsx'
 import './checkout-page.css'
 
 export function CheckoutPage() {
+
+    const { cart, refreshCart } = useCart()
+    const [ loading, setLoading ] = useState(true)
+    const [ error, setError ] = useState(null)
+    const [ success, setSuccess ] = useState(false)
+
+    const handleCheckout = async () => {
+        try {
+            setLoading(true)
+            setError(null)
+
+            await processCheckout()
+
+            setSuccess(true)
+
+            await refreshCart()
+        }catch (error) {
+            setError(error.message || "Error al procesar la compra")
+        } finally {
+            setLoading(false)
+        }
+    }
+
+    if (success) {
+        return (
+            <div>
+                <h2>!Compra realizada con éxito</h2>
+                <p>Tu orden y factura han sido generadas correctamente.</p>
+            </div>
+        )
+    }
+
     const [items, setItems] = useState([])
     const [form, setForm] = useState({
         name: '',

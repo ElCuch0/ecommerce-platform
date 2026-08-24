@@ -3,8 +3,10 @@ import { ModalContext } from '../../context/ModalContext.jsx'
 import './cart-modal.css'
 import { IconClose } from '../assets/Icons.jsx'
 import { CartGrid } from '../grids/CartGrid.jsx'
+import { useCart } from '../../context/cartContext.jsx'
 
 export function CartModal({ isOpen, onClose, items = [] }) {
+    const { updateQuantity, removeItem } = useCart()
     const total = items.reduce((sum, item) => sum + (item.price || 0) * (item.quantity || 1), 0)
     const navigate = useNavigate()
 
@@ -25,7 +27,11 @@ export function CartModal({ isOpen, onClose, items = [] }) {
                 </header>
 
                 <div className="modal-body-cart">
-                    <CartGrid items={items} />
+                    <CartGrid
+                        items={items}
+                        onUpdateQuantity={updateQuantity}
+                        onRemove={removeItem}
+                    />
                 </div>
 
                 <footer className="modal-cart-footer">

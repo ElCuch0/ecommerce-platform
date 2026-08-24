@@ -1,7 +1,8 @@
 import { apiRequest } from "./client.js";
 
-export const checkout = () => {
+export const processCheckout = () => {
   return apiRequest("/checkout", {
-    method: "POST"
+    method: "POST",
+    requiresAuth: true
   })
 }

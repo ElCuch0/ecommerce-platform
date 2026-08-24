@@ -10,10 +10,10 @@ export async function getCart(){
 export async function addToCart({ productId, quantity = 1 }){
   return apiRequest("/cart", {
     method: "POST",
-    body: {
+    body: JSON.stringify({
       productId,
       quantity
-    },
+    }),
     requiresAuth: true
   })
 }
@@ -21,9 +21,9 @@ export async function addToCart({ productId, quantity = 1 }){
 export async function updateCartItem(productId, quantity){
   return apiRequest(`/cart/${productId}`, {
     method: "PATCH",
-    body: {
+    body: JSON.stringify({
       quantity
-    },
+    }),
     requiresAuth: true
   })
 }
