@@ -1,11 +1,45 @@
 import { ModalContext } from '../../context/ModalContext.jsx'
+import { useAuth } from '../../context/AuthContext.jsx'
+import { useNavigate } from 'react-router-dom'
 import './login-modal.css'
 import { IconClose } from '../assets/Icons.jsx'
+import { useState } from 'react'
 
 export function LoginModal({ isOpen, onClose }) {
-    const handleSubmit = (event) => {
+
+    const navigate = useNavigate()
+    
+    const { login, loading } = useAuth()
+
+    const [email, setEmail] = useState("")
+    const [password, setPassword] = useState("")
+    const [error, setError] = useState("")
+
+    const handleSubmit = async (event) => {
+
         event.preventDefault()
-        onClose()
+
+        setError("")
+
+        try {
+
+            await login({
+                email,
+                password
+            })
+
+            //Redirección a la página
+            navigate("/")
+
+            onClose()
+
+        }catch (error) {
+
+            setError(
+                error.message ||
+                "Credenciales incorrectas"
+            )
+        }
     }
 
     return (
@@ -29,7 +63,10 @@ export function LoginModal({ isOpen, onClose }) {
                         <label htmlFor="loginEmail">Correo electrónico</label>
                         <input
                             type="email"
+                            value={email}
+                            onChange={(e) => setEmail(e.target.value)}
                             id="loginEmail"
+                            name="email"
                             className="form-input"
                             placeholder="tu@email.com"
                             required
@@ -40,7 +77,10 @@ export function LoginModal({ isOpen, onClose }) {
                         <label htmlFor="loginPassword">Contraseña</label>
                         <input
                             type="password"
+                            value={password}
+                            onChange={(e) => setPassword(e.target.value)}
                             id="loginPassword"
+                            name="password"
                             className="form-input"
                             placeholder="••••••••"
                             required
@@ -48,9 +88,13 @@ export function LoginModal({ isOpen, onClose }) {
                     </div>
                 </div>
 
+                {error && (
+                    <p>{error}</p>
+                )}
+
                 <footer className="modal-footer">
-                    <button type="submit" className="btn-register" style={{ width: '100%' }}>
-                        Entrar
+                    <button type="submit" className="btn-register" style={{ width: '100%' }} disabled={loading}>
+                        {loading ? 'Ingresando...' : 'Iniciar Sesión'}
                     </button>
 
                     <a href="/forgot-password" className="btn-link">

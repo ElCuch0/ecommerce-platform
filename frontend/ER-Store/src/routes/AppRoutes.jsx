@@ -27,7 +27,7 @@ export function AppRoutes() {
         <Route path="/register" element={<RegisterPage />} />
 
         {/* Panel administrativo (independiente del layout de la tienda) */}
-        <Route path="/admin" element={<AdminLayout />}>
+        {/*<Route path="/admin"><AdminLayout />
           <Route index element={<DashboardHome />} />
           <Route path="inventory" element={<InventoryTable />} />
           <Route path="add-product" element={<AddProduct />} />
@@ -36,7 +36,7 @@ export function AppRoutes() {
           <Route path="invoice" element={<Invoice />} />
           <Route path="reports" element={<Reports />} />
           <Route path="config" element={<Settings />} />
-        </Route>
+        </Route>*/}
       </Routes>
     </BrowserRouter>
   );

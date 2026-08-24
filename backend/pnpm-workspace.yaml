@@ -1,0 +1,9 @@
+allowBuilds:
+  '@prisma/client': true
+  '@prisma/engines': true
+  bcrypt: true
+  prisma: true
+overrides:
+  glob: "^11.1.0"
+  rimraf: "^6.0.1"
+  inflight: "npm:lru-cache@^11.0.0"
