@@ -1,30 +1,36 @@
 import { apiRequest } from "./client.js";
 
-export const getCart = () => {
-  return apiRequest("/cart")
+export async function getCart(){
+  return apiRequest("/cart", {
+    method: "GET",
+    requiresAuth: true
+  })
 }
 
-export const addToCart = (productId, quantity) => {
+export async function addToCart({ productId, quantity = 1 }){
   return apiRequest("/cart", {
     method: "POST",
-    body: JSON.stringify({
+    body: {
       productId,
       quantity
-    })
+    },
+    requiresAuth: true
   })
 }
 
-export const updateCartItem = (productId, quantity) => {
+export async function updateCartItem(productId, quantity){
   return apiRequest(`/cart/${productId}`, {
     method: "PATCH",
-    body: JSON.stringify({
+    body: {
       quantity
-    })
+    },
+    requiresAuth: true
   })
 }
 
-export const removeFromCart = (productId) => {
+export async function removeFromCart(productId){
   return apiRequest(`/cart/${productId}`, {
-    method: "DELETE"
+    method: "DELETE",
+    requiresAuth: true
   })
 }

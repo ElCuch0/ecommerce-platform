@@ -9,12 +9,10 @@ import { categorySchema, categoryIdSchema, categoryUpdateSchema } from "./catego
 const router = Router();
 
 router.get("/",
-  authenticate,
   controller.findAll
 )
 
 router.get("/:id",
-  authenticate,
   validate(categoryIdSchema),
   controller.findById
 )
