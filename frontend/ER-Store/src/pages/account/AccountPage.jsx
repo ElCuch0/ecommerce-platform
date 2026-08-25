@@ -37,13 +37,18 @@ function RequestState({ loading, error, emptyMessage, hasData, children }) {
 }
 
 export function AccountPage() {
-    const { user } = useAuth()
+    const { user, logout } = useAuth()
     const navigate = useNavigate()
     const [activeTab, setActiveTab] = useState('profile')
     const [orders, setOrders] = useState([])
     const [invoices, setInvoices] = useState([])
     const [loading, setLoading] = useState(true)
     const [error, setError] = useState(null)
+
+    const handleLogout = () => {
+        logout()
+        navigate('/')
+    }
 
     useEffect(() => {
         let cancelled = false
@@ -98,7 +103,10 @@ export function AccountPage() {
                         <h1>Hola, {user.name || 'cliente'}</h1>
                         <p>Administra tus datos y consulta el historial de tus compras.</p>
                     </div>
-                    <button type="button" className="account-back-button" onClick={() => navigate('/')}>Volver a la tienda</button>
+                    <div className="account-header-actions">
+                        <button type="button" className="account-back-button" onClick={() => navigate('/')}>Volver a la tienda</button>
+                        <button type="button" className="account-logout-button" onClick={handleLogout}>Cerrar sesión</button>
+                    </div>
                 </header>
 
                 <div className="account-layout">
