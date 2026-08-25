@@ -1,0 +1,481 @@
+[33mcommit 18f514ce250190d3853b6837366f0c126cd21880[m[33m ([m[1;36mHEAD[m[33m -> [m[1;32mIntegration[m[33m, [m[1;31morigin/Integration[m[33m)[m
+Author: ElCuchuko <128649696+ElCuch0@users.noreply.github.com>
+Date:   Mon Aug 24 23:24:16 2026 -0500
+
+    Feature: adminProducts
+
+[33mcommit 68484da28f0a88f28f2f9fa630a333339b70b439[m
+Author: ElCuchuko <128649696+ElCuch0@users.noreply.github.com>
+Date:   Mon Aug 24 21:42:09 2026 -0500
+
+    Feature: order details
+
+[33mcommit 9260df3609a92aa046d215e306f3c0908b48b571[m
+Author: ElCuchuko <128649696+ElCuch0@users.noreply.github.com>
+Date:   Mon Aug 24 21:31:09 2026 -0500
+
+    Feature: Logout
+
+[33mcommit 3700f59bf513920b1f87acbc48075e2551cca3fa[m
+Author: ElCuchuko <128649696+ElCuch0@users.noreply.github.com>
+Date:   Mon Aug 24 21:20:17 2026 -0500
+
+    Feature: Get orders/invoices
+
+[33mcommit ba02bfaeca5258e14723eb521868a89781db0568[m
+Author: ElCuchuko <128649696+ElCuch0@users.noreply.github.com>
+Date:   Mon Aug 24 17:11:27 2026 -0500
+
+    Feature: Cart
+
+[33mcommit 04f37d9a78acfd4e10798efa20f3fa835f067241[m
+Author: ElCuchuko <128649696+ElCuch0@users.noreply.github.com>
+Date:   Mon Aug 24 00:30:56 2026 -0500
+
+    Feature: remember user token
+
+[33mcommit b3e0bc76ad737493f26d84a48005093ec20a70f1[m[33m ([m[1;31morigin/API[m[33m, [m[1;32mAPI[m[33m)[m
+Author: ElCuchuko <128649696+ElCuch0@users.noreply.github.com>
+Date:   Sun Aug 23 23:53:08 2026 -0500
+
+    feat: add new feature
+
+[33mcommit 7381d6bab633a2f4d3d5da345d1f2fd3f025ed4f[m
+Author: ElCuchuko <128649696+ElCuch0@users.noreply.github.com>
+Date:   Sat Aug 22 01:47:39 2026 -0500
+
+    Create client CORS
+
+[33mcommit 726f4316507caa17dfb874bc7181a4873a389762[m
+Author: ElCuchuko <128649696+ElCuch0@users.noreply.github.com>
+Date:   Fri Aug 21 21:08:46 2026 -0500
+
+    Fixed users module
+
+[33mcommit 2807567dc9d7539e7550180d65bab801030954f2[m
+Author: ElCuchuko <128649696+ElCuch0@users.noreply.github.com>
+Date:   Fri Aug 21 20:42:24 2026 -0500
+
+    remove private test
+
+[33mcommit faa89e48b59c4c0172d52e35cc6182eaff7d8ba2[m
+Author: ElCuchuko <128649696+ElCuch0@users.noreply.github.com>
+Date:   Fri Aug 21 18:20:42 2026 -0500
+
+    Fixed checkout and adding get all invoces by user on invoices modules
+
+[33mcommit 9526955438c1d4d0725880c312d2769287bbcc19[m
+Author: ElCuchuko <128649696+ElCuch0@users.noreply.github.com>
+Date:   Thu Aug 20 20:53:16 2026 -0500
+
+    Fixed delete module cart
+
+[33mcommit 670d7dced82d33ef49fef439968520591b055e2f[m
+Author: ElCuchuko <128649696+ElCuch0@users.noreply.github.com>
+Date:   Thu Aug 20 20:39:01 2026 -0500
+
+    Fixed update module cart
+
+[33mcommit 14c74c1fb699296463568b88df8f2dcba34acad1[m
+Author: ElCuchuko <128649696+ElCuch0@users.noreply.github.com>
+Date:   Thu Aug 20 17:15:49 2026 -0500
+
+    Fixed create Cart
+
+[33mcommit d03490b7978b43a0a9a9271029b86b5cd03f933c[m
+Author: ElCuchuko <128649696+ElCuch0@users.noreply.github.com>
+Date:   Thu Aug 20 12:54:23 2026 -0500
+
+    Adding zod verification on module inventoryMovement
+
+[33mcommit 8beb5161bdf0c478f5786bc451e9fd8213259ca3[m
+Author: ElCuchuko <128649696+ElCuch0@users.noreply.github.com>
+Date:   Thu Aug 20 12:15:26 2026 -0500
+
+    fixed inventory module
+
+[33mcommit 8cf6b91a79c13db2b8e9257cd0fa4d38c2869aba[m
+Author: ElCuchuko <128649696+ElCuch0@users.noreply.github.com>
+Date:   Wed Aug 19 18:19:17 2026 -0500
+
+    Fixed module inventory
+
+[33mcommit 9ce96d59913323c18369ab4136c409f524874150[m
+Author: ElCuchuko <128649696+ElCuch0@users.noreply.github.com>
+Date:   Wed Aug 19 14:53:17 2026 -0500
+
+    Create cors for integration
+
+[33mcommit f37f551c7bc5d3cb13aad13533624365436e5429[m
+Author: ElCuchuko <128649696+ElCuch0@users.noreply.github.com>
+Date:   Tue Aug 18 20:36:54 2026 -0500
+
+    Fixed module products
+
+[33mcommit c41284ccb5cbab6449471b78140d81877c4dff87[m
+Author: ElCuchuko <128649696+ElCuch0@users.noreply.github.com>
+Date:   Sat Aug 15 21:45:59 2026 -0500
+
+    Fixing invoice, orders and user modules
+
+[33mcommit 6b617d33ba38ccf75a0dc10ae99972517937c3b7[m
+Author: ElCuchuko <128649696+ElCuch0@users.noreply.github.com>
+Date:   Sat Aug 15 20:15:06 2026 -0500
+
+    Adding testing and fixing update category endpoint
+
+[33mcommit f33f7483993ec90d7456f97907f1a30ecbe8f701[m
+Author: ElCuchuko <128649696+ElCuch0@users.noreply.github.com>
+Date:   Fri Aug 14 00:01:13 2026 -0500
+
+    Enpoints module invoices
+
+[33mcommit b5392b4861e35307683f51d13d3413e709238c34[m
+Author: ElCuchuko <128649696+ElCuch0@users.noreply.github.com>
+Date:   Thu Aug 13 21:40:30 2026 -0500
+
+    Endpoints modules checkout and orders
+
+[33mcommit dc239bc698b39c863b79c5cb2485dabb51cc6853[m
+Author: ElCuchuko <128649696+ElCuch0@users.noreply.github.com>
+Date:   Wed Aug 12 22:30:49 2026 -0500
+
+    Create modules order and checkout
+
+[33mcommit 9abf856a2195e61340f4cc367cfe9761aa01358a[m
+Author: ElCuchuko <128649696+ElCuch0@users.noreply.github.com>
+Date:   Tue Aug 11 20:32:14 2026 -0500
+
+    Enpoints cart module
+
+[33mcommit 7ac648c2689708255ab02ef7f66bcaa8ea5ddf9e[m
+Author: ElCuchuko <128649696+ElCuch0@users.noreply.github.com>
+Date:   Tue Aug 11 11:41:54 2026 -0500
+
+    Fixing categories logic on user's module
+
+[33mcommit 954a6704ce7c15e23b098b0bd6da002388319d86[m
+Author: ElCuchuko <128649696+ElCuch0@users.noreply.github.com>
+Date:   Tue Aug 11 11:16:09 2026 -0500
+
+    módulo categories funcional
+
+[33mcommit 44a0d08d75181ba3c5a245e75839b75204e7362e[m
+Author: ElCuchuko <128649696+ElCuch0@users.noreply.github.com>
+Date:   Tue Aug 11 10:11:23 2026 -0500
+
+    endpoint activate products
+
+[33mcommit 06ea97650ed370aefce8ce57e7fc78b250d6cab5[m
+Author: ElCuchuko <128649696+ElCuch0@users.noreply.github.com>
+Date:   Mon Aug 10 19:58:22 2026 -0500
+
+    endpoints CRUD products
+
+[33mcommit 4056b7ee336e7a43248acdc5001decbf3273d42b[m
+Author: ElCuchuko <128649696+ElCuch0@users.noreply.github.com>
+Date:   Mon Aug 10 18:14:06 2026 -0500
+
+    Módulo de inventoryMovements funcional
+
+[33mcommit 5a3b67d6654025023213a2790ccaaf9a66efc107[m
+Author: ElCuchuko <128649696+ElCuch0@users.noreply.github.com>
+Date:   Sun Aug 9 20:59:38 2026 -0500
+
+    Endpoints del módulo de inventory creados
+
+[33mcommit 04ba07e565cc97e06163005b4e919607fabca64f[m
+Author: ElCuchuko <128649696+ElCuch0@users.noreply.github.com>
+Date:   Sat Aug 8 23:28:39 2026 -0500
+
+    Creación endpoint post categories
+
+[33mcommit d9cd81f52218aae15c5d528752e25986df54b09d[m
+Author: ElCuchuko <128649696+ElCuch0@users.noreply.github.com>
+Date:   Sat Aug 8 21:43:28 2026 -0500
+
+    Implementación endpoints de inventory
+
+[33mcommit 8d070e646b945ba056c1dd8df855c8ada511c2d7[m
+Author: ElCuchuko <128649696+ElCuch0@users.noreply.github.com>
+Date:   Sat Aug 8 20:12:16 2026 -0500
+
+    Creación endpoint /me
+
+[33mcommit c1a16c3c79be861266cfc3958287de1812d9051a[m
+Author: ElCuchuko <128649696+ElCuch0@users.noreply.github.com>
+Date:   Sat Aug 8 18:36:38 2026 -0500
+
+    Fixing manejo de errores http
+
+[33mcommit 1d5a981831ee575b9ef729ce5051a6fc3926db35[m
+Author: ElCuchuko <128649696+ElCuch0@users.noreply.github.com>
+Date:   Fri Aug 7 21:02:19 2026 -0500
+
+    Endpoints de register y login funcionales
+
+[33mcommit 58b5df128ec7fd00e3c65bf53e77b5d937ec07cc[m
+Author: ElCuchuko <128649696+ElCuch0@users.noreply.github.com>
+Date:   Fri Aug 7 12:55:24 2026 -0500
+
+    Creación módulo users
+
+[33mcommit 675576a711c37a8a418b448bac102df2b558f0ec[m
+Author: ElCuchuko <128649696+ElCuch0@users.noreply.github.com>
+Date:   Tue Aug 4 19:56:04 2026 -0500
+
+    Agregación funciones patch en el módulo de inventario
+
+[33mcommit 2f8f87e6c96b443a109b5aa8012dda43dbea6d7c[m
+Author: ElCuchuko <128649696+ElCuch0@users.noreply.github.com>
+Date:   Tue Aug 4 19:23:55 2026 -0500
+
+    Creación endpoints base del módulo de facturas
+
+[33mcommit c4342db54434e36f4858cd782657ff5514c8e65f[m
+Author: ElCuchuko <128649696+ElCuch0@users.noreply.github.com>
+Date:   Tue Aug 4 18:45:46 2026 -0500
+
+    Creación endpoints base del  módulo de checkout
+
+[33mcommit 2468c40732d763ee2f901d6ccacdf924d22a0c83[m
+Author: ElCuchuko <128649696+ElCuch0@users.noreply.github.com>
+Date:   Tue Aug 4 17:42:17 2026 -0500
+
+    Fixing módulo de inventario
+
+[33mcommit ef9fa6335a83f5b32cdaf2fbcebc664bcac82ef0[m
+Author: ElCuchuko <128649696+ElCuch0@users.noreply.github.com>
+Date:   Mon Aug 3 22:07:38 2026 -0500
+
+    Creación módulo de carrito
+
+[33mcommit 2ad1b033f8efca7091a4688104e68df81bed396b[m
+Author: ElCuchuko <128649696+ElCuch0@users.noreply.github.com>
+Date:   Mon Aug 3 21:16:13 2026 -0500
+
+    Creación módulo de inventario
+
+[33mcommit 2e0d01c88867cfc0d1de2e4c4be4effbd23fcaf2[m
+Author: ElCuchuko <128649696+ElCuch0@users.noreply.github.com>
+Date:   Mon Aug 3 20:54:24 2026 -0500
+
+    Fix móodulo de productos y agregación de módulo de categorias
+
+[33mcommit 8e3d6d124d377931e74402c9a4b6bd2d767b3214[m
+Author: ElCuchuko <128649696+ElCuch0@users.noreply.github.com>
+Date:   Mon Aug 3 20:03:17 2026 -0500
+
+    Módulo de productos básico agregado
+
+[33mcommit df93325e9383068cff0299b4ff1bd4c52aff4c6a[m
+Author: ElCuchuko <128649696+ElCuch0@users.noreply.github.com>
+Date:   Sun Aug 2 23:39:16 2026 -0500
+
+    Gestionamiento de JWT
+
+[33mcommit eae0b777dc4bbdcd943410991b5b74c5821a8a3d[m
+Author: ElCuchuko <128649696+ElCuch0@users.noreply.github.com>
+Date:   Sun Aug 2 22:58:57 2026 -0500
+
+    Creación flujo básico login y register
+
+[33mcommit 8bc3a1c9b00911a39c943989fb6634d357b94c48[m
+Author: ElCuchuko <128649696+ElCuch0@users.noreply.github.com>
+Date:   Sun Aug 2 19:27:22 2026 -0500
+
+    Creación de la arquitectura base
+
+[33mcommit fae0194a8d5a27f4747f2a60d762e258f09bf574[m
+Merge: 7466629 6981a00
+Author: ElCuchuko <128649696+ElCuch0@users.noreply.github.com>
+Date:   Sat Aug 1 22:36:21 2026 -0500
+
+    Merge branch 'master' into API
+
+[33mcommit 6981a00a348cbc4db69eba03300f5aae3ab0fc55[m[33m ([m[1;31morigin/master[m[33m, [m[1;31morigin/HEAD[m[33m, [m[1;32mmaster[m[33m)[m
+Merge: e130647 da4136f
+Author: ElCuchuko <128649696+ElCuch0@users.noreply.github.com>
+Date:   Sat Jun 13 20:47:34 2026 -0500
+
+    Merge pull request #3 from ElCuch0/Register
+    
+    Migración a React
+
+[33mcommit da4136f156828091b048edc2f76c6e8f72fef8f5[m[33m ([m[1;31morigin/Register[m[33m, [m[1;32mRegister[m[33m)[m
+Author: ElCuchuko <128649696+ElCuch0@users.noreply.github.com>
+Date:   Sat Jun 13 20:44:17 2026 -0500
+
+    Eliminación frontend antigüo
+
+[33mcommit 1d40042282cf1dacbab118ab25478945c84c46be[m
+Author: ElCuchuko <128649696+ElCuch0@users.noreply.github.com>
+Date:   Sat Jun 13 20:42:12 2026 -0500
+
+    Agregación pagina registro
+
+[33mcommit 45577d0d00379389149738ef37baf935b83ed281[m
+Author: ElCuchuko <128649696+ElCuch0@users.noreply.github.com>
+Date:   Sat Jun 13 20:15:03 2026 -0500
+
+    Finalización componentes del frontend con React
+
+[33mcommit cbd57d45f076746d9b6f78bb60559fead2d19663[m
+Author: ElCuchuko <128649696+ElCuch0@users.noreply.github.com>
+Date:   Thu Jun 11 21:53:12 2026 -0500
+
+    Finalización páginas administrativas
+
+[33mcommit 66f439dc1c5992657bc2e96d14da31a18c33e065[m
+Author: ElCuchuko <128649696+ElCuch0@users.noreply.github.com>
+Date:   Mon Jun 8 21:44:52 2026 -0500
+
+    Agregación paginas product detail y checkout
+
+[33mcommit b97ea44f6ba72c21a31fb70c7876d8627856743d[m
+Author: ElCuchuko <128649696+ElCuch0@users.noreply.github.com>
+Date:   Fri Jun 5 13:01:38 2026 -0500
+
+    Inicialización enrutamientos
+
+[33mcommit 61395b5651bf6c8c4818f68f357d17d53256392f[m
+Author: ElCuchuko <128649696+ElCuch0@users.noreply.github.com>
+Date:   Thu Jun 4 22:19:02 2026 -0500
+
+    Agregación componentes modales y grid vertical productos
+
+[33mcommit 9e5c4752920cb22e09e434385f72553793136a61[m
+Author: ElCuchuko <128649696+ElCuch0@users.noreply.github.com>
+Date:   Tue Jun 2 23:47:31 2026 -0500
+
+    Estilización modal busqueda
+
+[33mcommit 6ca6ab1e5412e2c7888b4dc4cf59fa34bde0a0cd[m
+Author: ElCuchuko <128649696+ElCuch0@users.noreply.github.com>
+Date:   Tue Jun 2 21:13:09 2026 -0500
+
+    Creación componentes dashboard administrativo
+
+[33mcommit 4bf04d08c6d5666f8782f0389cb568cfdcd317e7[m
+Author: ElCuchuko <128649696+ElCuch0@users.noreply.github.com>
+Date:   Mon Jun 1 20:23:12 2026 -0500
+
+    Agregación componentes admin
+
+[33mcommit 48f0ecfd851aaaa9958586af87c1dd64d301c74e[m
+Author: ElCuchuko <128649696+ElCuch0@users.noreply.github.com>
+Date:   Fri May 29 01:00:22 2026 -0500
+
+    Agregación componente de supscripción
+
+[33mcommit e20227a81746d7c9c93a34f54597d2584aef3e91[m
+Author: ElCuchuko <128649696+ElCuch0@users.noreply.github.com>
+Date:   Fri May 29 00:15:31 2026 -0500
+
+    Agregación componentes collection-grid y featured-products
+
+[33mcommit 5dbdb76fac38b2727850b7def7a67da0b6d5fc18[m
+Author: ElCuchuko <128649696+ElCuch0@users.noreply.github.com>
+Date:   Thu May 28 00:32:16 2026 -0500
+
+    Agregación de categories-grid y footer
+
+[33mcommit d438458d75a1fc9e4975e9606122b40f1fa01234[m
+Author: ElCuchuko <128649696+ElCuch0@users.noreply.github.com>
+Date:   Wed May 27 00:18:01 2026 -0500
+
+    Creación componentes productos
+
+[33mcommit 624eaef9a42b13fe2cd9e70cb40c9e0fa1abad92[m
+Author: ElCuchuko <128649696+ElCuch0@users.noreply.github.com>
+Date:   Sun May 24 23:07:41 2026 -0500
+
+    Migración header y hero section a React
+
+[33mcommit 74666291d058aa5169e69b6d5a499423855b4753[m
+Author: ElCuchuko <128649696+ElCuch0@users.noreply.github.com>
+Date:   Fri May 22 16:32:11 2026 -0500
+
+    fixing files
+
+[33mcommit 34a49006e686af6de1be66e66e49d1e74c56854e[m
+Author: ElCuchuko <128649696+ElCuch0@users.noreply.github.com>
+Date:   Thu May 21 18:59:29 2026 -0500
+
+    Agregar archivos inciales React
+
+[33mcommit f4af273bfa6431d77d00af09dc94872586d55a7d[m
+Author: ElCuchuko <128649696+ElCuch0@users.noreply.github.com>
+Date:   Thu May 21 13:46:42 2026 -0500
+
+    Pruena conexión con db
+
+[33mcommit 6984e8934fafec8592746d22205ad5c95ba26f12[m
+Author: ElCuchuko <128649696+ElCuch0@users.noreply.github.com>
+Date:   Thu May 21 00:24:20 2026 -0500
+
+    Conexión a la base de datos
+
+[33mcommit efeba9456d8dd3560663c69281c1e8625019737a[m
+Author: ElCuchuko <128649696+ElCuch0@users.noreply.github.com>
+Date:   Wed May 20 23:06:22 2026 -0500
+
+    Agregar interfaz registro
+
+[33mcommit c60f39a7678dc154ac2815855bbe1364b9fb213d[m
+Author: ElCuchuko <128649696+ElCuch0@users.noreply.github.com>
+Date:   Wed May 20 21:46:54 2026 -0500
+
+    reset backend
+
+[33mcommit cfeed6b156eb9374c32086388279f9c9a7676804[m
+Merge: ca8a0b1 21999b8
+Author: ElCuchuko <128649696+ElCuch0@users.noreply.github.com>
+Date:   Mon May 18 22:53:40 2026 -0500
+
+    Merge branch 'dashboard-admin' of https://github.com/ElCuch0/ecommerce-platform into API
+
+[33mcommit 21999b8afedbc33e5872d864f1f63ecfe5bc1a54[m[33m ([m[1;31morigin/dashboard-admin[m[33m, [m[1;32mdashboard-admin[m[33m)[m
+Author: ElCuchuko <128649696+ElCuch0@users.noreply.github.com>
+Date:   Mon May 18 22:52:56 2026 -0500
+
+    Agregación interfaz de admin
+
+[33mcommit ca8a0b1f61927adc47ef350086c7702688f78ec0[m[33m ([m[1;31morigin/modals-nav[m[33m)[m
+Author: ElCuchuko <128649696+ElCuch0@users.noreply.github.com>
+Date:   Thu May 14 21:58:46 2026 -0500
+
+    fixing modal search
+
+[33mcommit cf2c39b5c372c88ae612d844f91780919548d746[m
+Author: ElCuchuko <128649696+ElCuch0@users.noreply.github.com>
+Date:   Thu May 14 21:20:15 2026 -0500
+
+    Arreglo modal login
+
+[33mcommit 8d0def2542e2c52827fbef33ec557186a6973e4d[m
+Author: ElCuchuko <128649696+ElCuch0@users.noreply.github.com>
+Date:   Wed May 13 18:43:28 2026 -0500
+
+    Implementación de interfaces dashboard main e inventario
+
+[33mcommit e130647cff870bb2149d01c040d491eb222b0c7f[m
+Merge: 0697bd8 8af5e41
+Author: ElCuchuko <128649696+ElCuch0@users.noreply.github.com>
+Date:   Sat May 9 18:17:39 2026 -0500
+
+    Merge pull request #2 from ElCuch0/modulo-product
+    
+    Refactorización y creación de modulo de producto individual
+
+[33mcommit 8af5e4106095ad77a833d6ddd9a3100cbae4a9b3[m[33m ([m[1;31morigin/modulo-product[m[33m, [m[1;32mmodulo-product[m[33m)[m
+Author: ElCuchuko <128649696+ElCuch0@users.noreply.github.com>
+Date:   Thu May 7 19:48:43 2026 -0500
+
+    Agregación modulo de vista productos individuales
+
+[33mcommit fc88fb2eeacb262f0865084a0e9541b3aed60894[m
+Author: ElCuchuko <128649696+ElCuch0@users.noreply.github.com>
+Date:   Thu Apr 23 22:16:00 2026 -0500
+
+    migración de modales a archivos html

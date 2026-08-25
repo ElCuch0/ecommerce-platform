@@ -1,4 +1,4 @@
-import { BrowserRouter, Routes, Route } from "react-router-dom";
+import { BrowserRouter, Navigate, Routes, Route } from "react-router-dom";
 import { products } from "../data.jsx";
 import { HomePage } from "../pages/home/HomePage.jsx";
 import { CartPage } from "../pages/cart/CartPage.jsx";
@@ -17,13 +17,22 @@ import Invoice from "../pages/admin/Invoice.jsx";
 import Reports from "../pages/admin/Reports.jsx";
 import Settings from "../pages/admin/Settings.jsx";
 import { ProtectedRoute } from "./ProtectedRoute.jsx";
+import { useAuth } from "../context/AuthContext.jsx";
 
 export function AppRoutes() {
+  const { user } = useAuth();
+  const userRole = typeof user?.role === "string" ? user.role : user?.role?.name;
+
   return (
     <BrowserRouter>
       <Routes>
         {/* Tienda pública */}
-        <Route path="/" element={<HomePage products={products} />} />
+        <Route
+          path="/"
+          element={userRole?.toUpperCase() === "ADMIN"
+            ? <Navigate to="/admin" replace />
+            : <HomePage products={products} />}
+        />
         <Route path="/cart" element={<CartPage />} />
         <Route path="/product/:id" element={<ProductDetail />} />
         <Route path="/checkout" element={<CheckoutPage />} />

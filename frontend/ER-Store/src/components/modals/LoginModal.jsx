@@ -23,13 +23,17 @@ export function LoginModal({ isOpen, onClose }) {
 
         try {
 
-            await login({
+            const response = await login({
                 email,
                 password
             })
 
-            //Redirección a la página
-            navigate("/")
+            const authenticatedUser = response.userWithoutPassword
+            const userRole = typeof authenticatedUser.role === 'string'
+                ? authenticatedUser.role
+                : authenticatedUser.role?.name
+
+            navigate(userRole?.toUpperCase() === 'ADMIN' ? "/admin" : "/")
 
             onClose()
 
