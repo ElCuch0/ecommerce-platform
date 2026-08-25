@@ -1,8 +1,27 @@
+import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
-import { products } from "../../data.jsx";
+import { getProducts } from "../../api/products.api.js";
 import ProductTable from "../../components/inventory/ProductTable";
 
 export default function InventoryTable() {
+  const [products, setProducts] = useState([]);
+  const [search, setSearch] = useState("");
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
+
+  useEffect(() => {
+    getProducts()
+      .then((response) => setProducts(response.data ?? response ?? []))
+      .catch((requestError) => setError(requestError.message || "No fue posible cargar los productos"))
+      .finally(() => setLoading(false));
+  }, []);
+
+  const filteredProducts = products.filter((product) => {
+    const query = search.toLowerCase().trim();
+    return !query || [product.name, product.reference, product.category?.name]
+      .some((value) => String(value || "").toLowerCase().includes(query));
+  });
+
   return (
     <>
       <h1 className="adm-page-title">Tabla de inventario</h1>
@@ -20,6 +39,8 @@ export default function InventoryTable() {
             type="search"
             className="adm-input"
             placeholder="Nombre, SKU o categoría…"
+            value={search}
+            onChange={(event) => setSearch(event.target.value)}
           />
         </div>
         <div className="adm-toolbar__actions">
@@ -35,9 +56,11 @@ export default function InventoryTable() {
       <section className="adm-card">
         <div className="adm-card__head">
           <h2 className="adm-card__title">Productos</h2>
-          <span className="adm-card__meta">{products.length} productos</span>
+          <span className="adm-card__meta">{filteredProducts.length} productos</span>
         </div>
-        <ProductTable products={products} />
+        {loading && <p className="adm-card__meta">Cargando productos...</p>}
+        {error && <p className="adm-card__meta">{error}</p>}
+        {!loading && !error && <ProductTable products={filteredProducts} />}
       </section>
     </>
   );

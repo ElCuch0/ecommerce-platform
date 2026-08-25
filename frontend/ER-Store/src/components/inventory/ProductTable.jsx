@@ -27,13 +27,13 @@ export default function ProductTable({ products = [] }) {
         <tbody>
           {products.map((product) => (
             <tr key={product.id}>
-              <td>ER-{String(product.id).padStart(3, "0")}</td>
+              <td>{product.reference || `ER-${String(product.id).padStart(3, "0")}`}</td>
               <td>{product.name}</td>
-              <td>{product.category}</td>
+              <td>{product.category?.name || product.category || "Sin categoría"}</td>
               <td>{formatCOP(product.price)}</td>
-              <td>{product.stock}</td>
+              <td>{product.inventory?.stock ?? product.stock ?? 0}</td>
               <td>
-                {product.stock > 0 ? (
+                {(product.inventory?.stock ?? product.stock ?? 0) > 0 ? (
                   <span className="adm-badge adm-badge--ok">En stock</span>
                 ) : (
                   <span className="adm-badge adm-badge--warn">Agotado</span>
@@ -41,7 +41,7 @@ export default function ProductTable({ products = [] }) {
               </td>
               <td className="adm-table__actions">
                 <Link to={`/admin/update-product?id=${product.id}`}>Editar</Link>
-                <Link to="/admin/delete-product">Eliminar</Link>
+                <Link to={`/admin/delete-product?id=${product.id}`}>Eliminar</Link>
               </td>
             </tr>
           ))}

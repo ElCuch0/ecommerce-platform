@@ -16,6 +16,7 @@ import DeleteProduct from "../pages/admin/DeleteProduct.jsx";
 import Invoice from "../pages/admin/Invoice.jsx";
 import Reports from "../pages/admin/Reports.jsx";
 import Settings from "../pages/admin/Settings.jsx";
+import { ProtectedRoute } from "./ProtectedRoute.jsx";
 
 export function AppRoutes() {
   return (
@@ -30,17 +31,18 @@ export function AppRoutes() {
         <Route path="/account" element={<AccountPage />} />
         <Route path="/account/orders/:id" element={<OrderDetailPage />} />
 
-        {/* Panel administrativo (independiente del layout de la tienda) */}
-        {/*<Route path="/admin"><AdminLayout />
-          <Route index element={<DashboardHome />} />
-          <Route path="inventory" element={<InventoryTable />} />
-          <Route path="add-product" element={<AddProduct />} />
-          <Route path="update-product" element={<UpdateProduct />} />
-          <Route path="delete-product" element={<DeleteProduct />} />
-          <Route path="invoice" element={<Invoice />} />
-          <Route path="reports" element={<Reports />} />
-          <Route path="config" element={<Settings />} />
-        </Route>*/}
+        <Route element={<ProtectedRoute requiredRole="ADMIN" />}>
+          <Route path="/admin" element={<AdminLayout />}>
+            <Route index element={<DashboardHome />} />
+            <Route path="inventory" element={<InventoryTable />} />
+            <Route path="add-product" element={<AddProduct />} />
+            <Route path="update-product" element={<UpdateProduct />} />
+            <Route path="delete-product" element={<DeleteProduct />} />
+            <Route path="invoice" element={<Invoice />} />
+            <Route path="reports" element={<Reports />} />
+            <Route path="config" element={<Settings />} />
+          </Route>
+        </Route>
       </Routes>
     </BrowserRouter>
   );
