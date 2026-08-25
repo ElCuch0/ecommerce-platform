@@ -5,6 +5,7 @@ import { CartPage } from "../pages/cart/CartPage.jsx";
 import { ProductDetail } from "../pages/product/ProductDetail.jsx";
 import { CheckoutPage } from "../pages/checkout/CheckoutPage.jsx";
 import { RegisterPage } from "../pages/register/RegisterPage.jsx";
+import { AccountPage } from "../pages/account/AccountPage.jsx";
 import AdminLayout from "../components/layout/AdminLayout.jsx";
 import DashboardHome from "../pages/admin/DashboardHome.jsx";
 import InventoryTable from "../pages/admin/InventoryTable.jsx";
@@ -25,6 +26,7 @@ export function AppRoutes() {
         <Route path="/product/:id" element={<ProductDetail />} />
         <Route path="/checkout" element={<CheckoutPage />} />
         <Route path="/register" element={<RegisterPage />} />
+        <Route path="/account" element={<AccountPage />} />
 
         {/* Panel administrativo (independiente del layout de la tienda) */}
         {/*<Route path="/admin"><AdminLayout />

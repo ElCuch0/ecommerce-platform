@@ -11,7 +11,7 @@ import { SearchModal } from '../../components/modals/SearchModal.jsx'
 import { LoginModal } from '../../components/modals/LoginModal.jsx'
 import { CartModal } from '../../components/modals/CartModal.jsx'
 import { getProducts } from '../../api/products.api.js'
-import { useCart } from '../../context/cartContext.jsx'
+import { useCart } from '../../context/CartContext.jsx'
 
 export function HomePage() {
 

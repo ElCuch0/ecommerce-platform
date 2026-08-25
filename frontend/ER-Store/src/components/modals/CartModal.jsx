@@ -3,7 +3,7 @@ import { ModalContext } from '../../context/ModalContext.jsx'
 import './cart-modal.css'
 import { IconClose } from '../assets/Icons.jsx'
 import { CartGrid } from '../grids/CartGrid.jsx'
-import { useCart } from '../../context/cartContext.jsx'
+import { useCart } from '../../context/CartContext.jsx'
 
 export function CartModal({ isOpen, onClose, items = [] }) {
     const { updateQuantity, removeItem } = useCart()

@@ -1,7 +1,7 @@
 import { useNavigate } from 'react-router-dom'
 import './cart-page.css'
 import { CartGrid } from '../../components/grids/CartGrid.jsx'
-import { useCart } from '../../context/cartContext.jsx'
+import { useCart } from '../../context/CartContext.jsx'
 
 export function CartPage() {
     const navigate = useNavigate()

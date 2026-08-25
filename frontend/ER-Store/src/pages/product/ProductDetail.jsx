@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react'
 import { useNavigate, useParams } from 'react-router-dom'
 import { products } from '../../data.jsx'
-import { useCart } from '../../context/cartContext.jsx'
+import { useCart } from '../../context/CartContext.jsx'
 import './product-detail.css'
 
 export function ProductDetail() {
