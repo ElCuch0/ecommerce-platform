@@ -159,6 +159,9 @@ export function AccountPage() {
                                                 <div className="record-side">
                                                     <span className={`record-status record-status--${String(order.status || 'pending').toLowerCase()}`}>{order.status || 'Pendiente'}</span>
                                                     <strong>{formatCurrency(order.total)}</strong>
+                                                    <button type="button" className="account-record-link" onClick={() => navigate(`/account/orders/${order.id}`)}>
+                                                        Ver detalles
+                                                    </button>
                                                 </div>
                                             </article>
                                         ))}

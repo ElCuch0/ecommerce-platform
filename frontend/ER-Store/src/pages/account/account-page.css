@@ -209,6 +209,16 @@
     font-size: 1.1rem;
 }
 
+.account-record-link {
+    color: #ce4b20;
+    font-size: 0.85rem;
+    font-weight: 800;
+}
+
+.account-record-link:hover {
+    text-decoration: underline;
+}
+
 .record-status {
     padding: 0.25rem 0.55rem;
     border-radius: 99px;
