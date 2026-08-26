@@ -5,7 +5,18 @@ const AuthContext = createContext(null)
 
 export function AuthProvider({ children }) {
 
-	const [user, setUser] = useState(null)
+	const [user, setUser] = useState(() => {
+		const token = localStorage.getItem("accessToken")
+		const storedUser = localStorage.getItem("user")
+
+		if (!token) return null
+
+		try {
+			return storedUser ? JSON.parse(storedUser) : { authenticated: true }
+		} catch {
+			return { authenticated: true }
+		}
+	})
 	const [loading, setLoading] = useState(false)
 
 	//login
@@ -22,14 +33,12 @@ export function AuthProvider({ children }) {
 			console.log("AUTH RESPONSE: ", response)
 
 			const token = response.data.accessToken
-
-			console.log("TOKEN: ", token)
+			const authenticatedUser = response.data.userWithoutPassword
 
 			localStorage.setItem("accessToken", token)
+			localStorage.setItem("user", JSON.stringify(authenticatedUser))
 
-			setUser({
-				autheticated: true
-			})
+			setUser(authenticatedUser)
 
 			return response
 		} finally {
@@ -39,7 +48,8 @@ export function AuthProvider({ children }) {
 	
 	//logout
 	const logout = () => {
-		localStorage.removeItem("token")
+		localStorage.removeItem("accessToken")
+		localStorage.removeItem("user")
 		setUser(null)
 	}
 
@@ -49,6 +59,7 @@ export function AuthProvider({ children }) {
 		<AuthContext.Provider
 			value={{
 				user,
+				loading,
 				login,
 				logout
 			}}

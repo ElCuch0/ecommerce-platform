@@ -1,4 +1,5 @@
-import { NavLink, Link } from "react-router-dom";
+import { NavLink, Link, useNavigate } from "react-router-dom";
+import { useAuth } from "../../context/AuthContext.jsx";
 import logoEr from "../../assets/images/Logo_ER.png";
 
 function topLinkClass({ isActive }) {
@@ -6,6 +7,14 @@ function topLinkClass({ isActive }) {
 }
 
 export default function TopBar({ onMenuClick }) {
+  const navigate = useNavigate();
+  const { logout } = useAuth();
+
+  const handleLogout = () => {
+    logout();
+    navigate("/", { replace: true });
+  };
+
   return (
     <header className="adm-topbar">
       <button
@@ -31,7 +40,7 @@ export default function TopBar({ onMenuClick }) {
         <NavLink to="/admin/inventory" className={topLinkClass}>
           Inventario
         </NavLink>
-        <NavLink to="/admin/invoice" className={topLinkClass}>
+        <NavLink to="/admin/orders" className={topLinkClass}>
           Pedidos
         </NavLink>
         <NavLink to="/admin/reports" className={topLinkClass}>
@@ -41,6 +50,15 @@ export default function TopBar({ onMenuClick }) {
           Configuración
         </span>
       </nav>
+
+      <button type="button" className="adm-topbar__logout" onClick={handleLogout}>
+        <svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" aria-hidden="true">
+          <path d="M10 17l5-5-5-5" />
+          <path d="M15 12H3" />
+          <path d="M21 19V5a2 2 0 0 0-2-2h-6" />
+        </svg>
+        <span>Cerrar sesión</span>
+      </button>
     </header>
   );
 }

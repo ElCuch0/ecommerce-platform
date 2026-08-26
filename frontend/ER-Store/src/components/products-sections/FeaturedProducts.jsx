@@ -4,8 +4,8 @@ import './featured-products.css'
 export function FeaturedProducts({products, loading, error, onAddToCart}) {
     return(
         <section>
-            <h2 className="featured-products-title">Productos Mas Vendidos</h2>
-            <p className="featured-products-description">Que es lo que mas compran los usuarios.</p>
+            <h2 className="featured-products-title">Productos Destacados</h2>
+            <p className="featured-products-description">Productos que creemos te pueden gustar.</p>
             <ProductsGrid products={products} loading={loading} error={error} onAddToCart={onAddToCart} />
         </section>
     )

@@ -29,7 +29,7 @@ export async function findById(id) {
 }
 
 export async function findByUserId(userId) {
-  return prisma.order.findFirst({
+  return prisma.order.findMany({
     where: {
       userId
     },

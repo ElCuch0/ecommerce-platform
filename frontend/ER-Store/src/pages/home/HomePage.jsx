@@ -4,13 +4,13 @@ import { HeaderNav } from '../../components/HeaderNav.jsx'
 import { CategoryGrid } from '../../components/grids/CategoryGrid.jsx'
 import { SellestProducts } from '../../components/products-sections/SellestProducts.jsx'
 import { FeaturedProducts } from '../../components/products-sections/FeaturedProducts.jsx'
-import { CollectionsGrid } from '../../components/grids/CollectionsGrid.jsx'
 import { SubscribeForm } from '../../components/forms/SubscribeForm.jsx'
 import { ErFooter } from '../../components/ErFooter.jsx'
 import { SearchModal } from '../../components/modals/SearchModal.jsx'
 import { LoginModal } from '../../components/modals/LoginModal.jsx'
 import { CartModal } from '../../components/modals/CartModal.jsx'
 import { getProducts } from '../../api/products.api.js'
+import { useCart } from '../../context/CartContext.jsx'
 
 export function HomePage() {
 
@@ -21,7 +21,7 @@ export function HomePage() {
     const [searchOpen, setSearchOpen] = useState(false)
     const [loginOpen, setLoginOpen] = useState(false)
     const [cartOpen, setCartOpen] = useState(false)
-    const [cartItems, setCartItems] = useState(() => JSON.parse(localStorage.getItem('cart')) || [])
+    const { items, addItem } = useCart()
 
     useEffect(() => {
         async function loadProducts() {
@@ -39,21 +39,16 @@ export function HomePage() {
         loadProducts()
     }, [])
 
-    const refreshCartItems = () => {
-        setCartItems(JSON.parse(localStorage.getItem('cart')) || [])
-    }
-
     const handleSearch = (query) => {
         console.log('Buscar:', query)
     }
 
     const handleOpenCart = () => {
-        refreshCartItems()
         setCartOpen(true)
     }
 
-    const handleAddToCart = () => {
-        refreshCartItems()
+    const handleProductAdd = async (product) => {
+        await addItem(product.id)
         setCartOpen(true)
     }
 
@@ -68,26 +63,27 @@ export function HomePage() {
             <SearchModal
                 isOpen={searchOpen}
                 onClose={() => setSearchOpen(false)}
-                products={products}
                 onSearch={handleSearch}
+                onAddToCart={handleProductAdd}
             />
             <LoginModal isOpen={loginOpen} onClose={() => setLoginOpen(false)} />
-            <CartModal isOpen={cartOpen} onClose={() => setCartOpen(false)} items={cartItems} />
+            <CartModal isOpen={cartOpen} onClose={() => setCartOpen(false)} items={items} />
 
             <HeroSection />
-            <CategoryGrid />
             <FeaturedProducts
             products={products.slice(0,10)}
             loading={loading}
             error={error}
-            onAddToCart={handleAddToCart}
+            onAddToCart={handleProductAdd}
             />
-            <CollectionsGrid />
+
+            <CategoryGrid />
+
             <SellestProducts
             products={products.slice(11,21)}
             loading={loading}
             error={error}
-            onAddToCart={handleAddToCart}
+            onAddToCart={handleProductAdd}
             />
             <SubscribeForm />
             <ErFooter onOpenLogin={() => setLoginOpen(true)} />

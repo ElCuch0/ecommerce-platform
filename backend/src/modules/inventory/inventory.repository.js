@@ -3,7 +3,15 @@ import prisma from "../../infrastructure/database/prisma.js";
 export async function findAll() {
   return prisma.inventory.findMany({
     include: {
-      product: true
+      product: {
+        include: {
+          category: {
+            select: {
+              name: true
+            }
+          }
+        }
+      }
     },
     orderBy: {
       id: "desc"

@@ -21,7 +21,8 @@ export function ProductCard ({product, onAddToCart}) {
                 </div>
                 <button
                     className="card-btn"
-                    onClick={onAddToCart}
+                    onClick={() => onAddToCart(product)}
+                    disabled={stock <= 0}
                 >
                     {stock > 0 ? 'Añadir al Carrito' : 'Agotado'}
                 </button>
