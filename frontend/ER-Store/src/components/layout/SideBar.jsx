@@ -29,18 +29,18 @@ export default function SideBar({ onNavigate }) {
       </NavLink>
 
       <p className="adm-sidebar__label" style={{ marginTop: "1rem" }}>
-        Catálogo
+        Categorías
       </p>
       <NavLink to="/admin/categories" className={sidebarLinkClass} onClick={onNavigate}>
         Categorías
-      </NavLink>
-      <NavLink to="/admin/orders" className={sidebarLinkClass} onClick={onNavigate}>
-        Órdenes
       </NavLink>
 
       <p className="adm-sidebar__label" style={{ marginTop: "1rem" }}>
         Informes
       </p>
+      <NavLink to="/admin/orders" className={sidebarLinkClass} onClick={onNavigate}>
+        Órdenes
+      </NavLink>
       <NavLink to="/admin/reports" className={sidebarLinkClass} onClick={onNavigate}>
         Ver informes
       </NavLink>

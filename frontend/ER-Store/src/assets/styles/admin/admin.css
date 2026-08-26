@@ -119,6 +119,27 @@
   pointer-events: none;
 }
 
+.adm-topbar__logout {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.45rem;
+  margin-left: auto;
+  min-height: 40px;
+  padding: 0.5rem 0.75rem;
+  border: 1px solid rgba(255, 255, 255, 0.35) !important;
+  border-radius: 6px;
+  color: #fff;
+  font-size: 0.85rem;
+  font-weight: 600;
+  transition: background 0.15s, border-color 0.15s;
+}
+
+.adm-topbar__logout:hover {
+  background: rgba(255, 255, 255, 0.12);
+  border-color: rgba(255, 255, 255, 0.65) !important;
+}
+
 .adm-sidebar__link--disabled {
   display: block;
   padding: 0.65rem 1.25rem 0.65rem 1rem;
