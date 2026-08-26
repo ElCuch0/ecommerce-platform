@@ -7,22 +7,18 @@ export async function getAllInventories() {
   })
 }
 
-export async function updateStock(inventoryId, stock) {
-  return await apiRequest(`/inventory/${inventoryId}/stock`, {
+export async function updateStock(productId, stock) {
+  return await apiRequest(`/inventory/${productId}/stock`, {
     method: "PATCH",
-    body: {
-      stock
-    },
+    body: JSON.stringify({ stock: Number(stock) }),
     requiresAuth: true
   })
 }
 
-export async function updateStock(inventoryId, minStock) {
-  return await apiRequest(`/inventory/${inventoryId}/min-stock`, {
+export async function updateMinimumStock(productId, minimumStock) {
+  return await apiRequest(`/inventory/${productId}/min-stock`, {
     method: "PATCH",
-    body: {
-      minStock
-    },
+    body: JSON.stringify({ minimumStock: Number(minimumStock) }),
     requiresAuth: true
   })
 }

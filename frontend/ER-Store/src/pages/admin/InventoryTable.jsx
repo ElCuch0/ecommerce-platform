@@ -1,34 +1,41 @@
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
-import { getAdminProducts } from "../../api/products.api.js";
-import { toggleProductStatus } from "../../api/adminProducts.api.js";
+import { getAllInventories, updateMinimumStock, updateStock } from "../../api/adminInventory.api.js";
 import ProductTable from "../../components/inventory/ProductTable";
 
 export default function InventoryTable() {
-  const [products, setProducts] = useState([]);
+  const [inventories, setInventories] = useState([]);
   const [search, setSearch] = useState("");
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
   const [updatingId, setUpdatingId] = useState(null);
+  const [drafts, setDrafts] = useState({});
 
   useEffect(() => {
-    getAdminProducts()
-      .then((response) => setProducts(response.data ?? response ?? []))
+    getAllInventories()
+      .then((response) => setInventories(response.data ?? response ?? []))
       .catch((requestError) => setError(requestError.message || "No fue posible cargar los productos"))
       .finally(() => setLoading(false));
   }, []);
 
-  const handleToggleStatus = async (product) => {
-    setUpdatingId(product.id);
+  const handleUpdateInventory = async (inventory) => {
+    const productId = inventory.product.id;
+    const draft = drafts[productId] || {};
+    setUpdatingId(productId);
     setError(null);
 
     try {
-      const response = await toggleProductStatus(product.id, product.isActive);
-      setProducts((currentProducts) => currentProducts.map((item) => (
-        item.id === product.id
-          ? { ...item, isActive: response.data?.isActive ?? !product.isActive }
+      const [stockResponse, minimumStockResponse] = await Promise.all([
+        updateStock(productId, draft.stock ?? inventory.stock),
+        updateMinimumStock(productId, draft.minimumStock ?? inventory.minimumStock)
+      ]);
+      const updatedInventory = minimumStockResponse.data ?? stockResponse.data;
+      setInventories((currentInventories) => currentInventories.map((item) => (
+        item.productId === inventory.productId
+          ? { ...item, ...updatedInventory, product: item.product }
           : item
       )));
+      setDrafts((currentDrafts) => ({ ...currentDrafts, [productId]: undefined }));
     } catch (requestError) {
       setError(requestError.message || "No fue posible cambiar el estado del producto");
     } finally {
@@ -36,9 +43,9 @@ export default function InventoryTable() {
     }
   };
 
-  const filteredProducts = products.filter((product) => {
+  const filteredInventories = inventories.filter((inventory) => {
     const query = search.toLowerCase().trim();
-    return !query || [product.name, product.reference, product.category?.name]
+    return !query || [inventory.product?.name, inventory.product?.reference, inventory.product?.category?.name]
       .some((value) => String(value || "").toLowerCase().includes(query));
   });
 
@@ -73,14 +80,19 @@ export default function InventoryTable() {
       <section className="adm-card">
         <div className="adm-card__head">
           <h2 className="adm-card__title">Productos</h2>
-          <span className="adm-card__meta">{filteredProducts.length} productos</span>
+          <span className="adm-card__meta">{filteredInventories.length} productos</span>
         </div>
         {loading && <p className="adm-card__meta">Cargando productos...</p>}
         {error && <p className="adm-card__meta">{error}</p>}
         {!loading && !error && (
           <ProductTable
-            products={filteredProducts}
-            onToggleStatus={handleToggleStatus}
+            inventories={filteredInventories}
+            drafts={drafts}
+            onDraftChange={(productId, field, value) => setDrafts((current) => ({
+              ...current,
+              [productId]: { ...current[productId], [field]: value }
+            }))}
+            onUpdateInventory={handleUpdateInventory}
             updatingId={updatingId}
           />
         )}

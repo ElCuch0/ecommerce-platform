@@ -68,7 +68,6 @@ export default function UpdateProduct() {
       <div className="adm-form-grid">
         <div>
           {selectedProduct && <ProductForm key={selectedProduct.id} defaultValues={selectedProduct} categories={categories} onSubmit={handleUpdate} submitLabel="Guardar cambios" submitting={submitting} />}
-          <StockSection defaultStock={selectedProduct?.inventory?.stock ?? selectedProduct?.stock} />
         </div>
       </div>
 
