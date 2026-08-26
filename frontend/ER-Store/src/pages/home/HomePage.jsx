@@ -4,7 +4,6 @@ import { HeaderNav } from '../../components/HeaderNav.jsx'
 import { CategoryGrid } from '../../components/grids/CategoryGrid.jsx'
 import { SellestProducts } from '../../components/products-sections/SellestProducts.jsx'
 import { FeaturedProducts } from '../../components/products-sections/FeaturedProducts.jsx'
-import { CollectionsGrid } from '../../components/grids/CollectionsGrid.jsx'
 import { SubscribeForm } from '../../components/forms/SubscribeForm.jsx'
 import { ErFooter } from '../../components/ErFooter.jsx'
 import { SearchModal } from '../../components/modals/SearchModal.jsx'
@@ -64,21 +63,22 @@ export function HomePage() {
             <SearchModal
                 isOpen={searchOpen}
                 onClose={() => setSearchOpen(false)}
-                products={products}
                 onSearch={handleSearch}
+                onAddToCart={handleProductAdd}
             />
             <LoginModal isOpen={loginOpen} onClose={() => setLoginOpen(false)} />
             <CartModal isOpen={cartOpen} onClose={() => setCartOpen(false)} items={items} />
 
             <HeroSection />
-            <CategoryGrid />
             <FeaturedProducts
             products={products.slice(0,10)}
             loading={loading}
             error={error}
             onAddToCart={handleProductAdd}
             />
-            <CollectionsGrid />
+
+            <CategoryGrid />
+
             <SellestProducts
             products={products.slice(11,21)}
             loading={loading}

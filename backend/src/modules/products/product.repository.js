@@ -1,6 +1,8 @@
 import prisma from "../../infrastructure/database/prisma.js";
 
-export async function findAll() {
+export async function findAll(search) {
+  const normalizedSearch = search?.trim();
+
   return prisma.product.findMany({
     orderBy: {
       id: "desc"
@@ -10,7 +12,15 @@ export async function findAll() {
 
       category: {
         isActive: true
-      }
+      },
+      ...(normalizedSearch && {
+        OR: [
+          { name: { contains: normalizedSearch, mode: "insensitive" } },
+          { description: { contains: normalizedSearch, mode: "insensitive" } },
+          { reference: { contains: normalizedSearch, mode: "insensitive" } },
+          { category: { name: { contains: normalizedSearch, mode: "insensitive" } } }
+        ]
+      })
     },
     include: {
       inventory: {

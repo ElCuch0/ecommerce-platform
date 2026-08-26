@@ -19,8 +19,8 @@ async function validateCategory(categoryId) {
   return category
 }
 
-export async function findAll() {
-  return await productRepository.findAll()
+export async function findAll(search) {
+  return await productRepository.findAll(search)
 }
 
 export async function findAllForAdmin() {

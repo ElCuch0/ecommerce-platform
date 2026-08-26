@@ -1,7 +1,8 @@
-import { useEffect, useMemo, useRef, useState } from 'react'
+import { useEffect, useRef, useState } from 'react'
 import { ModalContext } from '../../context/ModalContext.jsx'
 import { IconClose, IconEr } from '../assets/Icons.jsx'
 import { ProductCard } from '../cards/ProductCard.jsx'
+import { getProducts } from '../../api/products.api.js'
 import './search-modal.css'
 
 const popularSearchTerms = [
@@ -12,54 +13,58 @@ const popularSearchTerms = [
     'Accesorios'
 ]
 
-export function SearchModal({ isOpen, onClose, products = [], onSearch }) {
+export function SearchModal({ isOpen, onClose, onSearch, onAddToCart }) {
     const [query, setQuery] = useState('')
+    const [results, setResults] = useState([])
+    const [loading, setLoading] = useState(false)
+    const [error, setError] = useState('')
     const inputRef = useRef(null)
 
     useEffect(() => {
-        if (!isOpen) {
-            setQuery('')
-            return
-        }
+        const previousOverflow = document.body.style.overflow
+
+        if (!isOpen) return undefined
+
+        document.body.style.overflow = 'hidden'
 
         requestAnimationFrame(() => {
             inputRef.current?.focus()
             inputRef.current?.select()
         })
+
+        return () => {
+            document.body.style.overflow = previousOverflow
+        }
     }, [isOpen])
 
-    const recommendations = useMemo(() => {
-        const normalizedQuery = query.trim().toLowerCase()
-        if (!normalizedQuery) {
-            return products.slice(0, 7)
-        }
+    const handleClose = () => {
+        setQuery('')
+        setResults([])
+        setError('')
+        onClose()
+    }
 
-        return products
-            .filter((product) => {
-                const name = product.name.toLowerCase()
-                const category = (product.category || '').toLowerCase()
-                const alt = (product.alternative || '').toLowerCase()
-                return (
-                    name.includes(normalizedQuery) ||
-                    category.includes(normalizedQuery) ||
-                    alt.includes(normalizedQuery)
-                )
-            })
-            .slice(0, 4)
-    }, [products, query])
-
-    const handleSearch = (value) => {
+    const handleSearch = async (value) => {
         const trimmed = (value || query).trim()
         if (!trimmed) return
 
-        onSearch?.(trimmed)
-        onClose()
-        const section = document.getElementById('products-section')
-        section?.scrollIntoView({ behavior: 'smooth', block: 'start' })
+        setLoading(true)
+        setError('')
+
+        try {
+            const response = await getProducts(trimmed)
+            setResults(response.data || [])
+            onSearch?.(trimmed)
+        } catch {
+            setResults([])
+            setError('No fue posible realizar la búsqueda.')
+        } finally {
+            setLoading(false)
+        }
     }
 
     return (
-        <ModalContext isOpen={isOpen} onClose={onClose}>
+        <ModalContext isOpen={isOpen} onClose={handleClose}>
             <section className="nav-dialog" aria-label="Búsqueda">
                 <div className="nav-dialog-card">
                     <header className="nav-dialog-header">
@@ -71,7 +76,7 @@ export function SearchModal({ isOpen, onClose, products = [], onSearch }) {
                             type="button"
                             className="nav-dialog-close"
                             aria-label="Cerrar"
-                            onClick={onClose}
+                            onClick={handleClose}
                         >
                             <IconClose />
                         </button>
@@ -79,7 +84,10 @@ export function SearchModal({ isOpen, onClose, products = [], onSearch }) {
 
                     <div className="nav-dialog-body">
                         <label className="nav-dialog-label" htmlFor="searchInput">Buscar productos</label>
-                        <div className="search-input-row">
+                        <form className="search-input-row" onSubmit={(event) => {
+                            event.preventDefault()
+                            handleSearch(query)
+                        }}>
                             <input
                                 id="searchInput"
                                 ref={inputRef}
@@ -91,13 +99,12 @@ export function SearchModal({ isOpen, onClose, products = [], onSearch }) {
                                 autoComplete="off"
                             />
                             <button
-                                type="button"
+                                type="submit"
                                 className="search-submit"
-                                onClick={() => handleSearch(query)}
                             >
                                 Buscar
                             </button>
-                        </div>
+                        </form>
 
                         <div className="search-panels">
                             <section className="search-panel" aria-label="Búsquedas populares">
@@ -116,19 +123,18 @@ export function SearchModal({ isOpen, onClose, products = [], onSearch }) {
                                 </div>
                             </section>
 
-                            <section className="search-panel" aria-label="Productos recomendados">
-                                <h3 className="search-panel-title">Recomendados para ti</h3>
-                                <div className="search-rec-carousel-horizontal">
-                                    <div className="search-rec-carousel-strip">
-                                        {recommendations.length > 0 ? (
-                                            recommendations.map((product) => (
-                                                <ProductCard key={product.id} product={product} onClick={() => handleSearch(product.name)} />
-                                            ))
-                                        ) : (
-                                            <p>No hay recomendaciones para esa búsqueda.</p>
-                                        )}
-                                    </div>
-                                </div>
+                            <section className="search-panel search-results-panel" aria-live="polite" aria-label="Resultados de búsqueda">
+                                <h3 className="search-panel-title">Resultados</h3>
+                                {loading && <p>Buscando productos...</p>}
+                                {error && <p>{error}</p>}
+                                {!loading && !error && results.length === 0 && <p>Realiza una búsqueda para ver los productos.</p>}
+                                {!loading && !error && results.length > 0 && (
+                                    <ul className="search-results-grid">
+                                        {results.map((product) => (
+                                            <ProductCard key={product.id} product={product} onAddToCart={onAddToCart} />
+                                        ))}
+                                    </ul>
+                                )}
                             </section>
                         </div>
                     </div>

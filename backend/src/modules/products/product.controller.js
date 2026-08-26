@@ -7,7 +7,7 @@ export async function findAll(req, res, next) {
     return res.status(200).json({
       success: true,
       message: "Productos encontrados con éxito",
-      data: await service.findAll()
+      data: await service.findAll(req.query.search)
     });
   }catch (error) {
       next(error)
