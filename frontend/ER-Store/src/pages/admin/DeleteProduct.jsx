@@ -1,20 +1,19 @@
 import { useEffect, useState } from "react";
-import { Link, useSearchParams, useNavigate } from "react-router-dom";
-import { getProducts } from "../../api/products.api.js";
-import { deleteProduct } from "../../api/adminProducts.api.js";
+import { Link } from "react-router-dom";
+import { getAdminProducts } from "../../api/products.api.js";
+import { toggleProductStatus } from "../../api/adminProducts.api.js";
 
 export default function DeleteProduct() {
-  const [searchParams] = useSearchParams();
-  const navigate = useNavigate();
   const [products, setProducts] = useState([]);
-  const [selected, setSelected] = useState(() => searchParams.get("id") ? [searchParams.get("id")] : []);
+  const [selected, setSelected] = useState([]);
   const [search, setSearch] = useState("");
   const [loading, setLoading] = useState(true);
   const [submitting, setSubmitting] = useState(false);
+  const [updatingId, setUpdatingId] = useState(null);
   const [error, setError] = useState(null);
 
   const loadProducts = () => {
-    getProducts()
+    getAdminProducts()
       .then((response) => setProducts(response.data ?? response ?? []))
       .catch((requestError) => setError(requestError.message || "No fue posible cargar los productos"))
       .finally(() => setLoading(false));
@@ -35,28 +34,52 @@ export default function DeleteProduct() {
     setSelected((current) => [...new Set([...current, ...visibleProducts.map((product) => String(product.id))])]);
   };
 
-  const handleDelete = async () => {
+  const handleStatusChange = async (isActive) => {
+    const selectedProducts = products.filter((product) => (
+      selected.includes(String(product.id)) && product.isActive === isActive
+    ));
+
+    if (!selectedProducts.length) {
+      return;
+    }
+
     try {
       setSubmitting(true);
       setError(null);
-      await Promise.all(selected.map((id) => deleteProduct(id)));
-      navigate("/admin/inventory");
+      await Promise.all(selectedProducts.map((product) => toggleProductStatus(product.id, isActive)));
+      setProducts((current) => current.map((product) => selectedProducts.some((selectedProduct) => selectedProduct.id === product.id)
+        ? { ...product, isActive: !isActive }
+        : product));
+      setSelected([]);
     } catch (requestError) {
-      setError(requestError.message || "No fue posible desactivar los productos");
+      setError(requestError.message || "No fue posible cambiar el estado de los productos");
     } finally {
       setSubmitting(false);
     }
   };
+
+  const handleSingleStatusChange = async (product) => {
+    setUpdatingId(product.id);
+    setError(null);
+    try {
+      const response = await toggleProductStatus(product.id, product.isActive);
+      setProducts((current) => current.map((item) => item.id === product.id ? response.data : item));
+    } catch (requestError) {
+      setError(requestError.message || "No fue posible cambiar el estado del producto");
+    } finally {
+      setUpdatingId(null);
+    }
+  };
   return (
     <>
-      <h1 className="adm-page-title">Eliminar productos</h1>
+      <h1 className="adm-page-title">Estado de productos</h1>
       <p className="adm-page-subtitle">
-        Marca uno o varios productos y confirma la eliminación.
+        Activa o desactiva los productos disponibles en el catálogo.
       </p>
 
       {error && <p className="adm-muted-banner">{error}</p>}
       <p className="adm-muted-banner">
-        Selecciona los productos que deseas retirar del catálogo.
+        Los productos inactivos no aparecen en la tienda, pero permanecen disponibles para reactivarlos.
         </p>
 
       <div className="adm-toolbar">
@@ -70,8 +93,11 @@ export default function DeleteProduct() {
           <button type="button" className="adm-btn adm-btn--outline adm-btn--sm" onClick={selectVisible}>
             Seleccionar visibles
           </button>
-          <button type="button" className="adm-btn adm-btn--danger" disabled={!selected.length || submitting} onClick={handleDelete}>
-            {submitting ? "Eliminando..." : "Eliminar seleccionados"}
+          <button type="button" className="adm-btn adm-btn--danger" disabled={!selected.length || submitting} onClick={() => handleStatusChange(true)}>
+            {submitting ? "Actualizando..." : "Desactivar seleccionados"}
+          </button>
+          <button type="button" className="adm-btn adm-btn--primary" disabled={!selected.length || submitting} onClick={() => handleStatusChange(false)}>
+            {submitting ? "Actualizando..." : "Activar seleccionados"}
           </button>
           <Link to="/admin/inventory" className="adm-btn adm-btn--outline">
             Volver a la tabla
@@ -95,6 +121,8 @@ export default function DeleteProduct() {
                 <th>Nombre</th>
                 <th>Categoría</th>
                 <th>Stock</th>
+                <th>Estado</th>
+                <th>Acción</th>
               </tr>
             </thead>
             <tbody>
@@ -107,6 +135,16 @@ export default function DeleteProduct() {
                   <td>{p.name}</td>
                   <td>{p.category?.name || p.category || "Sin categoría"}</td>
                   <td>{p.inventory?.stock ?? p.stock ?? 0}</td>
+                  <td>
+                    <span className={`adm-badge ${p.isActive ? "adm-badge--ok" : "adm-badge--warn"}`}>
+                      {p.isActive ? "Activo" : "Inactivo"}
+                    </span>
+                  </td>
+                  <td className="adm-table__actions">
+                    <button type="button" disabled={updatingId === p.id} onClick={() => handleSingleStatusChange(p)}>
+                      {updatingId === p.id ? "Actualizando..." : p.isActive ? "Desactivar" : "Activar"}
+                    </button>
+                  </td>
                 </tr>
               ))}
             </tbody>

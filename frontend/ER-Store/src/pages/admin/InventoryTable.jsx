@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
-import { getProducts } from "../../api/products.api.js";
+import { getAdminProducts } from "../../api/products.api.js";
+import { toggleProductStatus } from "../../api/adminProducts.api.js";
 import ProductTable from "../../components/inventory/ProductTable";
 
 export default function InventoryTable() {
@@ -8,13 +9,32 @@ export default function InventoryTable() {
   const [search, setSearch] = useState("");
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
+  const [updatingId, setUpdatingId] = useState(null);
 
   useEffect(() => {
-    getProducts()
+    getAdminProducts()
       .then((response) => setProducts(response.data ?? response ?? []))
       .catch((requestError) => setError(requestError.message || "No fue posible cargar los productos"))
       .finally(() => setLoading(false));
   }, []);
+
+  const handleToggleStatus = async (product) => {
+    setUpdatingId(product.id);
+    setError(null);
+
+    try {
+      const response = await toggleProductStatus(product.id, product.isActive);
+      setProducts((currentProducts) => currentProducts.map((item) => (
+        item.id === product.id
+          ? { ...item, isActive: response.data?.isActive ?? !product.isActive }
+          : item
+      )));
+    } catch (requestError) {
+      setError(requestError.message || "No fue posible cambiar el estado del producto");
+    } finally {
+      setUpdatingId(null);
+    }
+  };
 
   const filteredProducts = products.filter((product) => {
     const query = search.toLowerCase().trim();
@@ -26,7 +46,7 @@ export default function InventoryTable() {
     <>
       <h1 className="adm-page-title">Tabla de inventario</h1>
       <p className="adm-page-subtitle">
-        Consulta, filtra y accede a actualizar o eliminar productos.
+        Consulta y filtra los productos del inventario, incluidos los inactivos.
       </p>
 
       <div className="adm-toolbar">
@@ -47,9 +67,6 @@ export default function InventoryTable() {
           <Link to="/admin/add-product" className="adm-btn adm-btn--primary">
             Agregar producto
           </Link>
-          <Link to="/admin/delete-product" className="adm-btn adm-btn--outline">
-            Eliminar…
-          </Link>
         </div>
       </div>
 
@@ -60,7 +77,13 @@ export default function InventoryTable() {
         </div>
         {loading && <p className="adm-card__meta">Cargando productos...</p>}
         {error && <p className="adm-card__meta">{error}</p>}
-        {!loading && !error && <ProductTable products={filteredProducts} />}
+        {!loading && !error && (
+          <ProductTable
+            products={filteredProducts}
+            onToggleStatus={handleToggleStatus}
+            updatingId={updatingId}
+          />
+        )}
       </section>
     </>
   );

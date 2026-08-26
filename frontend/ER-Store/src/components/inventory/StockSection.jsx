@@ -24,7 +24,7 @@ export default function StockSection({ defaultStock = 0 }) {
 
       <div className="adm-field">
         <label className="adm-label" htmlFor="admStockLoc">
-          Ubicación
+          Stock Mínimo
         </label>
         <input id="admStockLoc" type="text" className="adm-input" placeholder="Ej. Pasillo A-3" />
       </div>

@@ -25,7 +25,17 @@ export default function SideBar({ onNavigate }) {
         Actualizar
       </NavLink>
       <NavLink to="/admin/delete-product" className={sidebarLinkClass} onClick={onNavigate}>
-        Eliminar
+        Estado de productos
+      </NavLink>
+
+      <p className="adm-sidebar__label" style={{ marginTop: "1rem" }}>
+        Catálogo
+      </p>
+      <NavLink to="/admin/categories" className={sidebarLinkClass} onClick={onNavigate}>
+        Categorías
+      </NavLink>
+      <NavLink to="/admin/orders" className={sidebarLinkClass} onClick={onNavigate}>
+        Órdenes
       </NavLink>
 
       <p className="adm-sidebar__label" style={{ marginTop: "1rem" }}>

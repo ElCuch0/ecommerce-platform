@@ -23,31 +23,9 @@ export async function deleteProduct(productId) {
   })
 }
 
-// --- CATEGORÍAS ---
-export async function createCategory(categoryData) {
-  return await apiRequest("/categories", {
-    method: "POST",
-    body: {
-      categoryData
-    },
-    requiresAuth: true
-  })
-}
-
-export async function updateCategory(categoryId, categoryData) {
-  return await apiRequest(`/categories/${categoryId}`, {
-    method: "PUT",
-    body: {
-      categoryData
-    },
-    requiresAuth: true
-  })
-}
-
-export async function toggleCategoryStatus(categoryId, isActive) {
-  const method = isActive ? "DELETE" : "PATCH"
-  return await apiRequest(`/categories/${categoryId}`, {
-    method,
+export async function toggleProductStatus(productId, isActive) {
+  return await apiRequest(`/products/${productId}`, {
+    method: isActive ? "DELETE" : "PATCH",
     requiresAuth: true
   })
 }

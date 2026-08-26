@@ -8,11 +8,9 @@ export async function getAllOrders() {
 }
 
 export async function updateOrderStatus(orderId, status) {
-  return await apiRequest(`/orders/${orderId}`, {
+  return await apiRequest(`/orders/${orderId}/status`, {
     method: "PATCH",
-    body: {
-      status
-    },
+    body: JSON.stringify({ status }),
     requiresAuth: true
   })
 }

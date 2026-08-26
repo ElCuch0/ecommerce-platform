@@ -23,6 +23,10 @@ export async function findAll() {
   return await productRepository.findAll()
 }
 
+export async function findAllForAdmin() {
+  return await productRepository.findAllForAdmin()
+}
+
 export async function findById(id) {
 
   const product = await productRepository.findById(id)

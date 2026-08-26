@@ -18,6 +18,32 @@ export async function findAll() {
           stock: true,
           minimumStock: true
         }
+      },
+      category: {
+        select: {
+          name: true
+        }
+      }
+    }
+  });
+}
+
+export async function findAllForAdmin() {
+  return prisma.product.findMany({
+    orderBy: {
+      id: "desc"
+    },
+    include: {
+      inventory: {
+        select: {
+          stock: true,
+          minimumStock: true
+        }
+      },
+      category: {
+        select: {
+          name: true
+        }
       }
     }
   });

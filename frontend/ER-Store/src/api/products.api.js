@@ -6,3 +6,10 @@ export const getProducts = () => {
     requiresAuth: false
   })
 }
+
+export const getAdminProducts = () => {
+  return apiRequest("/products/admin", {
+    method: "GET",
+    requiresAuth: true
+  })
+}

@@ -1,9 +1,7 @@
-import { Link } from "react-router-dom";
-
 const formatCOP = (n) =>
   new Intl.NumberFormat("es-CO", { style: "currency", currency: "COP", maximumFractionDigits: 0 }).format(n);
 
-export default function ProductTable({ products = [] }) {
+export default function ProductTable({ products = [], onToggleStatus, updatingId }) {
   if (products.length === 0) {
     return (
       <p className="adm-card__meta">No hay productos para mostrar.</p>
@@ -15,7 +13,7 @@ export default function ProductTable({ products = [] }) {
       <table className="adm-table">
         <thead>
           <tr>
-            <th>SKU</th>
+            <th>Referencia</th>
             <th>Nombre</th>
             <th>Categoría</th>
             <th>Precio</th>
@@ -33,15 +31,22 @@ export default function ProductTable({ products = [] }) {
               <td>{formatCOP(product.price)}</td>
               <td>{product.inventory?.stock ?? product.stock ?? 0}</td>
               <td>
-                {(product.inventory?.stock ?? product.stock ?? 0) > 0 ? (
-                  <span className="adm-badge adm-badge--ok">En stock</span>
+                {product.isActive ? (
+                  <span className="adm-badge adm-badge--ok">Activo</span>
                 ) : (
-                  <span className="adm-badge adm-badge--warn">Agotado</span>
+                  <span className="adm-badge adm-badge--warn">Inactivo</span>
                 )}
               </td>
               <td className="adm-table__actions">
-                <Link to={`/admin/update-product?id=${product.id}`}>Editar</Link>
-                <Link to={`/admin/delete-product?id=${product.id}`}>Eliminar</Link>
+                <button
+                  type="button"
+                  onClick={() => onToggleStatus(product)}
+                  disabled={updatingId === product.id}
+                >
+                  {updatingId === product.id
+                    ? "Actualizando..."
+                    : product.isActive ? "Desactivar" : "Activar"}
+                </button>
               </td>
             </tr>
           ))}

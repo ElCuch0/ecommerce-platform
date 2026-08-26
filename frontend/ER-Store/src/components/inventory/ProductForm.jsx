@@ -18,14 +18,14 @@ export default function ProductForm({ defaultValues = {}, categories = [], onSub
       <form onSubmit={handleSubmit}>
         <div className="adm-field">
           <label className="adm-label" htmlFor="admProdName">
-            Nombre del producto
+            Referencia del producto
           </label>
           <input
             id="admProdReference"
             name="reference"
             type="text"
             className="adm-input"
-            placeholder="Referencia / SKU"
+            placeholder="Referencia/SKU"
             defaultValue={defaultValues.reference ?? ""}
             required
           />

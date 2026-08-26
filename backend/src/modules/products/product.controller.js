@@ -1,4 +1,3 @@
-import { success } from "zod";
 import * as service from "./product.service.js";
 
 export async function findAll(req, res, next) {
@@ -12,6 +11,18 @@ export async function findAll(req, res, next) {
     });
   }catch (error) {
       next(error)
+  }
+}
+
+export async function findAllForAdmin(req, res, next) {
+  try {
+    return res.status(200).json({
+      success: true,
+      message: "Productos encontrados con éxito",
+      data: await service.findAllForAdmin()
+    });
+  } catch (error) {
+    next(error)
   }
 }
 

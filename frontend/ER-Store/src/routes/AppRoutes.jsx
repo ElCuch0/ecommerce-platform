@@ -10,12 +10,14 @@ import { OrderDetailPage } from "../pages/order/OrderDetailPage.jsx";
 import AdminLayout from "../components/layout/AdminLayout.jsx";
 import DashboardHome from "../pages/admin/DashboardHome.jsx";
 import InventoryTable from "../pages/admin/InventoryTable.jsx";
+import CategoriesPage from "../pages/admin/CategoriesPage.jsx";
 import AddProduct from "../pages/admin/AddProduct.jsx";
 import UpdateProduct from "../pages/admin/UpdateProduct.jsx";
 import DeleteProduct from "../pages/admin/DeleteProduct.jsx";
 import Invoice from "../pages/admin/Invoice.jsx";
 import Reports from "../pages/admin/Reports.jsx";
 import Settings from "../pages/admin/Settings.jsx";
+import OrdersPage from "../pages/admin/OrdersPage.jsx";
 import { ProtectedRoute } from "./ProtectedRoute.jsx";
 import { useAuth } from "../context/AuthContext.jsx";
 
@@ -44,6 +46,8 @@ export function AppRoutes() {
           <Route path="/admin" element={<AdminLayout />}>
             <Route index element={<DashboardHome />} />
             <Route path="inventory" element={<InventoryTable />} />
+            <Route path="categories" element={<CategoriesPage />} />
+            <Route path="orders" element={<OrdersPage />} />
             <Route path="add-product" element={<AddProduct />} />
             <Route path="update-product" element={<UpdateProduct />} />
             <Route path="delete-product" element={<DeleteProduct />} />
