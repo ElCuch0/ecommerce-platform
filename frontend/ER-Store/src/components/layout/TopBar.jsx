@@ -31,7 +31,7 @@ export default function TopBar({ onMenuClick }) {
         <NavLink to="/admin/inventory" className={topLinkClass}>
           Inventario
         </NavLink>
-        <NavLink to="/admin/invoice" className={topLinkClass}>
+        <NavLink to="/admin/orders" className={topLinkClass}>
           Pedidos
         </NavLink>
         <NavLink to="/admin/reports" className={topLinkClass}>
