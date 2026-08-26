@@ -28,17 +28,18 @@ export function LoginModal({ isOpen, onClose }) {
                 password
             })
 
-            const authenticatedUser = response.userWithoutPassword
-            const userRole = typeof authenticatedUser.role === 'string'
-                ? authenticatedUser.role
-                : authenticatedUser.role?.name
+            const authenticatedUser = response.data?.userWithoutPassword
+            const userRole = authenticatedUser.role?.name
 
-            navigate(userRole?.toUpperCase() === 'ADMIN' ? "/admin" : "/")
+                if (userRole?.toUpperCase() === "ADMIN") {
+                    navigate("/admin")
+                }
+
+            navigate("/")
 
             onClose()
 
         }catch (error) {
-
             setError(
                 error.message ||
                 "Credenciales incorrectas"
@@ -100,10 +101,6 @@ export function LoginModal({ isOpen, onClose }) {
                     <button type="submit" className="btn-register" style={{ width: '100%' }} disabled={loading}>
                         {loading ? 'Ingresando...' : 'Iniciar Sesión'}
                     </button>
-
-                    <a href="/forgot-password" className="btn-link">
-                        ¿Olvidaste tu contraseña?
-                    </a>
 
                     <a href="/register" className="btn-link">
                         ¿No tienes cuenta? Regístrate

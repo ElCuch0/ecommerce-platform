@@ -3,8 +3,7 @@ import { Link, useSearchParams, useNavigate } from "react-router-dom";
 import { getProducts } from "../../api/products.api.js";
 import { getCategories } from "../../api/categories.api.js";
 import { updateProduct } from "../../api/adminProducts.api.js";
-import ProductForm from "../../components/inventory/ProductForm";
-import StockSection from "../../components/inventory/StockSection";
+import ProductForm from "../../components/inventory/ProductForm.jsx";
 
 export default function UpdateProduct() {
   const [searchParams] = useSearchParams();

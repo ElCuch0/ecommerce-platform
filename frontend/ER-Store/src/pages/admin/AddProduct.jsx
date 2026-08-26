@@ -2,9 +2,8 @@ import { useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { createProduct } from "../../api/adminProducts.api.js";
 import { getCategories } from "../../api/categories.api.js";
-import ProductForm from "../../components/inventory/ProductForm";
-import ProductImages from "../../components/inventory/ProductImages";
-import StockSection from "../../components/inventory/StockSection";
+import ProductForm from "../../components/inventory/ProductForm.jsx";
+import ProductImages from "../../components/inventory/ProductImages.jsx";
 
 export default function AddProduct() {
   const navigate = useNavigate();
