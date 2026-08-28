@@ -68,13 +68,17 @@ export async function findById(id) {
       id: true,
       name: true,
       reference: true,
+      description: true,
       price: true,
+      image: true,
+      brand: true,
       isActive: true,
 
 
       category: {
         select: {
           id: true,
+          name: true,
           isActive: true
         }
       },

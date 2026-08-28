@@ -9,6 +9,13 @@ export const getProducts = (search = "") => {
   })
 }
 
+export const getProductById = (id) => {
+  return apiRequest(`/products/${id}`, {
+    method: "GET",
+    requiresAuth: false
+  })
+}
+
 export const getAdminProducts = () => {
   return apiRequest("/products/admin", {
     method: "GET",
